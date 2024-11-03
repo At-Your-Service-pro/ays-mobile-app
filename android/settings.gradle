@@ -44,7 +44,7 @@ if (getRNMinorVersion() >= 75) {
   }
 }
 
-rootProject.name = 'mobileapp'
+rootProject.name = 'mobile-app'
 
 dependencyResolutionManagement {
   versionCatalogs {
