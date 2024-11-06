@@ -47,6 +47,17 @@ const index = () => {
       <Image source={item.image} style={styles.image} />
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.description}>{item.description}</Text>
+      {/* <View style={styles.pagination}>
+          {onboardingData.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dot,
+                { backgroundColor: index === currentSlideIndex ? '#00A8E8' : '#D3D3D3' },
+              ]}
+            />
+          ))}
+        </View> */}
     </View>
   );
 
@@ -67,7 +78,7 @@ const index = () => {
         {currentSlideIndex === onboardingData.length - 1 ? (
           <CustomeButtom 
             title='Get Started'
-            onPress={() => router.push('/welcome')}
+            onPress={() => router.push('welcome')}
           />
         ) : (
           <CustomeButtom 
@@ -111,11 +122,21 @@ const styles = StyleSheet.create({
     color: '#555', 
     textAlign: 'center', 
     paddingHorizontal: 40 ,
-    marginTop: 5
+    marginTop: 9
   },
   footer: { 
     flexDirection: 'row', 
     justifyContent: 'center', 
-    padding: 20 
+    marginTop: 10
+  },
+  pagination: {
+    flexDirection: 'row',
+    alignSelf: 'center'
+  },
+  dot: {
+    height: 8,
+    width: 8,
+    borderRadius: 4,
+    marginHorizontal: 5,
   },
 })

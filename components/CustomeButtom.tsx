@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet,Dimensions } from 'react-native'
+import { View, Text,StyleSheet,Dimensions,TouchableOpacity } from 'react-native'
 import React from 'react'
 
 interface Props {
@@ -10,7 +10,10 @@ const {width,height} = Dimensions.get('window');
 
 const CustomeButtom:React.FC<Props> = ({title,onPress}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity 
+      style={styles.container}
+      onPress={onPress}
+    >
       <View
         style={{
           justifyContent: 'center',
@@ -19,11 +22,10 @@ const CustomeButtom:React.FC<Props> = ({title,onPress}) => {
         }}
       >
         <Text
-          onPress={onPress}
           style={styles.text}
         >{title}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: 'center',
     width: width / 1.2,
-    height: height / 12
+    height: height / 13
   },
   text: {
     color: 'white',
