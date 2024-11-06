@@ -12,7 +12,7 @@ const index = () => {
   const onboardingData = [
     {
       id: 1,
-      title: 'Get variety of professional sevrices',
+      title: 'Get variety of professional services',
       description: 'Get differet professional services anywhere you are',
       image: require('../assets/images/1.png'),
     },
@@ -61,7 +61,7 @@ const index = () => {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => item.id.toString()}
       />
       <View style={styles.footer}>
         {currentSlideIndex === onboardingData.length - 1 ? (
@@ -101,16 +101,17 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   title: { 
-    fontSize: 24, 
+    fontSize: 26, 
     fontWeight: 'bold', 
     color: '#333', 
     textAlign: 'center' 
   },
   description: { 
-    fontSize: 16, 
+    fontSize: 17, 
     color: '#555', 
     textAlign: 'center', 
-    paddingHorizontal: 40 
+    paddingHorizontal: 40 ,
+    marginTop: 5
   },
   footer: { 
     flexDirection: 'row', 
