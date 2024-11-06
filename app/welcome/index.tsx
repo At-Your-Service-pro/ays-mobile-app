@@ -1,9 +1,17 @@
-import { StyleSheet, Text, View,SafeAreaView,TextInput } from 'react-native'
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  SafeAreaView,
+  TextInput ,
+  ScrollView
+} from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto';
 import Entypo from '@expo/vector-icons/Entypo';
 import React,{useState} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { router } from 'expo-router';
 
 const index = () => {
   const [formData,setFormData] = useState({
@@ -22,7 +30,7 @@ const index = () => {
   }
  
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <SafeAreaView
         style={styles.headerContainer}
       >
@@ -80,10 +88,53 @@ const index = () => {
                 </TouchableOpacity>
              </View>
           </View>
-
+          <TouchableOpacity
+            style={styles.forgotPasswordContainer}
+            onPress={() => router.push('/forgotpassword')}
+          >
+            <Text
+              style={styles.forgotPasswordText}
+            >
+              Forgot password?
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <CustomeButtom 
+          title="Login" 
+          onPress={() => {}}
+        />
+        <View
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginTop: 20
+          }}
+        >
+          <View 
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}
+          >
+            <Text
+              style={{
+                color: '#5E5E5E'
+              }}
+            >
+              Don't have an account?
+            </Text>
+            <TouchableOpacity
+              onPress={() => router.push('/signup')}
+            > 
+              <Text 
+                style={{fontSize: 20,fontWeight: 'regular',marginLeft: 5}}
+              > Sign up </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -125,12 +176,21 @@ const styles = StyleSheet.create({
     fontWeight: 'medium'
   },
   loginInput: {
-    padding: 10,
+    padding: 7,
     marginBottom: 10,
     borderRadius: 7,
     marginTop: 10,
     fontSize: 18,
     width: '85%'
+  },
+  forgotPasswordContainer: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    marginTop: 20
+  },
+  forgotPasswordText: {
+    fontSize: 17,
+    fontWeight: 'regular',
   }
 
 })

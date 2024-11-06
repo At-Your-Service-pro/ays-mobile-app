@@ -76,17 +76,29 @@ const index = () => {
       />
       <View style={styles.footer}>
         {currentSlideIndex === onboardingData.length - 1 ? (
-          <CustomeButtom 
+          <View
+            style={{
+              width: '85%'
+            }}
+          >
+            <CustomeButtom 
             title='Get Started'
-            onPress={() => router.push('welcome')}
+            onPress={() => router.push('/welcome')}
           />
+          </View>
         ) : (
-          <CustomeButtom 
+          <View
+            style={{
+              width: '85%'
+            }}
+          >
+            <CustomeButtom 
             title='Next'
             onPress={() => {
               ref.current.scrollToIndex({ index: currentSlideIndex + 1 });
             }}
           />
+          </View>
         )}
       </View>
       </SafeAreaView>

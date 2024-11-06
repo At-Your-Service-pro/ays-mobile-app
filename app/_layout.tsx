@@ -17,6 +17,22 @@ const _layout = () => {
             name='welcome'
             options={{headerShown: false}}
           />
+          <Stack.Screen 
+            name='forgotpassword'
+            options={{headerShown: false}}
+          />
+          <Stack.Screen 
+            name='signup'
+            options={{headerShown: false}}
+          />
+          <Stack.Screen 
+            name='otp'
+            options={{headerShown: false}}
+          />
+          <Stack.Screen 
+            name='createpassword'
+            options={{headerShown: false}}
+          />
       </Stack>
     </GestureHandlerRootView>
   )

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     alignSelf: 'center',
-    width: width / 1.2,
+    width: '100%',
     height: height / 13
   },
   text: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'medium',
     textAlign: 'center',
-  },
+  }
 });
 
 export default CustomeButtom
