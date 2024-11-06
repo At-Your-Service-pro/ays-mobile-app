@@ -43,7 +43,7 @@ const index = () => {
           >Fill out your details to log you in</Text>
         </View>
         <View
-          style={styles.loginContainer}
+          style={styles.loginContainer} 
         >
           <View>
              <Text
