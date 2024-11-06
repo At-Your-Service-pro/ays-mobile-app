@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View,SafeAreaView,TextInput } from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto';
+import Entypo from '@expo/vector-icons/Entypo';
 import React,{useState} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const index = () => {
   const [formData,setFormData] = useState({
@@ -10,6 +12,7 @@ const index = () => {
     confirmPassword: '',
     errorMessage: ''
   });
+  const [showPassword,setShowPassword] = useState(false);
 
   const handleChange = (event: any) => {
     setFormData({
@@ -64,8 +67,17 @@ const index = () => {
                   placeholder="Enter Password"
                   keyboardType="default"
                   style={styles.loginInput}
+                  secureTextEntry={!showPassword}
                 />
-                <Fontisto name="email" size={24} color="black" />
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <Entypo 
+                    name={showPassword ? 'eye' : 'eye-with-line'} 
+                    size={20} 
+                    color="black" 
+                  />
+                </TouchableOpacity>
              </View>
           </View>
 
