@@ -4,7 +4,7 @@ import "../global.css"
 
 const index = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>index</Text>
     </View>
   )
@@ -12,4 +12,11 @@ const index = () => {
 
 export default index
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+})
