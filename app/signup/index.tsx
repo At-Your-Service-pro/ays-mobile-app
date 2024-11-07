@@ -3,16 +3,21 @@ import {
   Text, 
   View,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  TextInput,
+  TouchableOpacity
 } from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
+import Entypo from '@expo/vector-icons/Entypo';
 
 const index = () => {
+  const [showPassword,setShowPassword] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView
+      >
         <View
           style={styles.header}
         >
@@ -20,6 +25,111 @@ const index = () => {
           <View>
             <Text style={styles.headerText}> Create Account </Text>
           </View>
+        </View>
+        <View>
+          <View
+            style={{
+              marginTop: 20
+            }}
+          >
+              <Text
+                style={styles.loginTextHeader}
+              > Firstname </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <AntDesign name="user" size={24} color="black" />
+                <TextInput
+                    placeholder=""
+                    keyboardType="default"
+                    style={styles.loginInput}
+                  />
+              </View>
+            </View>
+            <View
+            style={{
+              marginTop: 20
+            }}
+          >
+              <Text
+                style={styles.loginTextHeader}
+              > Lastname </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <AntDesign name="user" size={24} color="black" />
+                <TextInput
+                    placeholder=""
+                    keyboardType="default"
+                    style={styles.loginInput}
+                  />
+              </View>
+            </View>
+            <View
+              style={{
+                marginTop: 20
+              }}
+            >
+              <Text
+                style={styles.loginTextHeader}
+              > Email </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <AntDesign name="user" size={24} color="black" />
+                <TextInput
+                    placeholder=""
+                    keyboardType="email-address"
+                    style={styles.loginInput}
+                  />
+              </View>
+            </View>
+            <View
+            style={{
+              marginTop: 20
+            }}
+          >
+             <Text
+              style={styles.loginTextHeader}
+             > Password </Text>
+             <View 
+              style={styles.loginContainerText}
+             >
+              <TextInput
+                  placeholder="Enter Password"
+                  keyboardType="default"
+                  style={styles.loginInput}
+                  secureTextEntry={!showPassword}
+                />
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <Entypo 
+                    name={showPassword ? 'eye' : 'eye-with-line'} 
+                    size={20} 
+                    color="black" 
+                  />
+                </TouchableOpacity>
+             </View>
+          </View>
+          <View
+            style={{
+              marginTop: 20
+            }}
+          >
+              <Text
+                style={styles.loginTextHeader}
+              > Phone number </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <TextInput
+                    placeholder="e.g 0245679625"
+                    keyboardType="default"
+                    style={styles.loginInput}
+                  />
+              </View>
+            </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -33,7 +143,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     marginHorizontal: 'auto',
-    marginTop: '10%'
+    marginTop: '10%',
   },
   header: {
     display: 'flex',
@@ -48,5 +158,26 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'semibold',
     textAlign: 'center'
-  }
+  },
+  loginContainerText: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#EBEBEB',
+    borderRadius: 7,
+    alignItems: 'center',
+    paddingLeft: 15,
+    marginTop: 10
+  },
+  loginTextHeader: {
+    fontSize: 20,
+    fontWeight: 'regular'
+  },
+  loginInput: {
+    padding: 7,
+    marginBottom: 10,
+    borderRadius: 7,
+    marginTop: 10,
+    fontSize: 18,
+    width: '85%'
+  },
 })
