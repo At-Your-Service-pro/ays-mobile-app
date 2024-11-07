@@ -27,6 +27,13 @@ const index = () => {
       [event.target.id]: event.target.value
     })
   }
+  const verifyPassword = () => {
+    if(formData.password === formData.confirmPassword){
+      router.push('/welcome')
+    }else{
+      alert('Passwords mismatch');
+    }
+  }
  
   return (
     <SafeAreaView 
@@ -87,13 +94,13 @@ const index = () => {
             >
              <Text
               style={styles.loginTextHeader}
-             > Password </Text>
+             > Confirm Password </Text>
              <View 
               style={styles.loginContainerText}
              >
               <TextInput
-                  id='password'
-                  placeholder="Enter Password"
+                  id='confirmpassword'
+                  placeholder="Confirm Password"
                   keyboardType="default"
                   style={styles.loginInput}
                   secureTextEntry={!showPassword}
@@ -110,10 +117,14 @@ const index = () => {
                 </TouchableOpacity>
              </View>
           </View>
-        <CustomeButtom 
-          title="Reset password" 
-          onPress={() => router.push('')}
-        />
+          <View
+            style={styles.button}
+          >
+            <CustomeButtom 
+              title="Reset password" 
+              onPress={verifyPassword}
+            />
+          </View>
       </ScrollView>
     </SafeAreaView>
   )
@@ -132,7 +143,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginVertical: 20
   },
   headerSubText: {
     marginTop: 10,
@@ -167,5 +179,8 @@ const styles = StyleSheet.create({
   header: {
   paddingBottom: 15
   },
+  button: {
+    marginTop: 40
+  }
 
 })

@@ -79,14 +79,18 @@ const index = () => {
             <Text>
               Haven't got otp code yet ?
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                marginTop: 10
+              }}
+            >
               <Text style={{color: '#1AACD5'}}>Resend</Text>
             </TouchableOpacity>
         </View>
 
         <CustomeButtom 
           title="Confirm" 
-          onPress={() => router.push('/otp')}
+          onPress={() => router.push('/createnewpassword')}
         />
       </ScrollView>
     </SafeAreaView>
