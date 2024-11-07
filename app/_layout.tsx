@@ -30,7 +30,7 @@ const _layout = () => {
             options={{headerShown: false}}
           />
           <Stack.Screen 
-            name='createpassword'
+            name='createnewpassword'
             options={{headerShown: false}}
           />
       </Stack>

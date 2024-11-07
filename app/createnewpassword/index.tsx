@@ -16,7 +16,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 const index = () => {
   const [formData,setFormData] = useState({
-    email: ''
+    password: '',
+    confirmPassword: '',
   });
   const [showPassword,setShowPassword] = useState(false);
 
@@ -44,35 +45,74 @@ const index = () => {
         <View>
           <Text
             style={styles.headerText}
-          > Reset password </Text>
+          > Create new password </Text>
           <Text
             style={styles.headerSubText} 
-          > Enter email associated with your account. We{'\'ll'} send an otp code to verify that the account is yours </Text>
+          > Your new password must be different from previous used password </Text>
         </View>
         <View
-          style={styles.loginContainer} 
-        >
-          <View>
+              style={{
+                marginTop: 20
+              }}
+            >
              <Text
               style={styles.loginTextHeader}
-             > Email </Text>
+             > Password </Text>
              <View 
               style={styles.loginContainerText}
              >
-              <Fontisto name="email" size={24} color="black" />
               <TextInput
-                  id='email'
-                  placeholder="Enter Email"
-                  keyboardType="email-address"
+                  id='password'
+                  placeholder="Enter Password"
+                  keyboardType="default"
                   style={styles.loginInput}
+                  secureTextEntry={!showPassword}
                   onChange={handleChange}
                 />
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <Entypo 
+                    name={showPassword ? 'eye' : 'eye-with-line'} 
+                    size={20} 
+                    color="black" 
+                  />
+                </TouchableOpacity>
              </View>
           </View>
-        </View>
+          <View
+              style={{
+                marginTop: 20
+              }}
+            >
+             <Text
+              style={styles.loginTextHeader}
+             > Password </Text>
+             <View 
+              style={styles.loginContainerText}
+             >
+              <TextInput
+                  id='password'
+                  placeholder="Enter Password"
+                  keyboardType="default"
+                  style={styles.loginInput}
+                  secureTextEntry={!showPassword}
+                  onChange={handleChange}
+                />
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <Entypo 
+                    name={showPassword ? 'eye' : 'eye-with-line'} 
+                    size={20} 
+                    color="black" 
+                  />
+                </TouchableOpacity>
+             </View>
+          </View>
         <CustomeButtom 
-          title="Continue" 
-          onPress={() => router.push('/otp')}
+          title="Reset password" 
+          onPress={() => router.push('')}
         />
       </ScrollView>
     </SafeAreaView>

@@ -123,10 +123,10 @@ const index = () => {
               </View>
             </View>
             <View
-            style={{
-              marginTop: 20
-            }}
-          >
+              style={{
+                marginTop: 20
+              }}
+            >
              <Text
               style={styles.loginTextHeader}
              > Password </Text>
@@ -181,7 +181,7 @@ const index = () => {
             </View>
             <CustomeButtom 
               title='Continue'
-              onPress={() => router.push('/otp')}
+              onPress={() => router.push('/welcome')}
             />
         </View>
       </ScrollView>

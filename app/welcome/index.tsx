@@ -30,10 +30,12 @@ const index = () => {
   }
  
   return (
-    <ScrollView 
+    <SafeAreaView 
+      style={styles.container}
     >
-      <SafeAreaView
+      <ScrollView
         style={styles.headerContainer}
+        showsVerticalScrollIndicator={false}
       >
         <View>
           <Text
@@ -137,8 +139,8 @@ const index = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
