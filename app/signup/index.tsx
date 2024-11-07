@@ -5,7 +5,11 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView, 
+  Platform,
+  TouchableWithoutFeedback, 
+  Keyboard
 } from 'react-native'
 import React,{useState} from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -16,9 +20,30 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 
 const index = () => {
   const [showPassword,setShowPassword] = useState(false);
+  const [formData,setFormData] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    phonenumber: ''
+  });
+
+  const handleChange = (event: any) => {
+    setFormData({
+       ...formData,
+        [event.target.id]: event.target.value
+    })
+  }
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView 
+      style={styles.container}
+    >
       <ScrollView
+        showsVerticalScrollIndicator={false} 
+        style={{
+          height: '200%',
+          paddingBottom: 500
+        }}
       >
         <View
           style={styles.header}
@@ -47,9 +72,11 @@ const index = () => {
               >
                 <AntDesign name="user" size={24} color="black" />
                 <TextInput
+                    id='firstname'
                     placeholder=""
                     keyboardType="default"
                     style={styles.loginInput}
+                    onChange={handleChange}
                   />
               </View>
             </View>
@@ -66,9 +93,11 @@ const index = () => {
               >
                 <AntDesign name="user" size={24} color="black" />
                 <TextInput
+                    id='lastname'
                     placeholder=""
                     keyboardType="default"
                     style={styles.loginInput}
+                    onChange={handleChange}
                   />
               </View>
             </View>
@@ -85,9 +114,11 @@ const index = () => {
               >
                 <Fontisto name="email" size={24} color="black" />
                 <TextInput
+                    id='email'
                     placeholder=""
                     keyboardType="email-address"
                     style={styles.loginInput}
+                    onChange={handleChange}
                   />
               </View>
             </View>
@@ -103,10 +134,12 @@ const index = () => {
               style={styles.loginContainerText}
              >
               <TextInput
+                  id='password'
                   placeholder="Enter Password"
                   keyboardType="default"
                   style={styles.loginInput}
                   secureTextEntry={!showPassword}
+                  onChange={handleChange}
                 />
                 <TouchableOpacity
                   onPress={() => setShowPassword(!showPassword)}
@@ -131,9 +164,11 @@ const index = () => {
                 style={styles.loginContainerText}
               >
                 <TextInput
+                    id='phonenumber'
                     placeholder="e.g 0245679625"
                     keyboardType="default"
                     style={styles.loginInput}
+                    onChange={handleChange}
                   />
               </View>
             </View>
@@ -180,7 +215,7 @@ const styles = StyleSheet.create({
   loginContainerText: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: '#EBEBEB',
+    backgroundColor: '#E1E1E1',
     borderRadius: 7,
     alignItems: 'center',
     paddingLeft: 15,
@@ -202,6 +237,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 20
+    marginTop: 20,
+    width: '85%',
+    marginHorizontal: 'auto',
+    marginBottom: 10
   }
 })

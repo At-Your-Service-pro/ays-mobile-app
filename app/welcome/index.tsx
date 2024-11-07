@@ -25,12 +25,13 @@ const index = () => {
   const handleChange = (event: any) => {
     setFormData({
      ...formData,
-      [event.target.name]: event.target.value
+      [event.target.id]: event.target.value
     })
   }
  
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+    >
       <SafeAreaView
         style={styles.headerContainer}
       >
@@ -54,9 +55,11 @@ const index = () => {
              >
               <Fontisto name="email" size={24} color="black" />
               <TextInput
+                  id='email'
                   placeholder="Enter Email"
                   keyboardType="email-address"
                   style={styles.loginInput}
+                  onChange={handleChange}
                 />
              </View>
           </View>
@@ -72,6 +75,7 @@ const index = () => {
               style={styles.loginContainerText}
              >
               <TextInput
+                  id='password'
                   placeholder="Enter Password"
                   keyboardType="default"
                   style={styles.loginInput}
@@ -142,8 +146,7 @@ export default index
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#ffffff'
+    flex: 1
   },
   headerContainer: {
     width: '90%',
@@ -156,7 +159,8 @@ const styles = StyleSheet.create({
   },
   headerSubText: {
     marginTop: 10,
-    fontSize: 18
+    fontSize: 15,
+    color: '#5E5E5E'
   },
   loginContainer: {
     marginTop: 40,
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
   loginContainerText: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#E1E1E1',
     borderRadius: 7,
     alignItems: 'center',
     paddingLeft: 15,
