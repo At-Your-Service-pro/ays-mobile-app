@@ -11,6 +11,8 @@ import React,{useState} from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
+import CustomeButtom from '@/components/CustomeButtom';
+import Fontisto from '@expo/vector-icons/Fontisto';
 
 const index = () => {
   const [showPassword,setShowPassword] = useState(false);
@@ -26,7 +28,12 @@ const index = () => {
             <Text style={styles.headerText}> Create Account </Text>
           </View>
         </View>
-        <View>
+        <View
+          style={{
+            width: '90%',
+            marginHorizontal: 'auto'
+          }}
+        >
           <View
             style={{
               marginTop: 20
@@ -76,7 +83,7 @@ const index = () => {
               <View 
                 style={styles.loginContainerText}
               >
-                <AntDesign name="user" size={24} color="black" />
+                <Fontisto name="email" size={24} color="black" />
                 <TextInput
                     placeholder=""
                     keyboardType="email-address"
@@ -130,6 +137,17 @@ const index = () => {
                   />
               </View>
             </View>
+            <View
+              style={styles.privacy}
+            >
+               <Text>
+                By tapping "Continue" you agree to our <Text style={{color: '#1AACD5'}}>Terms of Use</Text> and <Text style={{color: '#1AACD5'}}>Privacy Policy</Text>
+               </Text>
+            </View>
+            <CustomeButtom 
+              title='Continue'
+              onPress={() => router.push('/otp')}
+            />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -180,4 +198,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     width: '85%'
   },
+  privacy: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 20
+  }
 })
