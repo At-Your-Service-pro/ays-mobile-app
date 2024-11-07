@@ -181,7 +181,7 @@ const index = () => {
             </View>
             <CustomeButtom 
               title='Continue'
-              onPress={() => router.push('/welcome')}
+              onPress={() => router.push('/otp')}
             />
         </View>
       </ScrollView>
