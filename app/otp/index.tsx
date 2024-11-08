@@ -11,10 +11,12 @@ import Entypo from '@expo/vector-icons/Entypo';
 import React,{useState} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams  } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 const index = () => {
+  const {previous_screen} = useLocalSearchParams();
+
   const [formData,setFormData] = useState({
     email: '',
     password: '',
@@ -90,7 +92,13 @@ const index = () => {
 
         <CustomeButtom 
           title="Confirm" 
-          onPress={() => router.push('/createnewpassword')}
+          onPress={() => {
+            if(previous_screen == 'signup') {
+              router.push('/welcome');
+            } else {
+              router.push('/createnewpassword')
+            }
+          }}
         />
       </ScrollView>
     </SafeAreaView>

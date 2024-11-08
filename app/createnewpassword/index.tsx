@@ -20,6 +20,7 @@ const index = () => {
     confirmPassword: '',
   });
   const [showPassword,setShowPassword] = useState(false);
+  const [error,setError] = useState('');
 
   const handleChange = (event: any) => {
     setFormData({
@@ -31,7 +32,7 @@ const index = () => {
     if(formData.password === formData.confirmPassword){
       router.push('/welcome')
     }else{
-      alert('Passwords mismatch');
+     setError('Password is mismatched')
     }
   }
  
@@ -61,7 +62,7 @@ const index = () => {
               style={{
                 marginTop: 20
               }}
-            >
+        >
              <Text
               style={styles.loginTextHeader}
              > Password </Text>
@@ -117,6 +118,13 @@ const index = () => {
                 </TouchableOpacity>
              </View>
           </View>
+          {
+            error &&  <View
+            style={styles.error}
+          >
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+          }
           <View
             style={styles.button}
           >
@@ -181,6 +189,18 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 40
+  },
+  error: {
+    borderWidth: 1,
+    borderColor: '#E60023',
+    borderRadius: 10
+  },
+  errorText: {
+    color: '#E60023',
+    fontSize: 15,
+    padding: 10,
+    marginHorizontal: 20,
+    marginBottom: 10
   }
 
 })

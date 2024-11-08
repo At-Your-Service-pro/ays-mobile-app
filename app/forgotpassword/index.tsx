@@ -7,7 +7,6 @@ import {
   ScrollView,
 } from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto';
-import Entypo from '@expo/vector-icons/Entypo';
 import React,{useState} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -18,7 +17,6 @@ const index = () => {
   const [formData,setFormData] = useState({
     email: ''
   });
-  const [showPassword,setShowPassword] = useState(false);
 
   const handleChange = (event: any) => {
     setFormData({

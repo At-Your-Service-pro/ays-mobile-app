@@ -6,17 +6,15 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView, 
-  Platform,
-  TouchableWithoutFeedback, 
-  Keyboard
+  Dimensions
 } from 'react-native'
 import React,{useState} from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { router } from 'expo-router';
+import { router,Link } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
-import CustomeButtom from '@/components/CustomeButtom';
 import Fontisto from '@expo/vector-icons/Fontisto';
+
+const {height} = Dimensions.get('window');
 
 const index = () => {
   const [showPassword,setShowPassword] = useState(false);
@@ -179,10 +177,24 @@ const index = () => {
                 By tapping "Continue" you agree to our <Text style={{color: '#1AACD5'}}>Terms of Use</Text> and <Text style={{color: '#1AACD5'}}>Privacy Policy</Text>
                </Text>
             </View>
-            <CustomeButtom 
-              title='Continue'
-              onPress={() => router.push('/otp')}
-            />
+            <TouchableOpacity
+              style={styles.link}
+            >
+              <Link
+                href={{
+                  pathname: '/otp',
+                  params: {
+                    previous_screen: 'signup'
+                  }
+                }}
+              >
+                <Text
+                  style={styles.text}
+                >
+                  Continue
+                </Text>
+              </Link>
+            </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -241,5 +253,20 @@ const styles = StyleSheet.create({
     width: '85%',
     marginHorizontal: 'auto',
     marginBottom: 10
+  },
+  link: {
+    backgroundColor: '#1AACD5',
+    padding: 10,
+    borderRadius: 10,
+    margin: 10,
+    alignSelf: 'center',
+    width: '100%',
+    height: height / 13
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'medium',
+    textAlign: 'center',
   }
 })
