@@ -13,6 +13,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { router,Link } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
 import Fontisto from '@expo/vector-icons/Fontisto';
+import CustomeButtom from '@/components/CustomeButtom';
 
 const {height} = Dimensions.get('window');
 
@@ -177,24 +178,10 @@ const index = () => {
                 By tapping "Continue" you agree to our <Text style={{color: '#1AACD5'}}>Terms of Use</Text> and <Text style={{color: '#1AACD5'}}>Privacy Policy</Text>
                </Text>
             </View>
-            <TouchableOpacity
-              style={styles.link}
-            >
-              <Link
-                href={{
-                  pathname: '/otp',
-                  params: {
-                    previous_screen: 'signup'
-                  }
-                }}
-              >
-                <Text
-                  style={styles.text}
-                >
-                  Continue
-                </Text>
-              </Link>
-            </TouchableOpacity>
+           <CustomeButtom 
+            title='Continue'
+            onPress={() => router.push('/otp')}
+           />
         </View>
       </ScrollView>
     </SafeAreaView>
