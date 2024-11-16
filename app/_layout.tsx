@@ -12,7 +12,6 @@ const _layout = () => {
   return (
     <Provider store={store}>
       <GestureHandlerRootView>
-        <NavigationContainer>
         <Stack>
             <Stack.Screen 
                 name="index"
@@ -39,7 +38,6 @@ const _layout = () => {
               options={{headerShown: false}}
             />
         </Stack>
-        </NavigationContainer>
         
       </GestureHandlerRootView>
     </Provider>
