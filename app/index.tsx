@@ -1,9 +1,18 @@
-import { StyleSheet, Text, View,Dimensions,SafeAreaView,Image,Button } from 'react-native'
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  Dimensions,
+  SafeAreaView,
+  Image,
+  StatusBar 
+} from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import React,{useRef,useState} from 'react'
 import { router } from 'expo-router'
 import "../global.css"
 import CustomeButtom from '@/components/CustomeButtom'
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -101,6 +110,7 @@ const index = () => {
           </View>
         )}
       </View>
+      <StatusBar barStyle="dark-content" />
       </SafeAreaView>
     </View>
   )

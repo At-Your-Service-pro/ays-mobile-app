@@ -87,7 +87,7 @@ const index = () => {
                   onPress={() => setShowPassword(!showPassword)}
                 >
                   <Entypo 
-                    name={showPassword ? 'eye' : 'eye-with-line'} 
+                    name={showPassword ? 'eye-with-line' : 'eye'} 
                     size={20} 
                     color="black" 
                   />
