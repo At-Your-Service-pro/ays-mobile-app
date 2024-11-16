@@ -6,11 +6,13 @@ import "../global.css";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { store } from '@/redux/app/store';
 import { Provider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
 
 const _layout = () => {
   return (
     <Provider store={store}>
       <GestureHandlerRootView>
+        <NavigationContainer>
         <Stack>
             <Stack.Screen 
                 name="index"
@@ -37,6 +39,8 @@ const _layout = () => {
               options={{headerShown: false}}
             />
         </Stack>
+        </NavigationContainer>
+        
       </GestureHandlerRootView>
     </Provider>
   )
