@@ -7,8 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform,
-  Dimensions
+  Platform
 } from 'react-native';
 import React, { useState } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -16,25 +15,34 @@ import { router } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import CustomeButtom from '@/components/CustomeButtom';
-
-const { height } = Dimensions.get('window');
+import * as Yup from 'yup';
+import {useFormik} from 'formik';
+import Validationerror from '@/components/Validationerror';
 
 const index = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    phonenumber: ''
-  });
+  const signUpForm = useFormik({
+    initialValues: {
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      phonenumber: ''
+    },
+    validationSchema: Yup.object().shape({
+      firstname: Yup.string().required('Please enter first name'),
+      lastname: Yup.string().required('Please enter last name'),
+      email: Yup.string().email('Please enter a valid email').required('Please enter email'),
+      password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter password'),
+      phonenumber: Yup.string().required('Please enter phone number')
+    }),
+    onSubmit: async(values,actions) => {
+      console.log(values);
+    }
+  })
+  
 
-  const handleChange = (id: string, value: string) => {
-    setFormData({
-      ...formData,
-      [id]: value
-    });
-  };
+ 
 
   return (
     <SafeAreaView style={styles.container}>
@@ -59,7 +67,9 @@ const index = () => {
                     placeholder=""
                     keyboardType="default"
                     style={styles.loginInput}
-                    onChangeText={(text) => handleChange('firstname', text)}
+                    value={signUpForm.values.firstname}
+                    onChangeText={signUpForm.handleChange('firstname')}
+                    onBlur={signUpForm.handleBlur('firstname')}
                   />
                 </View>
               </View>
@@ -71,7 +81,9 @@ const index = () => {
                     placeholder=""
                     keyboardType="default"
                     style={styles.loginInput}
-                    onChangeText={(text) => handleChange('lastname', text)}
+                    value={signUpForm.values.lastname}
+                    onChangeText={signUpForm.handleChange('lastname')}
+                    onBlur={signUpForm.handleBlur('lastname')}
                   />
                 </View>
               </View>
@@ -83,7 +95,9 @@ const index = () => {
                     placeholder=""
                     keyboardType="email-address"
                     style={styles.loginInput}
-                    onChangeText={(text) => handleChange('email', text)}
+                    value={signUpForm.values.email}
+                    onChangeText={signUpForm.handleChange('email')}
+                    onBlur={signUpForm.handleBlur('email')}
                   />
                 </View>
               </View>
@@ -95,7 +109,9 @@ const index = () => {
                     keyboardType="default"
                     style={styles.loginInput}
                     secureTextEntry={!showPassword}
-                    onChangeText={(text) => handleChange('password', text)}
+                    value={signUpForm.values.password}
+                    onChangeText={signUpForm.handleChange('password')}
+                    onBlur={signUpForm.handleBlur('password')}
                   />
                   <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                     <Entypo 
@@ -113,7 +129,9 @@ const index = () => {
                     placeholder="e.g 0245679625"
                     keyboardType="phone-pad"
                     style={styles.loginInput}
-                    onChangeText={(text) => handleChange('phonenumber', text)}
+                    value={signUpForm.values.phonenumber}
+                    onChangeText={signUpForm.handleChange('phonenumber')}
+                    onBlur={signUpForm.handleBlur('phonenumber')}
                   />
                 </View>
               </View>
