@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   TextInput,
   ScrollView,
+  Platform,
+  KeyboardAvoidingView
 } from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -40,100 +42,107 @@ const index = () => {
     <SafeAreaView 
       style={styles.container}
     >
-      <ScrollView
-        style={styles.headerContainer}
-        showsVerticalScrollIndicator={false}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios'? 'padding' : 'height'}
+        style={{
+          flex:1
+        }}
       >
-         <TouchableOpacity
-          style={styles.header}
-          onPress={() => router.back()}
+        <ScrollView
+          style={styles.headerContainer}
+          showsVerticalScrollIndicator={false}
         >
-          <AntDesign name="left" size={24} color="black"/>
-        </TouchableOpacity>
-        <View>
-          <Text
-            style={styles.headerText}
-          > Create new password </Text>
-          <Text
-            style={styles.headerSubText} 
-          > Your new password must be different from previous used password </Text>
-        </View>
-        <View
-              style={{
-                marginTop: 20
-              }}
-        >
-             <Text
-              style={styles.loginTextHeader}
-             > Password </Text>
-             <View 
-              style={styles.loginContainerText}
-             >
-              <TextInput
-                  id='password'
-                  placeholder="Enter Password"
-                  keyboardType="default"
-                  style={styles.loginInput}
-                  secureTextEntry={!showPassword}
-                  onChange={handleChange}
-                />
-                <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                >
-                  <Entypo 
-                    name={showPassword ? 'eye' : 'eye-with-line'} 
-                    size={20} 
-                    color="black" 
-                  />
-                </TouchableOpacity>
-             </View>
+          <TouchableOpacity
+            style={styles.header}
+            onPress={() => router.back()}
+          >
+            <AntDesign name="left" size={24} color="black"/>
+          </TouchableOpacity>
+          <View>
+            <Text
+              style={styles.headerText}
+            > Create new password </Text>
+            <Text
+              style={styles.headerSubText} 
+            > Your new password must be different from previous used password </Text>
           </View>
           <View
-              style={{
-                marginTop: 20
-              }}
+                style={{
+                  marginTop: 20
+                }}
+          >
+              <Text
+                style={styles.loginTextHeader}
+              > Password </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <TextInput
+                    id='password'
+                    placeholder="Enter Password"
+                    keyboardType="default"
+                    style={styles.loginInput}
+                    secureTextEntry={!showPassword}
+                    onChange={handleChange}
+                  />
+                  <TouchableOpacity
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
+                    <Entypo 
+                      name={showPassword ? 'eye' : 'eye-with-line'} 
+                      size={20} 
+                      color="black" 
+                    />
+                  </TouchableOpacity>
+              </View>
+            </View>
+            <View
+                style={{
+                  marginTop: 20
+                }}
+              >
+              <Text
+                style={styles.loginTextHeader}
+              > Confirm Password </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <TextInput
+                    id='confirmpassword'
+                    placeholder="Confirm Password"
+                    keyboardType="default"
+                    style={styles.loginInput}
+                    secureTextEntry={!showPassword}
+                    onChange={handleChange}
+                  />
+                  <TouchableOpacity
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
+                    <Entypo 
+                      name={showPassword ? 'eye' : 'eye-with-line'} 
+                      size={20} 
+                      color="black" 
+                    />
+                  </TouchableOpacity>
+              </View>
+            </View>
+            {
+              error &&  <View
+              style={styles.error}
             >
-             <Text
-              style={styles.loginTextHeader}
-             > Confirm Password </Text>
-             <View 
-              style={styles.loginContainerText}
-             >
-              <TextInput
-                  id='confirmpassword'
-                  placeholder="Confirm Password"
-                  keyboardType="default"
-                  style={styles.loginInput}
-                  secureTextEntry={!showPassword}
-                  onChange={handleChange}
-                />
-                <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                >
-                  <Entypo 
-                    name={showPassword ? 'eye' : 'eye-with-line'} 
-                    size={20} 
-                    color="black" 
-                  />
-                </TouchableOpacity>
-             </View>
-          </View>
-          {
-            error &&  <View
-            style={styles.error}
-          >
-            <Text style={styles.errorText}>{error}</Text>
-          </View>
-          }
-          <View
-            style={styles.button}
-          >
-            <CustomeButtom 
-              title="Reset password" 
-              onPress={verifyPassword}
-            />
-          </View>
-      </ScrollView>
+              <Text style={styles.errorText}>{error}</Text>
+            </View>
+            }
+            <View
+              style={styles.button}
+            >
+              <CustomeButtom 
+                title="Reset password" 
+                onPress={verifyPassword}
+              />
+            </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

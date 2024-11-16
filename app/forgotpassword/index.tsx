@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   TextInput,
   ScrollView,
+  Platform,
+  KeyboardAvoidingView
 } from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto';
 import React,{useState} from 'react'
@@ -29,50 +31,57 @@ const index = () => {
     <SafeAreaView 
       style={styles.container}
     >
-      <ScrollView
-        style={styles.headerContainer}
-        showsVerticalScrollIndicator={false}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios'? 'padding' : 'height'}
+        style={{
+          flex: 1
+        }}
       >
-         <TouchableOpacity
-          style={styles.header}
-          onPress={() => router.back()}
+        <ScrollView
+          style={styles.headerContainer}
+          showsVerticalScrollIndicator={false}
         >
-          <AntDesign name="left" size={24} color="black"/>
-        </TouchableOpacity>
-        <View>
-          <Text
-            style={styles.headerText}
-          > Reset password </Text>
-          <Text
-            style={styles.headerSubText} 
-          > Enter email associated with your account. We{'\'ll'} send an otp code to verify that the account is yours </Text>
-        </View>
-        <View
-          style={styles.loginContainer} 
-        >
+          <TouchableOpacity
+            style={styles.header}
+            onPress={() => router.back()}
+          >
+            <AntDesign name="left" size={24} color="black"/>
+          </TouchableOpacity>
           <View>
-             <Text
-              style={styles.loginTextHeader}
-             > Email </Text>
-             <View 
-              style={styles.loginContainerText}
-             >
-              <Fontisto name="email" size={24} color="black" />
-              <TextInput
-                  id='email'
-                  placeholder="Enter Email"
-                  keyboardType="email-address"
-                  style={styles.loginInput}
-                  onChange={handleChange}
-                />
-             </View>
+            <Text
+              style={styles.headerText}
+            > Reset password </Text>
+            <Text
+              style={styles.headerSubText} 
+            > Enter email associated with your account. We{'\'ll'} send an otp code to verify that the account is yours </Text>
           </View>
-        </View>
-        <CustomeButtom 
-          title="Continue" 
-          onPress={() => router.push('/otp')}
-        />
-      </ScrollView>
+          <View
+            style={styles.loginContainer} 
+          >
+            <View>
+              <Text
+                style={styles.loginTextHeader}
+              > Email </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <Fontisto name="email" size={24} color="black" />
+                <TextInput
+                    id='email'
+                    placeholder="Enter Email"
+                    keyboardType="email-address"
+                    style={styles.loginInput}
+                    onChange={handleChange}
+                  />
+              </View>
+            </View>
+          </View>
+          <CustomeButtom 
+            title="Continue" 
+            onPress={() => router.push('/otp')}
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Stack } from 'expo-router'
-import { Slot } from "expo-router";
+import { Stack,SplashScreen } from 'expo-router'
 import "../global.css";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { store } from '@/redux/app/store';
 import { Provider } from 'react-redux';
+
+//Prevent Splash screen from auto hiding
+// SplashScreen.preventAutoHideAsync();
 
 const _layout = () => {
   return (
