@@ -9,6 +9,7 @@ import {
     signUpData,
     loginData
  } from './../enums/enums';
+ import { getToken } from './_token';
 
 export const SignUp = async(data:signUpData) => {
     const response = await fetch(signUpUrl,{
@@ -35,11 +36,12 @@ export const  Login = async(data:loginData) => {
 }
 
 export const UpdateUserData = async(data:signUpData) => {
+    const token = getToken('token')
     const response = await fetch(updateUrl,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(data),
     })
