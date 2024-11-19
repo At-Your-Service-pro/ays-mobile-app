@@ -19,6 +19,7 @@ import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import Validationerror from '@/components/Validationerror';
 import { useAuth } from '@/hooks/useAuth';
+import { saveFormData } from '@/utils/formData';
 
 const index = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -38,7 +39,16 @@ const index = () => {
       phonenumber: Yup.string().required('Please enter phone number')
     }),
     onSubmit: async(values,actions) => {
-      console.log(values);
+      const {firstname,lastname,email,password,phonenumber} = values;
+
+      try {
+        if(firstname && lastname && email && password && phonenumber){
+          await saveFormData('formData',values);
+          router.push('/otp')
+        }
+      } catch(err) {
+
+      }
     }
   })
   
@@ -74,6 +84,9 @@ const index = () => {
                   />
                 </View>
               </View>
+              { signUpForm.touched.firstname && signUpForm.errors.firstname && (<Validationerror title={signUpForm.errors.firstname} />)
+                
+              }
               <View style={{ marginTop: 20 }}>
                 <Text style={styles.loginTextHeader}>Lastname</Text>
                 <View style={styles.loginContainerText}>
@@ -143,7 +156,7 @@ const index = () => {
               </View>
               <CustomeButtom 
                 title="Continue"
-                onPress={() => router.push('/otp')}
+                onPress={signUpForm.handleSubmit}
               />
             </View>
           </View>
