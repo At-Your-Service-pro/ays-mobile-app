@@ -10,6 +10,10 @@ import { signUpData,loginData } from "@/enums/enums";
 import { saveToken } from "@/utils/_token";
 
 export const useAuth = () => {
+    const VerifyUserExists = async() => {
+
+    }
+
     const CreataAccount = async(data: signUpData) => {
         const response = await SignUp(data);
         const responseData = await response.json();
@@ -52,7 +56,8 @@ export const useAuth = () => {
         LoginUser,
         RequestOtpForEmail,
         UpdateData,
-        Verifyotp
+        Verifyotp,
+        VerifyUserExists
     };
 };
   

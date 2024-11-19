@@ -3,13 +3,26 @@ import {
     signUpUrl,
     updateUrl,
     otpUrl,
-    verifyOtpUrl 
+    verifyOtpUrl,
+    verifyUser 
 } from './../endpoints/endpoints';
 import { 
     signUpData,
     loginData
  } from './../enums/enums';
  import { getToken } from './_token';
+
+export const VerifyUser = async(data: signUpData) => {
+    const response = await fetch(verifyUser,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+
+    return response;
+} 
 
 export const SignUp = async(data:signUpData) => {
     const response = await fetch(signUpUrl,{
