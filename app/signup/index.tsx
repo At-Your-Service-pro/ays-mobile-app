@@ -36,7 +36,7 @@ const index = () => {
       lastname: Yup.string().required('Please enter last name'),
       email: Yup.string().email('Please enter a valid email').required('Please enter email'),
       password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter password'),
-      phonenumber: Yup.string().required('Please enter phone number')
+      phonenumber: Yup.string().required('Please enter phone number').max(10,'Phone number must nor exceed 10 numbers')
     }),
     onSubmit: async(values,actions) => {
       const {firstname,lastname,email,password,phonenumber} = values;
