@@ -6,4 +6,4 @@ export const signUpUrl = `${api_url}/users/signup`;
 export const  updateUrl = `${api_url}/users/update`;
 export const otpUrl =  `${api_url}/users/request-otp`;
 export const verifyOtpUrl = `${api_url}/users/verify-otp`;
-export const verifyUser = `${api_url}/users/verify-user`;
+export const verifyUserUrl = `${api_url}/users/verify-user`;

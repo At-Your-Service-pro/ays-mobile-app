@@ -40,7 +40,7 @@ const Validationerror: React.FC<ValidationerrorProps> = ({
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: 12.01,
+        fontSize: 15,
         fontWeight: 'normal',
         fontStyle: 'normal',
         lineHeight: 17.6,
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     },
     containerStyle: {
         height: 30,
-        borderRadius: 12,
+        marginTop: 10,
+        borderRadius: 5,
         backgroundColor: '#e1cece',
         shadowColor: 'rgba(0, 0, 0, 0.25)',
         shadowOffset: {

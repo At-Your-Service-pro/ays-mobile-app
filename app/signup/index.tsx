@@ -7,7 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  Dimensions
 } from 'react-native';
 import React, { useState } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -21,8 +22,13 @@ import Validationerror from '@/components/Validationerror';
 import { useAuth } from '@/hooks/useAuth';
 import { saveFormData } from '@/utils/formData';
 
+const {width,height} = Dimensions.get('window');
+
 const index = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const {VerifyUserExists,error} = useAuth();
+  const [loading,setLoading] = useState(false);
+
   const signUpForm = useFormik({
     initialValues: {
       firstname: '',
@@ -32,28 +38,33 @@ const index = () => {
       phonenumber: ''
     },
     validationSchema: Yup.object().shape({
-      firstname: Yup.string().required('Please enter first name'),
-      lastname: Yup.string().required('Please enter last name'),
-      email: Yup.string().email('Please enter a valid email').required('Please enter email'),
-      password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter password'),
-      phonenumber: Yup.string().required('Please enter phone number').max(10,'Phone number must nor exceed 10 numbers')
+      firstname: Yup.string().required('Please enter your first name'),
+      lastname: Yup.string().required('Please enter your  last name'),
+      email: Yup.string().email('Please enter a valid email').required('Please enter your email'),
+      password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter your password'),
+      phonenumber: Yup.string().max(10,'Phone number must not exceed 10 numbers').required('Please enter your phone number')
     }),
     onSubmit: async(values,actions) => {
-      const {firstname,lastname,email,password,phonenumber} = values;
+      // const res = await VerifyUserExists(values);
+      // console.log(res)
+    
+      router.push('/otp');
+    //  try {
+    //   if(error === false){
+    //     await saveFormData('formData',values);
+    //     router.push('/otp')
+    //   }else {
+    //     console.log('user verification failed');
+    //   }
+    //  } catch(err) {
+    //   console.log(err);
+    //  }
 
-      try {
-        if(firstname && lastname && email && password && phonenumber){
-          await saveFormData('formData',values);
-          router.push('/otp')
-        }
-      } catch(err) {
+      // actions.setSubmitting(false);
 
-      }
     }
   })
   
-
- 
 
   return (
     <SafeAreaView style={styles.container}>
@@ -69,6 +80,7 @@ const index = () => {
                 <Text style={styles.headerText}>Create Account</Text>
               </View>
             </View>
+            
             <View style={{ width: '90%', marginHorizontal: 'auto' }}>
               <View style={{ marginTop: 20 }}>
                 <Text style={styles.loginTextHeader}>Firstname</Text>
@@ -101,6 +113,8 @@ const index = () => {
                   />
                 </View>
               </View>
+              { signUpForm.touched.lastname && signUpForm.errors.lastname && (<Validationerror title={signUpForm.errors.lastname} />)}
+
               <View style={{ marginTop: 20 }}>
                 <Text style={styles.loginTextHeader}>Email</Text>
                 <View style={styles.loginContainerText}>
@@ -115,6 +129,8 @@ const index = () => {
                   />
                 </View>
               </View>
+              {signUpForm.touched.email && signUpForm.errors.email && (<Validationerror title={signUpForm.errors.email} />)}
+
               <View style={{ marginTop: 20 }}>
                 <Text style={styles.loginTextHeader}>Password</Text>
                 <View style={styles.loginContainerText}>
@@ -136,6 +152,8 @@ const index = () => {
                   </TouchableOpacity>
                 </View>
               </View>
+              {signUpForm.touched.password && signUpForm.errors.password && (<Validationerror title={signUpForm.errors.password} />)}
+
               <View style={{ marginTop: 20 }}>
                 <Text style={styles.loginTextHeader}>Phone number</Text>
                 <View style={styles.loginContainerText}>
@@ -149,15 +167,34 @@ const index = () => {
                   />
                 </View>
               </View>
+              {signUpForm.touched.phonenumber && signUpForm.errors.phonenumber && (<Validationerror title={signUpForm.errors.phonenumber} />)}
+
+              <View style={styles.error}>
+              {
+                error && <Validationerror title='User already exists'/>
+              }
+            </View>
               <View style={styles.privacy}>
                 <Text>
                   By tapping "Continue" you agree to our <Text style={{ color: '#1AACD5' }}>Terms of Use</Text> and <Text style={{ color: '#1AACD5' }}>Privacy Policy</Text>
                 </Text>
               </View>
-              <CustomeButtom 
-                title="Continue"
-                onPress={signUpForm.handleSubmit}
-              />
+                <TouchableOpacity 
+                  style={styles.containerStyle}
+                  onPress={() => signUpForm.handleSubmit()}
+                >
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      flex: 1
+                    }}
+                  >
+                    <Text
+                      style={styles.textStyle}
+                    >{'Continue'}</Text>
+                  </View>
+                </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -215,4 +252,22 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     marginBottom: 10,
   },
+  error: {
+    marginVertical: 15
+  },
+  containerStyle: {
+    backgroundColor: '#1AACD5',
+    padding: 10,
+    borderRadius: 10,
+    margin: 10,
+    alignSelf: 'center',
+    width: '100%',
+    height: height / 13
+  },
+  textStyle: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'medium',
+    textAlign: 'center',
+  }
 });

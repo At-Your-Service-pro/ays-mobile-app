@@ -1,17 +1,33 @@
-import React from "react";
+import React,{useState} from "react";
 import { 
     SignUp,
     Login,
     RequestOtp,
     UpdateUserData,
-    VerifyOtp 
+    VerifyOtp,
+    VerifyUser 
 } from "@/utils/utils";
 import { signUpData,loginData } from "@/enums/enums";
 import { saveToken } from "@/utils/_token";
 
 export const useAuth = () => {
-    const VerifyUserExists = async() => {
+    const [error,setError] = useState(false);
 
+    const VerifyUserExists = async(data: signUpData) => {
+        const {email,firstname,lastname,password,phonenumber} = data;
+
+        const response = await VerifyUser({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            phonenumber: phonenumber
+        });
+
+        const responseData = await response.json();
+        console.log(responseData);
+
+        return responseData;
     }
 
     const CreataAccount = async(data: signUpData) => {
@@ -57,7 +73,8 @@ export const useAuth = () => {
         RequestOtpForEmail,
         UpdateData,
         Verifyotp,
-        VerifyUserExists
+        VerifyUserExists,
+        error
     };
 };
   

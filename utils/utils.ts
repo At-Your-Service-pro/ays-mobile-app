@@ -4,7 +4,7 @@ import {
     updateUrl,
     otpUrl,
     verifyOtpUrl,
-    verifyUser 
+    verifyUserUrl 
 } from './../endpoints/endpoints';
 import { 
     signUpData,
@@ -13,14 +13,22 @@ import {
  import { getToken } from './_token';
 
 export const VerifyUser = async(data: signUpData) => {
-    const response = await fetch(verifyUser,{
+    const {firstname,lastname,email,password,phonenumber} = data;
+
+    const response = await fetch(verifyUserUrl,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            phonenumber: phonenumber
+        }),
     })
-
+ 
     return response;
 } 
 

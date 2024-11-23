@@ -3,7 +3,7 @@ import React from 'react'
 
 interface Props {
   title?: string;
-  onPress?: () => void;
+  onPress?: () => any;
 }
 
 const {width,height} = Dimensions.get('window');
@@ -11,7 +11,7 @@ const {width,height} = Dimensions.get('window');
 const CustomeButtom:React.FC<Props> = ({title,onPress}) => {
   return (
     <TouchableOpacity 
-      style={styles.container}
+      style={styles.containerStyle}
       onPress={onPress}
     >
       <View
@@ -22,7 +22,7 @@ const CustomeButtom:React.FC<Props> = ({title,onPress}) => {
         }}
       >
         <Text
-          style={styles.text}
+          style={styles.textStyle}
         >{title}</Text>
       </View>
     </TouchableOpacity>
@@ -30,7 +30,7 @@ const CustomeButtom:React.FC<Props> = ({title,onPress}) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerStyle: {
     backgroundColor: '#1AACD5',
     padding: 10,
     borderRadius: 10,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: height / 13
   },
-  text: {
+  textStyle: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'medium',
