@@ -38,6 +38,10 @@ const _layout = () => {
               name='createnewpassword'
               options={{headerShown: false}}
             />
+            <Stack.Screen
+              name='dashboard'
+              options={{headerShown: false}}
+            />
         </Stack>
         
       </GestureHandlerRootView>
