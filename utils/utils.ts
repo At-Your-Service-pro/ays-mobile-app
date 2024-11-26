@@ -16,16 +16,16 @@ export const VerifyUser = async(data: signUpData) => {
     const {firstname,lastname,email,password,phonenumber} = data;
 
     const response = await fetch(verifyUserUrl,{
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            password: password,
-            phonenumber: phonenumber
+            firstname,
+            lastname,
+            email,
+            password,
+            phonenumber
         }),
     })
  
@@ -34,11 +34,17 @@ export const VerifyUser = async(data: signUpData) => {
 
 export const SignUp = async(data:signUpData) => {
     const response = await fetch(signUpUrl,{
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+            firstname: data.firstname,
+            lastname: data.lastname,
+            email: data.email,
+            password: data.password,
+            phonenumber: data.phonenumber
+        }),
     })
 
     return response;

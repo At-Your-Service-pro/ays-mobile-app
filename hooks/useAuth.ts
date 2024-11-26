@@ -14,7 +14,7 @@ export const useAuth = () => {
     const [error,setError] = useState(false);
 
     const VerifyUserExists = async(data: signUpData) => {
-        const {email,firstname,lastname,password,phonenumber} = data;
+        const {firstname,lastname,email,password,phonenumber} = data;
 
         const response = await VerifyUser({
             firstname: firstname,
@@ -30,8 +30,16 @@ export const useAuth = () => {
         return responseData;
     }
 
-    const CreataAccount = async(data: signUpData) => {
-        const response = await SignUp(data);
+    const CreateAccount = async(data: signUpData) => {
+        const {firstname,lastname,email,password,phonenumber} = data;
+        console.log(`data: ${firstname}`);
+        const response = await SignUp({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            phonenumber: phonenumber
+        });
         const responseData = await response.json();
         return responseData;
     }
@@ -68,7 +76,7 @@ export const useAuth = () => {
     }
 
     return {
-        CreataAccount,
+        CreateAccount,
         LoginUser,
         RequestOtpForEmail,
         UpdateData,

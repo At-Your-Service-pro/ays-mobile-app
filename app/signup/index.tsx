@@ -42,27 +42,31 @@ const index = () => {
       lastname: Yup.string().required('Please enter your  last name'),
       email: Yup.string().email('Please enter a valid email').required('Please enter your email'),
       password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter your password'),
-      phonenumber: Yup.string().max(10,'Phone number must not exceed 10 numbers').required('Please enter your phone number')
+      phonenumber: Yup.string()
+      .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
+      .required('Please enter your phone number').required('Please enter your phone number')
     }),
-    onSubmit: async(values,actions) => {
-      // const res = await VerifyUserExists(values);
-      // console.log(res)
+    onSubmit: async (values, actions) => {
+      try {
+        const {firstname,lastname,email,password,phonenumber} = values;
+       const res = await VerifyUserExists({
+        firstname,
+        lastname,
+        email,
+        password,
+        phonenumber
+       })
+
+       console.log(res);
+      
+      } catch (err) {
+        console.error('Account creation failed:', err);
+        // Optionally show error to the user
+      } finally {
+        actions.setSubmitting(false); // Reset submission state
+      }
+    },
     
-      router.push('/otp');
-    //  try {
-    //   if(error === false){
-    //     await saveFormData('formData',values);
-    //     router.push('/otp')
-    //   }else {
-    //     console.log('user verification failed');
-    //   }
-    //  } catch(err) {
-    //   console.log(err);
-    //  }
-
-      // actions.setSubmitting(false);
-
-    }
   })
   
 
@@ -169,11 +173,11 @@ const index = () => {
               </View>
               {signUpForm.touched.phonenumber && signUpForm.errors.phonenumber && (<Validationerror title={signUpForm.errors.phonenumber} />)}
 
-              <View style={styles.error}>
+              {/* <View style={styles.error}>
               {
                 error && <Validationerror title='User already exists'/>
               }
-            </View>
+            </View> */}
               <View style={styles.privacy}>
                 <Text>
                   By tapping "Continue" you agree to our <Text style={{ color: '#1AACD5' }}>Terms of Use</Text> and <Text style={{ color: '#1AACD5' }}>Privacy Policy</Text>
