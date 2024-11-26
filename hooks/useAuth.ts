@@ -25,8 +25,6 @@ export const useAuth = () => {
         });
 
         const responseData = await response.json();
-        console.log(responseData);
-
         return responseData;
     }
 
@@ -81,8 +79,7 @@ export const useAuth = () => {
         RequestOtpForEmail,
         UpdateData,
         Verifyotp,
-        VerifyUserExists,
-        error
+        VerifyUserExists
     };
 };
   

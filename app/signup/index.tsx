@@ -26,8 +26,9 @@ const {width,height} = Dimensions.get('window');
 
 const index = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const {VerifyUserExists,error} = useAuth();
+  const {VerifyUserExists,RequestOtpForEmail} = useAuth();
   const [loading,setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const signUpForm = useFormik({
     initialValues: {
@@ -56,6 +57,14 @@ const index = () => {
         password,
         phonenumber
        })
+
+       if(res.statusCode == 400) {
+        setError(res.message);
+       } else {
+        RequestOtpForEmail(values.email);
+        saveFormData('formdData',values);
+        router.push('/otp');
+       }
 
        console.log(res);
       
