@@ -44,8 +44,8 @@ const index = () => {
       email: Yup.string().email('Please enter a valid email').required('Please enter your email'),
       password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter your password'),
       phonenumber: Yup.string()
-      .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
-      .required('Please enter your phone number').required('Please enter your phone number')
+      .matches(/^0[0-9]{9}$/, 'Phone number must start with 0 and be exactly 10 digits long')
+      .required('Please enter your phone number')
     }),
     onSubmit: async (values, actions) => {
       try {
@@ -182,11 +182,11 @@ const index = () => {
               </View>
               {signUpForm.touched.phonenumber && signUpForm.errors.phonenumber && (<Validationerror title={signUpForm.errors.phonenumber} />)}
 
-              {/* <View style={styles.error}>
+              <View style={styles.error}>
               {
-                error && <Validationerror title='User already exists'/>
+                error && <Validationerror title={`${error} , try again`}/>
               }
-            </View> */}
+            </View> 
               <View style={styles.privacy}>
                 <Text>
                   By tapping "Continue" you agree to our <Text style={{ color: '#1AACD5' }}>Terms of Use</Text> and <Text style={{ color: '#1AACD5' }}>Privacy Policy</Text>
