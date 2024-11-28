@@ -13,12 +13,15 @@ import React, { useState, useRef } from "react";
 import CustomeButtom from "@/components/CustomeButtom";
 import { router, useLocalSearchParams } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import {useAuth} from '@/hooks/useAuth';
 
 const OTPVerification = () => {
   const { previous_screen } = useLocalSearchParams();
 
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
+
+  const {Verifyotp} = useAuth();
 
   const handleOtpChange = (value: string, index: number) => {
     if (isNaN(Number(value))) return; // Prevent non-numeric input
@@ -44,6 +47,7 @@ const OTPVerification = () => {
     console.log("Entered OTP:", otpCode);
 
     if (previous_screen === "signup") {
+      
       router.push("/welcome");
     } else {
       router.push("/createnewpassword");
