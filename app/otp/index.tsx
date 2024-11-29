@@ -21,7 +21,7 @@ const OTPVerification = () => {
   const { previous_screen,email } = useLocalSearchParams();
 
   const formData = loadFormData('formData');
-  // console.log(formData);
+  console.log(formData);
 
   const [error,setError] = useState('');
   const [otp, setOtp] = useState(["", "", "", "", ""]);

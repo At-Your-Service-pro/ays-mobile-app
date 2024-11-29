@@ -1,24 +1,27 @@
 import * as SecureStore from 'expo-secure-store';
 
-export async function saveFormData(key:string,value: string | boolean | object){
+export async function saveFormData(key: string, value: string | boolean | object) {
     try {
-        await SecureStore.setItemAsync(key, JSON.stringify(value));
-    }catch(error){
-        console.log(error);
+        const stringifiedValue = JSON.stringify(value);
+        console.log("Saving to SecureStore:", stringifiedValue);
+        await SecureStore.setItemAsync(key, stringifiedValue);
+    } catch (error) {
+        console.log("Error saving form data:", error);
     }
 }
 
-export async function loadFormData(key: string){
+
+export async function loadFormData(key: string) {
     try {
         const storedFormData = await SecureStore.getItemAsync(key);
-        if(storedFormData !== null){
+        console.log("Retrieved from SecureStore:", storedFormData);
+
+        if (storedFormData !== null) {
             const parsedFormData = JSON.parse(storedFormData);
+            console.log("Parsed Form Data:", parsedFormData);
             return parsedFormData;
         }
-
-    }catch(err){
-        console.error('Error loading form data:', err);
+    } catch (err) {
+        console.error("Error loading form data:", err);
     }
-
-
 }
