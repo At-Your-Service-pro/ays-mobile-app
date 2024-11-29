@@ -54,6 +54,7 @@ export const useAuth = () => {
     const RequestOtpForEmail = async(email: string) => {
         const response = await RequestOtp(email);
         const responseData = await response.json();
+        console.log(responseData);
         return responseData;
     }
 

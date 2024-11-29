@@ -21,13 +21,12 @@ const OTPVerification = () => {
   const { previous_screen,email } = useLocalSearchParams();
 
   const formData = loadFormData('formData');
-  console.log(formData);
 
   const [error,setError] = useState('');
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
 
-  const {Verifyotp,CreateAccount} = useAuth();
+  const {Verifyotp,CreateAccount,RequestOtpForEmail} = useAuth();
 
   const handleOtpChange = (value: string, index: number) => {
     if (isNaN(Number(value))) return; // Prevent non-numeric input
@@ -70,6 +69,10 @@ const OTPVerification = () => {
     }
   };
 
+  const handleResend = () => {
+    RequestOtpForEmail(email);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -111,7 +114,10 @@ const OTPVerification = () => {
           </View>
           <View style={styles.resend}>
             <Text>Haven't got the OTP code yet?</Text>
-            <TouchableOpacity style={{ marginTop: 10 }}>
+            <TouchableOpacity 
+              style={{ marginTop: 10 }}
+              onPress={handleResend}
+            >
               <Text style={{ color: "#1AACD5" }}>Resend</Text>
             </TouchableOpacity>
           </View>
