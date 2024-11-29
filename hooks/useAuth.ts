@@ -7,7 +7,7 @@ import {
     VerifyOtp,
     VerifyUser 
 } from "@/utils/utils";
-import { signUpData,loginData } from "@/enums/enums";
+import { signUpData,loginData,otpData } from "@/enums/enums";
 import { saveToken } from "@/utils/_token";
 
 export const useAuth = () => {
@@ -63,8 +63,11 @@ export const useAuth = () => {
         return responseData;
     }
 
-    const Verifyotp = async(data: { email: string, otp: string }) => {
-        const response = await VerifyOtp(data);
+    const Verifyotp = async(data: otpData) => {
+        const {email,otp} = data
+        const response = await VerifyOtp({
+            email,otp
+        });
         const responseData = await response.json();
         if(responseData.statusCode == 200) {
             saveToken("token", responseData.token);

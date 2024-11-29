@@ -16,7 +16,8 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import {useAuth} from '@/hooks/useAuth';
 
 const OTPVerification = () => {
-  const { previous_screen } = useLocalSearchParams();
+  const { previous_screen,email } = useLocalSearchParams();
+  console.log(typeof email);
 
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
@@ -42,11 +43,15 @@ const OTPVerification = () => {
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const otpCode = otp.join("");
     console.log("Entered OTP:", otpCode);
 
     if (previous_screen === "signup") {
+      const res = await Verifyotp({
+        email,
+        otp: otpCode,
+      })
       
       router.push("/welcome");
     } else {

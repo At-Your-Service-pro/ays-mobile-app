@@ -63,7 +63,12 @@ const index = () => {
        } else {
         RequestOtpForEmail(values.email);
         saveFormData('formdData',values);
-        router.push('/otp');
+        router.push({
+          pathname: '/otp',
+          params: {
+            email: values.email
+          }
+        });
        }
 
        console.log(res);
