@@ -9,16 +9,18 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import CustomeButtom from "@/components/CustomeButtom";
 import { router, useLocalSearchParams } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import {useAuth} from '@/hooks/useAuth';
+import Validationerror from "@/components/Validationerror";
 
 const OTPVerification = () => {
   const { previous_screen,email } = useLocalSearchParams();
-  console.log(typeof email);
+  console.log(previous_screen);
 
+  const [error,setError] = useState('');
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
 
@@ -52,8 +54,16 @@ const OTPVerification = () => {
         email,
         otp: otpCode,
       })
+
+      console.log(res);
+
+      if(res.statusCode == 200){
+        setError('')
+        router.push("/welcome");
+      }else {
+        setError(res.message);
+      }
       
-      router.push("/welcome");
     } else {
       router.push("/createnewpassword");
     }
@@ -92,6 +102,11 @@ const OTPVerification = () => {
                 ref={(ref) => (inputs.current[index] = ref)}
               />
             ))}
+          </View>
+          <View style={styles.error}>
+            {
+              error && <Validationerror title={`${error}, try again`} />
+            }
           </View>
           <View style={styles.resend}>
             <Text>Haven't got the OTP code yet?</Text>
@@ -154,4 +169,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
   },
+  error: {
+    marginTop: 10
+  }
 });

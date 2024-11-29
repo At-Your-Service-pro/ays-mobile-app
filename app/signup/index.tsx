@@ -66,7 +66,8 @@ const index = () => {
         router.push({
           pathname: '/otp',
           params: {
-            email: values.email
+            email: values.email,
+            previous_screen: 'signup'
           }
         });
        }
