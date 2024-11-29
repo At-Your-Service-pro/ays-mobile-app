@@ -61,8 +61,9 @@ const index = () => {
        if(res.statusCode == 400) {
         setError(res.message);
        } else {
+        console.log(values);
         RequestOtpForEmail(values.email);
-        saveFormData('formdData',values);
+        saveFormData('formData',values);
         router.push({
           pathname: '/otp',
           params: {

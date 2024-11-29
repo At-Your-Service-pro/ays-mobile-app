@@ -9,7 +9,8 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useRef,useEffect } from "react";
+import React, { useState, useRef} from "react";
+import { loadFormData } from "@/utils/formData";
 import CustomeButtom from "@/components/CustomeButtom";
 import { router, useLocalSearchParams } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -18,13 +19,15 @@ import Validationerror from "@/components/Validationerror";
 
 const OTPVerification = () => {
   const { previous_screen,email } = useLocalSearchParams();
-  console.log(previous_screen);
+
+  const formData = loadFormData('formData');
+  // console.log(formData);
 
   const [error,setError] = useState('');
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
 
-  const {Verifyotp} = useAuth();
+  const {Verifyotp,CreateAccount} = useAuth();
 
   const handleOtpChange = (value: string, index: number) => {
     if (isNaN(Number(value))) return; // Prevent non-numeric input
@@ -47,7 +50,6 @@ const OTPVerification = () => {
 
   const handleConfirm = async () => {
     const otpCode = otp.join("");
-    console.log("Entered OTP:", otpCode);
 
     if (previous_screen === "signup") {
       const res = await Verifyotp({
@@ -55,10 +57,9 @@ const OTPVerification = () => {
         otp: otpCode,
       })
 
-      console.log(res);
-
       if(res.statusCode == 200){
         setError('')
+        // CreateAccount(formData);
         router.push("/welcome");
       }else {
         setError(res.message);

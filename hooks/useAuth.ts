@@ -72,10 +72,8 @@ export const useAuth = () => {
         if(responseData.statusCode == 200) {
             saveToken("token", responseData.token);
         } 
-
-        console.log(responseData);
         
-        return responseData.data
+        return responseData
     }
 
     return {
