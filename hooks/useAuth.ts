@@ -9,9 +9,11 @@ import {
 } from "@/utils/utils";
 import { signUpData,loginData,otpData } from "@/enums/enums";
 import { saveToken } from "@/utils/_token";
+import { useRouter } from "expo-router";
 
 export const useAuth = () => {
     const [error,setError] = useState(false);
+    const router = useRouter();
 
     const VerifyUserExists = async(data: signUpData) => {
         const {firstname,lastname,email,password,phonenumber} = data;
@@ -39,7 +41,12 @@ export const useAuth = () => {
             phonenumber: phonenumber
         });
         const responseData = await response.json();
-        return responseData;
+        console.log(responseData);
+        if(responseData.statusCode == 201){
+            router.push('/welcome');
+        } else {
+            setError(true);
+        }
     }
 
     const LoginUser = async(data:loginData ) => {
