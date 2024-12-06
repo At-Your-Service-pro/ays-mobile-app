@@ -20,7 +20,8 @@ import Validationerror from "@/components/Validationerror";
 const OTPVerification = () => {
   const { previous_screen,email } = useLocalSearchParams();
 
-  const formData = loadFormData('formData');
+  const formData: any = loadFormData('formData');
+  console.log(`formData: ${formData}`);
 
   const [error,setError] = useState('');
   const [otp, setOtp] = useState(["", "", "", "", ""]);
@@ -57,9 +58,12 @@ const OTPVerification = () => {
       })
 
       if(res.statusCode == 200){
-        setError('')
-        // CreateAccount(formData);
-        router.push("/welcome");
+        setError('');
+        const responseData = CreateAccount(formData);
+        console.log(`responseData: ${responseData}`);
+        // if(responseData.statusCode == 201){
+        //   router.push("/welcome");
+        // }
       }else {
         setError(res.message);
       }

@@ -1,10 +1,10 @@
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export async function saveFormData(key: string, value: string | boolean | object) {
     try {
         const stringifiedValue = JSON.stringify(value);
-        console.log("Saving to SecureStore:", stringifiedValue);
-        await SecureStore.setItemAsync(key, stringifiedValue);
+        await AsyncStorage.setItem(key, stringifiedValue);
     } catch (error) {
         console.log("Error saving form data:", error);
     }
@@ -13,12 +13,10 @@ export async function saveFormData(key: string, value: string | boolean | object
 
 export async function loadFormData(key: string) {
     try {
-        const storedFormData = await SecureStore.getItemAsync(key);
-        console.log("Retrieved from SecureStore:", storedFormData);
+        const storedFormData = await AsyncStorage.getItem(key);
 
         if (storedFormData !== null) {
             const parsedFormData = JSON.parse(storedFormData);
-            console.log("Parsed Form Data:", parsedFormData);
             return parsedFormData;
         }
     } catch (err) {

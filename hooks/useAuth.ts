@@ -29,9 +29,9 @@ export const useAuth = () => {
     }
 
     const CreateAccount = async(data: signUpData) => {
-        const {firstname,lastname,email,password,phonenumber} = data;
+        const {email,firstname,lastname,password,phonenumber} = data;
         console.log(`data: ${firstname}`);
-        const response = await SignUp({
+        const response: any = await SignUp({
             firstname: firstname,
             lastname: lastname,
             email: email,
