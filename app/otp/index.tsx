@@ -49,7 +49,6 @@ const OTPVerification = () => {
   const handleConfirm = async () => {
     const otpCode = otp.join("");
     const formData = await loadFormData('formData');
-    console.log(formData);
 
     if (previous_screen === "signup") {
       const res = await Verifyotp({
@@ -61,7 +60,12 @@ const OTPVerification = () => {
         setError('');
         const responseData: any = CreateAccount(formData);
         if(responseData.statusCode == 201){
-          router.push("/welcome");
+          router.push({
+            pathname: '/welcome',
+            params:{
+              message: 'user_created'
+            }
+          });
         }
       }else {
         setError(res.message);

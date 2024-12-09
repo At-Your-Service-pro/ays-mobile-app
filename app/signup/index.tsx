@@ -21,6 +21,7 @@ import {useFormik} from 'formik';
 import Validationerror from '@/components/Validationerror';
 import { useAuth } from '@/hooks/useAuth';
 import { saveFormData } from '@/utils/formData';
+import Toast from 'react-native-toast-message';
 
 const {width,height} = Dimensions.get('window');
 
@@ -78,6 +79,11 @@ const index = () => {
       } catch (err) {
         console.error('Account creation failed:', err);
         // Optionally show error to the user
+        Toast.show({
+          text1: 'Account creation failed',
+          text2: '',
+          type: 'error',
+        })
       } finally {
         actions.setSubmitting(false); // Reset submission state
       }
@@ -94,6 +100,7 @@ const index = () => {
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{ height: '300%' }}>
+            <Toast />
             <View style={styles.header}>
               <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
               <View>

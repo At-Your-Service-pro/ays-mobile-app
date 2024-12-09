@@ -8,10 +8,11 @@ import {
 } from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto';
 import Entypo from '@expo/vector-icons/Entypo';
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { router } from 'expo-router';
+import { router,useLocalSearchParams } from 'expo-router';
+import Toast from 'react-native-toast-message';
 
 const index = () => {
   const [formData,setFormData] = useState({
@@ -21,6 +22,18 @@ const index = () => {
     errorMessage: ''
   });
   const [showPassword,setShowPassword] = useState(false);
+  const {message} = useLocalSearchParams();
+  console.log(message);
+
+  useEffect(() => {
+    if(message === 'user_created'){
+      Toast.show({
+        text1: "Account created successfully",
+        text2: "login",
+        type: "success",
+      });
+    }
+  },[]);
 
   const handleChange = (event: any) => {
     setFormData({
@@ -33,6 +46,9 @@ const index = () => {
     <SafeAreaView 
       style={styles.container}
     >
+      {
+        message && <Toast />
+      }
       <ScrollView
         style={styles.headerContainer}
         showsVerticalScrollIndicator={false}
