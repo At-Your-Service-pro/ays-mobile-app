@@ -28,7 +28,14 @@ const index = () => {
   }),
   onSubmit: (values) => {
     // navigation.navigate('ResetPasswordScreen', { email: values.email });
-    console.log(values);
+    // console.log(values);
+    router.push({
+      pathname: '/otp',
+      params: {
+        email: values.email,
+        previous_screen: 'reset_pass'
+      }
+    })
   }
  });
 
@@ -90,13 +97,7 @@ const index = () => {
           </View>
           <CustomeButtom 
             title="Continue" 
-            onPress={() => router.push({
-              pathname: '/otp',
-              params: {
-                email: values.email,
-                previous_screen: 'reset_pass'
-              }
-            })}
+            onPress={formdata.handleSubmit}
           />
         </ScrollView>
       </KeyboardAvoidingView>
