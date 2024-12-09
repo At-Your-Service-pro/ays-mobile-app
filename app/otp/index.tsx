@@ -50,7 +50,7 @@ const OTPVerification = () => {
     const otpCode = otp.join("");
     const formData = await loadFormData('formData');
 
-    if (previous_screen === "signup") {
+    if (previous_screen === "signup" || previous_screen === "reset_pass") {
       const res = await Verifyotp({
         email,
         otp: otpCode,
@@ -60,12 +60,7 @@ const OTPVerification = () => {
         setError('');
         const responseData: any = CreateAccount(formData);
         if(responseData.statusCode == 201){
-          router.push({
-            pathname: '/welcome',
-            params:{
-              message: 'user_created'
-            }
-          });
+          router.push('/dashboard');  
         }
       }else {
         setError(res.message);
@@ -76,13 +71,21 @@ const OTPVerification = () => {
     }
   };
 
-  const handleResend = () => {
-    RequestOtpForEmail(email);
-    Toast.show({
-      text1: "OTP sent successfully",
-      text2: "Check your email to get your otp code",
-      type: "success",
-    });
+  const handleResend = async() => {
+    const response =await  RequestOtpForEmail(email);
+    if(response.statusCode == 200){
+      Toast.show({
+        text1: "OTP sent successfully",
+        text2: "Check your email to get your otp code",
+        type: "success",
+      });
+    } else {
+      Toast.show({
+        text1: "Failed to send OTP",
+        text2: response.message,
+        type: "error",
+      });
+    }
   }
 
   return (

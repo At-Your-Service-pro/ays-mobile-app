@@ -12,20 +12,28 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 import React,{useState} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { router } from 'expo-router';
+import { router,useLocalSearchParams } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import Validationerror from '@/components/Validationerror';
 
 const index = () => {
-  const [formData,setFormData] = useState({
+ const formdata = useFormik({
+  initialValues: {
     email: ''
-  });
-
-  const handleChange = (event: any) => {
-    setFormData({
-     ...formData,
-      [event.target.id]: event.target.value
-    })
+  },
+  validationSchema: Yup.object().shape({
+    email: Yup.string().email('Please enter a valid email').required('Please enter your email')
+  }),
+  onSubmit: (values) => {
+    // navigation.navigate('ResetPasswordScreen', { email: values.email });
+    console.log(values);
   }
+ });
+
+  const {message} = useLocalSearchParams();
+  console.log(`message: ${message}`);
  
   return (
     <SafeAreaView 
@@ -71,14 +79,24 @@ const index = () => {
                     placeholder="Enter Email"
                     keyboardType="email-address"
                     style={styles.loginInput}
-                    onChange={handleChange}
+                    onChangeText={formdata.handleChange('email')}
+                    onBlur={formdata.handleBlur('email')}
                   />
               </View>
+              {
+                formdata.touched.email && formdata.errors.email && (<Validationerror title={formdata.errors.email}/>)
+              }
             </View>
           </View>
           <CustomeButtom 
             title="Continue" 
-            onPress={() => router.push('/otp')}
+            onPress={() => router.push({
+              pathname: '/otp',
+              params: {
+                email: values.email,
+                previous_screen: 'reset_pass'
+              }
+            })}
           />
         </ScrollView>
       </KeyboardAvoidingView>

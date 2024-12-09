@@ -112,7 +112,12 @@ const index = () => {
           </View>
           <TouchableOpacity
             style={styles.forgotPasswordContainer}
-            onPress={() => router.push('/forgotpassword')}
+            onPress={() => router.push({
+              pathname: '/forgotpassword',
+              params:{
+                message: 'forgot_pass'
+              }
+            })}
           >
             <Text
               style={styles.forgotPasswordText}
