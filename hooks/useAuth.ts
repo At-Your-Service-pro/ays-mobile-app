@@ -12,7 +12,8 @@ import { saveToken } from "@/utils/_token";
 import { useRouter } from "expo-router";
 
 export const useAuth = () => {
-    const [error,setError] = useState(false);
+    const [_error,setError] = useState(false);
+    const [notification,setNotification] = useState(false);
     const router = useRouter();
 
     const VerifyUserExists = async(data: signUpData) => {
@@ -45,7 +46,7 @@ export const useAuth = () => {
         if(responseData.statusCode == 201){
             router.push('/welcome');
         } else {
-            setError(true);
+
         }
     }
 
@@ -62,6 +63,9 @@ export const useAuth = () => {
         const response = await RequestOtp(email);
         const responseData = await response.json();
         console.log(responseData);
+        if(responseData.statusCode == 200) {
+            setNotification(true);
+        }
         return responseData;
     }
 
@@ -90,7 +94,9 @@ export const useAuth = () => {
         RequestOtpForEmail,
         UpdateData,
         Verifyotp,
-        VerifyUserExists
+        VerifyUserExists,
+        _error,
+        notification
     };
 };
   

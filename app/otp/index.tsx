@@ -16,6 +16,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import {useAuth} from '@/hooks/useAuth';
 import Validationerror from "@/components/Validationerror";
+import Toast from 'react-native-toast-message';
 
 const OTPVerification = () => {
   const { previous_screen,email } = useLocalSearchParams();
@@ -24,7 +25,7 @@ const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
 
-  const {Verifyotp,CreateAccount,RequestOtpForEmail} = useAuth();
+  const {Verifyotp,CreateAccount,RequestOtpForEmail,notification} = useAuth();
 
   const handleOtpChange = (value: string, index: number) => {
     if (isNaN(Number(value))) return; // Prevent non-numeric input
@@ -73,10 +74,16 @@ const OTPVerification = () => {
 
   const handleResend = () => {
     RequestOtpForEmail(email);
+    Toast.show({
+      text1: "OTP sent successfully",
+      text2: "Check your email to get your otp code",
+      type: "success",
+    });
   }
 
   return (
     <SafeAreaView style={styles.container}>
+      <Toast />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     width: "90%",
     marginHorizontal: "auto",
-    marginTop: "15%",
+    marginTop: "23%",
   },
   headerText: {
     fontSize: 30,
