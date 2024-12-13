@@ -13,14 +13,29 @@ import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { router,useLocalSearchParams } from 'expo-router';
 import Toast from 'react-native-toast-message';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import Validationerror from '@/components/Validationerror';
 
 const index = () => {
-  const [formData,setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    errorMessage: ''
-  });
+  const formData = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+       .email('Invalid email')
+       .required('Email is required'),
+      password: Yup.string()
+       .min(6, 'Password must be at least 6 characters long')
+       .required('Password is required')
+    }),
+    onSubmit: values => {
+      console.log(values);
+      // TODO: Send the form data to the server
+    }
+  })
   const [showPassword,setShowPassword] = useState(false);
   const {message} = useLocalSearchParams();
   console.log(message);
@@ -34,13 +49,6 @@ const index = () => {
       });
     }
   },[]);
-
-  const handleChange = (event: any) => {
-    setFormData({
-     ...formData,
-      [event.target.id]: event.target.value
-    })
-  }
  
   return (
     <SafeAreaView 
@@ -77,7 +85,8 @@ const index = () => {
                   placeholder="Enter Email"
                   keyboardType="email-address"
                   style={styles.loginInput}
-                  onChange={handleChange}
+                  onChangeText={formData.handleChange('email')}
+                  onBlur={formData.handleBlur('email')}
                 />
              </View>
           </View>
@@ -98,6 +107,8 @@ const index = () => {
                   keyboardType="default"
                   style={styles.loginInput}
                   secureTextEntry={!showPassword}
+                  onChangeText={formData.handleChange('password')}
+                  onBlur={formData.handleBlur('password')}
                 />
                 <TouchableOpacity
                   onPress={() => setShowPassword(!showPassword)}

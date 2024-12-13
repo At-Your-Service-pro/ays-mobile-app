@@ -48,7 +48,7 @@ const index = () => {
       email: Yup.string().email('Please enter a valid email').required('Please enter your email'),
       password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter your password'),
       phonenumber: Yup.string()
-      .matches(/^[0-9]{9}$/, 'Phone number must start be exactly 10 digits')
+      .matches(/^[0-9]{10}$/, 'Phone number must start be exactly 10 digits')
       .required('Please enter your phone number')
     }),
     onSubmit: async (values, actions) => {
