@@ -8,7 +8,6 @@ import {
   Platform,
   KeyboardAvoidingView
 } from 'react-native'
-import Fontisto from '@expo/vector-icons/Fontisto';
 import Entypo from '@expo/vector-icons/Entypo';
 import React,{useState} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';

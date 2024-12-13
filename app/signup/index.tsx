@@ -62,7 +62,6 @@ const index = () => {
        if(res.statusCode == 400) {
         setError(res.message);
        } else {
-        console.log(values);
         RequestOtpForEmail(values.email);
         saveFormData('formData',values);
         router.push({
