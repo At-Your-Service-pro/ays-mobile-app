@@ -50,7 +50,7 @@ const OTPVerification = () => {
     const otpCode = otp.join("");
     const formData = await loadFormData('formData');
 
-    if (previous_screen === "signup" || previous_screen === "reset_pass") {
+    if (previous_screen === "signup") {
       const res = await Verifyotp({
         email,
         otp: otpCode,
@@ -63,22 +63,19 @@ const OTPVerification = () => {
           if(previous_screen == 'signup'){
             router.push('/dashboard');  
           }
-          if(previous_screen == 'reset_pass'){
-            router.push('/createnewpassword')
-          }
         }
       }else {
         setError(res.message);
       }
       
-    } else {
+    }
+    if(previous_screen === 'reset_pass'){
       router.push("/createnewpassword");
     }
   };
 
   const handleResend = async() => {
     const response =await  RequestOtpForEmail(email);
-    console.log(response);
     if(response.statusCode == 200){
       Toast.show({
         text1: "OTP sent successfully",

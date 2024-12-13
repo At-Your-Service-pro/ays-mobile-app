@@ -17,8 +17,10 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Validationerror from '@/components/Validationerror';
+import { useAuth } from '@/hooks/useAuth';
 
 const index = () => {
+  const {RequestOtpForEmail} = useAuth();
  const formdata = useFormik({
   initialValues: {
     email: ''
@@ -27,8 +29,9 @@ const index = () => {
     email: Yup.string().email('Please enter a valid email').required('Please enter your email')
   }),
   onSubmit: (values) => {
-    // navigation.navigate('ResetPasswordScreen', { email: values.email });
-    // console.log(values);
+   
+    RequestOtpForEmail(values.email);
+    
     router.push({
       pathname: '/otp',
       params: {
@@ -38,9 +41,6 @@ const index = () => {
     })
   }
  });
-
-  const {message} = useLocalSearchParams();
-  console.log(`message: ${message}`);
  
   return (
     <SafeAreaView 
