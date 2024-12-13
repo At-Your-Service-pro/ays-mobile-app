@@ -10,7 +10,7 @@ import {
   Platform,
   Dimensions
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -22,6 +22,8 @@ import Validationerror from '@/components/Validationerror';
 import { useAuth } from '@/hooks/useAuth';
 import { saveFormData } from '@/utils/formData';
 import Toast from 'react-native-toast-message';
+import CountryPicker from "react-native-country-picker-modal";
+import PhoneInput from "react-native-phone-number-input";
 
 const {width,height} = Dimensions.get('window');
 
@@ -30,6 +32,7 @@ const index = () => {
   const {VerifyUserExists,RequestOtpForEmail} = useAuth();
   const [loading,setLoading] = useState(false);
   const [error, setError] = useState('');
+  const phoneInput = useRef<PhoneInput>(null);
 
   const signUpForm = useFormik({
     initialValues: {
@@ -45,7 +48,7 @@ const index = () => {
       email: Yup.string().email('Please enter a valid email').required('Please enter your email'),
       password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Please enter your password'),
       phonenumber: Yup.string()
-      .matches(/^0[0-9]{9}$/, 'Phone number must start with 0 and be exactly 10 digits long')
+      .matches(/^[0-9]{9}$/, 'Phone number must start be exactly 10 digits')
       .required('Please enter your phone number')
     }),
     onSubmit: async (values, actions) => {
@@ -182,16 +185,19 @@ const index = () => {
 
               <View style={{ marginTop: 20 }}>
                 <Text style={styles.loginTextHeader}>Phone number</Text>
-                <View style={styles.loginContainerText}>
-                  <TextInput
-                    placeholder="e.g 0245679625"
-                    keyboardType="phone-pad"
-                    style={styles.loginInput}
-                    value={signUpForm.values.phonenumber}
-                    onChangeText={signUpForm.handleChange('phonenumber')}
-                    onBlur={signUpForm.handleBlur('phonenumber')}
-                  />
-                </View>
+                <PhoneInput
+                  ref={phoneInput}
+                  defaultValue={signUpForm.values.phonenumber}
+                  defaultCode="GH"
+                  layout="first"
+                  onChangeText={signUpForm.handleChange('phonenumber')}
+                  containerStyle={styles.countryInput}
+                  textContainerStyle={styles.countryInputText}
+                  textInputStyle={{fontSize: 18}}
+                  disableArrowIcon={true}
+                  countryPickerButtonStyle={{ pointerEvents: "none" }}
+                />
+                
               </View>
               {signUpForm.touched.phonenumber && signUpForm.errors.phonenumber && (<Validationerror title={signUpForm.errors.phonenumber} />)}
 
@@ -258,6 +264,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 15,
     marginTop: 10,
+  },
+  countryInput: {
+    flexDirection: 'row',
+    backgroundColor: '#E1E1E1',
+    borderRadius: 7,
+    alignItems: 'center',
+    padding: 7,
+    marginTop: 10,
+    width: '100%'
+  },
+  countryInputText: {
+    backgroundColor: '#E1E1E1',
+    borderRadius: 7
   },
   loginTextHeader: {
     fontSize: 20,

@@ -15,3 +15,8 @@ export interface otpData {
     email: string;
     otp: string;
 }
+
+export interface updateData {
+    email: string;
+    password: string;
+}

@@ -5,9 +5,10 @@ import {
     RequestOtp,
     UpdateUserData,
     VerifyOtp,
-    VerifyUser 
+    VerifyUser,
+    updatePassword
 } from "@/utils/utils";
-import { signUpData,loginData,otpData } from "@/enums/enums";
+import { signUpData,loginData,otpData,updateData } from "@/enums/enums";
 import { saveToken } from "@/utils/_token";
 import { useRouter } from "expo-router";
 
@@ -31,9 +32,15 @@ export const useAuth = () => {
         return responseData;
     }
 
+    const UpdatePassword = async(data: updateData) => {
+       const {email, password} = data;
+        const response = await updatePassword(email,password)
+        const responseData = await response.json();
+        return responseData;
+    }
+
     const CreateAccount = async(data: signUpData) => {
         const {email,firstname,lastname,password,phonenumber} = data;
-        console.log(`data: ${firstname}`);
         const response: any = await SignUp({
             firstname: firstname,
             lastname: lastname,
@@ -42,12 +49,7 @@ export const useAuth = () => {
             phonenumber: phonenumber
         });
         const responseData = await response.json();
-        console.log(responseData);
-        if(responseData.statusCode == 201){
-            router.push('/welcome');
-        } else {
-
-        }
+        return responseData;
     }
 
     const LoginUser = async(data:loginData ) => {
@@ -96,7 +98,8 @@ export const useAuth = () => {
         Verifyotp,
         VerifyUserExists,
         _error,
-        notification
+        notification,
+        UpdatePassword
     };
 };
   

@@ -25,7 +25,7 @@ const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
 
-  const {Verifyotp,CreateAccount,RequestOtpForEmail,notification} = useAuth();
+  const {Verifyotp,CreateAccount,RequestOtpForEmail} = useAuth();
 
   const handleOtpChange = (value: string, index: number) => {
     if (isNaN(Number(value))) return; // Prevent non-numeric input

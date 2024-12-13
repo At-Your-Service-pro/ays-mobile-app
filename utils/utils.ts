@@ -4,7 +4,8 @@ import {
     updateUrl,
     otpUrl,
     verifyOtpUrl,
-    verifyUserUrl 
+    verifyUserUrl,
+    updatePasswordUrl
 } from './../endpoints/endpoints';
 import { 
     signUpData,
@@ -31,6 +32,21 @@ export const VerifyUser = async(data: signUpData) => {
  
     return response;
 } 
+
+export const updatePassword = async(email:string,password:string) => {
+    const response = await fetch(updatePasswordUrl,{
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email,
+            password
+        })
+    })
+
+    return response;
+}
 
 export const SignUp = async(data:signUpData) => {
     const response = await fetch(signUpUrl,{

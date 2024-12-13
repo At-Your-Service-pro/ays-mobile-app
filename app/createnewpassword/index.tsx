@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import Entypo from '@expo/vector-icons/Entypo';
-import React,{useState} from 'react'
+import React,{useState} from 'react';
 import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { router,useLocalSearchParams } from 'expo-router';
@@ -17,11 +17,13 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Validationerror from '@/components/Validationerror';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import { useAuth } from '@/hooks/useAuth';
+import Toast from 'react-native-toast-message';
 
 const index = () => {
   const {email,previous_screen} = useLocalSearchParams();
   const [showPassword,setShowPassword] = useState(false);
-  const [error,setError] = useState('');
+  const {UpdatePassword} = useAuth();
   
   const formData = useFormik({
     initialValues: {
@@ -30,22 +32,42 @@ const index = () => {
     },
     validationSchema: Yup.object({
       password: Yup.string()
-       .min(8, 'Password must be at least 8 characters long')
-       .required('Password is required'),
+        .min(8, 'Password must be at least 8 characters long')
+        .required('Password is required'),
       confirmPassword: Yup.string()
-       .min(8, 'Confirm Password must be at least 8 characters long')
-       .required('Confirm Password is required'),
+        .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
+        .required('Confirm Password is required'),
     }),
-    onSubmit: (values) => {
-   
-    }
-  })
+    onSubmit: async(values) => {  
+      const response = await UpdatePassword({
+        email,
+        password: values.password
+      })
+      if(response.statusCode == 200){
+        Toast.show({
+          text1: 'Password updated successfully',
+          type:'success',
+        });
+
+        setTimeout(() => {
+          router.push('/welcome');
+        },1000)
+      
+      }
+    },
+  });
+  
 
 
   return (
     <SafeAreaView 
       style={styles.container}
     >
+       <Toast 
+        position="top" 
+        topOffset={50} 
+        visibilityTime={3000} 
+      />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios'? 'padding' : 'height'}
         style={{
@@ -215,6 +237,17 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 20,
     marginBottom: 10
-  }
+  },
+  toast: {
+    zIndex: 100, // Ensures it stands out above other components
+    elevation: 10, // For Android (zIndex alone doesn’t work on Android)
+    backgroundColor: '#333', // Dark background
+    padding: 15,
+    borderRadius: 10,
+    shadowColor: '#000', // Adds shadow for a "floating" effect
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
 
 })
