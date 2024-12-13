@@ -70,7 +70,13 @@ const OTPVerification = () => {
       
     }
     if(previous_screen === 'reset_pass'){
-      router.push("/createnewpassword");
+      router.push({
+        pathname: '/createnewpassword',
+        params: {
+          email,
+          previous_screen: 'otp'
+        }
+      });
     }
   };
 

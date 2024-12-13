@@ -12,31 +12,36 @@ import Entypo from '@expo/vector-icons/Entypo';
 import React,{useState} from 'react'
 import CustomeButtom from '@/components/CustomeButtom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { router } from 'expo-router';
+import { router,useLocalSearchParams } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Validationerror from '@/components/Validationerror';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 
 const index = () => {
-  const [formData,setFormData] = useState({
-    password: '',
-    confirmPassword: '',
-  });
+  const {email,previous_screen} = useLocalSearchParams();
   const [showPassword,setShowPassword] = useState(false);
   const [error,setError] = useState('');
-
-  const handleChange = (event: any) => {
-    setFormData({
-     ...formData,
-      [event.target.id]: event.target.value
-    })
-  }
-  const verifyPassword = () => {
-    if(formData.password === formData.confirmPassword){
-      router.push('/welcome')
-    }else{
-     setError('Password is mismatched')
+  
+  const formData = useFormik({
+    initialValues: {
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: Yup.object({
+      password: Yup.string()
+       .min(8, 'Password must be at least 8 characters long')
+       .required('Password is required'),
+      confirmPassword: Yup.string()
+       .min(8, 'Confirm Password must be at least 8 characters long')
+       .required('Confirm Password is required'),
+    }),
+    onSubmit: (values) => {
+   
     }
-  }
- 
+  })
+
+
   return (
     <SafeAreaView 
       style={styles.container}
@@ -82,7 +87,8 @@ const index = () => {
                     keyboardType="default"
                     style={styles.loginInput}
                     secureTextEntry={!showPassword}
-                    onChange={handleChange}
+                    onChangeText={formData.handleChange('password')}
+                    onBlur={formData.handleBlur('password')}
                   />
                   <TouchableOpacity
                     onPress={() => setShowPassword(!showPassword)}
@@ -95,6 +101,9 @@ const index = () => {
                   </TouchableOpacity>
               </View>
             </View>
+            {
+              formData.touched.password && formData.errors.password && (<Validationerror title={formData.errors.password}/>)
+            }
             <View
                 style={{
                   marginTop: 20
@@ -112,7 +121,8 @@ const index = () => {
                     keyboardType="default"
                     style={styles.loginInput}
                     secureTextEntry={!showPassword}
-                    onChange={handleChange}
+                    onChangeText={formData.handleChange('confirmPassword')}
+                    onBlur={formData.handleBlur('confirmPassword')}
                   />
                   <TouchableOpacity
                     onPress={() => setShowPassword(!showPassword)}
@@ -125,19 +135,15 @@ const index = () => {
                   </TouchableOpacity>
               </View>
             </View>
-            {
-              error &&  <View
-              style={styles.error}
-            >
-              <Text style={styles.errorText}>{error}</Text>
-            </View>
-            }
+              {
+                formData.touched.confirmPassword && formData.errors.confirmPassword && (<Validationerror title={formData.errors.confirmPassword}/>)
+              }
             <View
               style={styles.button}
             >
               <CustomeButtom 
                 title="Reset password" 
-                onPress={verifyPassword}
+                onPress={formData.handleSubmit}
               />
             </View>
         </ScrollView>
