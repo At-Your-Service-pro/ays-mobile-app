@@ -16,8 +16,11 @@ import Toast from 'react-native-toast-message';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Validationerror from '@/components/Validationerror';
+import { useAuth } from '@/hooks/useAuth';
 
 const index = () => {
+  const {LoginUser} = useAuth();
+  const [error,setError] = useState('');
   const formData = useFormik({
     initialValues: {
       email: '',
@@ -31,32 +34,34 @@ const index = () => {
        .min(6, 'Password must be at least 6 characters long')
        .required('Password is required')
     }),
-    onSubmit: values => {
+    onSubmit: async(values) => {
       console.log(values);
+      const response = await LoginUser(values);
+      if(response.statusCode === 401){
+        setError(response.message);
+      } else {
+        router.push('/dashboard');
+      }
+      
       // TODO: Send the form data to the server
     }
   })
   const [showPassword,setShowPassword] = useState(false);
-  const {message} = useLocalSearchParams();
-  console.log(message);
 
-  useEffect(() => {
-    if(message === 'user_created'){
-      Toast.show({
-        text1: "Account created successfully",
-        text2: "login",
-        type: "success",
-      });
-    }
-  },[]);
+  // useEffect(() => {
+  //   if(message === 'user_created'){
+  //     Toast.show({
+  //       text1: "Account created successfully",
+  //       text2: "login",
+  //       type: "success",
+  //     });
+  //   }
+  // },[]);
  
   return (
     <SafeAreaView 
       style={styles.container}
     >
-      {
-        message && <Toast />
-      }
       <ScrollView
         style={styles.headerContainer}
         showsVerticalScrollIndicator={false}
@@ -90,6 +95,9 @@ const index = () => {
                 />
              </View>
           </View>
+          {
+            formData.touched.email && formData.errors.email && (<Validationerror title={formData.errors.email}/>)
+          }
           <View
             style={{
               marginTop: 20
@@ -121,6 +129,9 @@ const index = () => {
                 </TouchableOpacity>
              </View>
           </View>
+          {
+            formData.touched.password && formData.errors.password && (<Validationerror title={formData.errors.password}/>)
+          }
           <TouchableOpacity
             style={styles.forgotPasswordContainer}
             onPress={() => router.push({
@@ -136,10 +147,13 @@ const index = () => {
               Forgot password?
             </Text>
           </TouchableOpacity>
+          {
+            error && (<Validationerror title={`${error}, try again`}/>)
+          }
         </View>
         <CustomeButtom 
           title="Login" 
-          onPress={() => {}}
+          onPress={formData.handleSubmit}
         />
         <View
           style={{
