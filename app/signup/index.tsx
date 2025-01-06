@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native';
 import React, { useState,useRef } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -29,6 +30,7 @@ const {width,height} = Dimensions.get('window');
 
 const index = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showloader,setShowLoader] = useState(false);
   const {VerifyUserExists,RequestOtpForEmail} = useAuth();
   const [loading,setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -53,6 +55,7 @@ const index = () => {
     }),
     onSubmit: async (values, actions) => {
       try {
+        setShowLoader(true);
         const {firstname,lastname,email,password,phonenumber} = values;
        const res = await VerifyUserExists({
         firstname,
@@ -64,16 +67,20 @@ const index = () => {
 
        if(res.statusCode == 400) {
         setError(res.message);
+        setShowLoader(false);
        } else {
-        RequestOtpForEmail(values.email);
-        saveFormData('formData',values);
-        router.push({
-          pathname: '/otp',
-          params: {
-            email: values.email,
-            previous_screen: 'signup'
-          }
-        });
+         RequestOtpForEmail(values.email);
+         saveFormData('formData',values);
+         setTimeout(() => {
+           setShowLoader(false);
+           router.push({
+            pathname: '/otp',
+            params: {
+              email: values.email,
+              previous_screen: 'signup'
+            }
+          });
+         },1000);
        }
 
        console.log(res);
@@ -222,9 +229,11 @@ const index = () => {
                       flex: 1
                     }}
                   >
-                    <Text
+                    {
+                      showloader ? <ActivityIndicator size={130} color={'#ffffff'}/> :  <Text
                       style={styles.textStyle}
                     >{'Continue'}</Text>
+                    }
                   </View>
                 </TouchableOpacity>
             </View>
@@ -302,7 +311,7 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     backgroundColor: '#1AACD5',
-    padding: 10,
+    padding: 15,
     borderRadius: 10,
     margin: 10,
     alignSelf: 'center',
