@@ -16,7 +16,6 @@ import { useRouter } from "expo-router";
 export const useAuth = () => {
     const [_error,setError] = useState(false);
     const [notification,setNotification] = useState(false);
-    const router = useRouter();
 
     const VerifyUserExists = async(data: signUpData) => {
         const {firstname,lastname,email,password,phonenumber} = data;
@@ -35,8 +34,7 @@ export const useAuth = () => {
 
     const GetUser = async(email: string) => {
         const response: any = await getUser(email);
-        const responseData = await response.json();
-        return responseData;
+        return response;
     }
 
     const UpdatePassword = async(data: updateData) => {

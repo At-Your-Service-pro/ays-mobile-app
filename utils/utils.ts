@@ -38,7 +38,7 @@ export const getUser = async(email: string) => {
     try {
         const token = await getToken('token');
         const response = await fetch(getUserUrl,{
-            method: 'get',
+            method: 'post',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
@@ -47,8 +47,9 @@ export const getUser = async(email: string) => {
                 email
             }),
         })
-
-        return response;
+         
+        const data = await response.json(); // Extract the actual JSON content
+        return data;
     }catch(err){
         return err;
     }
