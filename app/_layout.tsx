@@ -20,7 +20,7 @@ const _layout = () => {
             />
             <Stack.Screen 
               name='welcome'
-              options={{headerShown: false}}
+              options={{headerShown: false,gestureEnabled: false }}
             />
             <Stack.Screen 
               name='forgotpassword'
@@ -40,7 +40,7 @@ const _layout = () => {
             />
             <Stack.Screen
               name='dashboard'
-              options={{headerShown: false}}
+              options={{headerShown: false,gestureEnabled: false }}
             />
         </Stack>
         

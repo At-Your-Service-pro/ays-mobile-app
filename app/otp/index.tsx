@@ -55,17 +55,16 @@ const OTPVerification = () => {
         email,
         otp: otpCode,
       })
+      console.log(res);
 
       if(res.statusCode == 200){
         setError('');
+        CreateAccount(formData);
+        router.push('/dashboard');  
       }else {
         setError(res.message);
       }
 
-      const responseData: any = CreateAccount(formData);
-      if(responseData.statusCode == 201){
-        router.push('/dashboard');  
-      }
       
     }
     if(previous_screen === 'reset_pass'){

@@ -4,7 +4,9 @@ import {
   View,
   SafeAreaView,
   TextInput ,
-  ScrollView
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native'
 import Fontisto from '@expo/vector-icons/Fontisto';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -63,130 +65,135 @@ const index = () => {
     <SafeAreaView 
       style={styles.container}
     >
-      <ScrollView
-        style={styles.headerContainer}
-        showsVerticalScrollIndicator={false}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios"? "padding" : "height"}
+        style={{ flex: 1 }}
       >
-        <View>
-          <Text
-            style={styles.headerText}
-          >Welcome!</Text>
-          <Text
-            style={styles.headerSubText} 
-          >Fill out your details to log you in</Text>
-        </View>
-        <View
-          style={styles.loginContainer} 
+        <ScrollView
+          style={styles.headerContainer}
+          showsVerticalScrollIndicator={false}
         >
           <View>
-             <Text
-              style={styles.loginTextHeader}
-             > Email </Text>
-             <View 
-              style={styles.loginContainerText}
-             >
-              <Fontisto name="email" size={24} color="black" />
-              <TextInput
-                  id='email'
-                  placeholder="Enter Email"
-                  keyboardType="email-address"
-                  style={styles.loginInput}
-                  onChangeText={formData.handleChange('email')}
-                  onBlur={formData.handleBlur('email')}
-                />
-             </View>
+            <Text
+              style={styles.headerText}
+            >Welcome!</Text>
+            <Text
+              style={styles.headerSubText} 
+            >Fill out your details to log you in</Text>
           </View>
-          {
-            formData.touched.email && formData.errors.email && (<Validationerror title={formData.errors.email}/>)
-          }
+          <View
+            style={styles.loginContainer} 
+          >
+            <View>
+              <Text
+                style={styles.loginTextHeader}
+              > Email </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <Fontisto name="email" size={24} color="black" />
+                <TextInput
+                    id='email'
+                    placeholder="Enter Email"
+                    keyboardType="email-address"
+                    style={styles.loginInput}
+                    onChangeText={formData.handleChange('email')}
+                    onBlur={formData.handleBlur('email')}
+                  />
+              </View>
+            </View>
+            {
+              formData.touched.email && formData.errors.email && (<Validationerror title={formData.errors.email}/>)
+            }
+            <View
+              style={{
+                marginTop: 20
+              }}
+            >
+              <Text
+                style={styles.loginTextHeader}
+              > Password </Text>
+              <View 
+                style={styles.loginContainerText}
+              >
+                <TextInput
+                    id='password'
+                    placeholder="Enter Password"
+                    keyboardType="default"
+                    style={styles.loginInput}
+                    secureTextEntry={!showPassword}
+                    onChangeText={formData.handleChange('password')}
+                    onBlur={formData.handleBlur('password')}
+                  />
+                  <TouchableOpacity
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
+                    <Entypo 
+                      name={showPassword ? 'eye-with-line' : 'eye'} 
+                      size={20} 
+                      color="black" 
+                    />
+                  </TouchableOpacity>
+              </View>
+            </View>
+            {
+              formData.touched.password && formData.errors.password && (<Validationerror title={formData.errors.password}/>)
+            }
+            <TouchableOpacity
+              style={styles.forgotPasswordContainer}
+              onPress={() => router.push({
+                pathname: '/forgotpassword',
+                params:{
+                  message: 'forgot_pass'
+                }
+              })}
+            >
+              <Text
+                style={styles.forgotPasswordText}
+              >
+                Forgot password?
+              </Text>
+            </TouchableOpacity>
+            {
+              error && (<Validationerror title={`${error}, try again`}/>)
+            }
+          </View>
+          <CustomeButtom 
+            title="Login" 
+            onPress={formData.handleSubmit}
+          />
           <View
             style={{
+              display: 'flex',
+              alignItems: 'center',
               marginTop: 20
             }}
           >
-             <Text
-              style={styles.loginTextHeader}
-             > Password </Text>
-             <View 
-              style={styles.loginContainerText}
-             >
-              <TextInput
-                  id='password'
-                  placeholder="Enter Password"
-                  keyboardType="default"
-                  style={styles.loginInput}
-                  secureTextEntry={!showPassword}
-                  onChangeText={formData.handleChange('password')}
-                  onBlur={formData.handleBlur('password')}
-                />
-                <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                >
-                  <Entypo 
-                    name={showPassword ? 'eye-with-line' : 'eye'} 
-                    size={20} 
-                    color="black" 
-                  />
-                </TouchableOpacity>
-             </View>
-          </View>
-          {
-            formData.touched.password && formData.errors.password && (<Validationerror title={formData.errors.password}/>)
-          }
-          <TouchableOpacity
-            style={styles.forgotPasswordContainer}
-            onPress={() => router.push({
-              pathname: '/forgotpassword',
-              params:{
-                message: 'forgot_pass'
-              }
-            })}
-          >
-            <Text
-              style={styles.forgotPasswordText}
-            >
-              Forgot password?
-            </Text>
-          </TouchableOpacity>
-          {
-            error && (<Validationerror title={`${error}, try again`}/>)
-          }
-        </View>
-        <CustomeButtom 
-          title="Login" 
-          onPress={formData.handleSubmit}
-        />
-        <View
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginTop: 20
-          }}
-        >
-          <View 
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}
-          >
-            <Text
+            <View 
               style={{
-                color: '#5E5E5E'
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center'
               }}
             >
-              Don't have an account?
-            </Text>
-            <TouchableOpacity
-              onPress={() => router.push('/signup')}
-            > 
-              <Text 
-                style={{fontSize: 20,fontWeight: 'regular',marginLeft: 5}}
-              > Sign up </Text>
-            </TouchableOpacity>
+              <Text
+                style={{
+                  color: '#5E5E5E'
+                }}
+              >
+                Don't have an account?
+              </Text>
+              <TouchableOpacity
+                onPress={() => router.push('/signup')}
+              > 
+                <Text 
+                  style={{fontSize: 20,fontWeight: 'regular',marginLeft: 5}}
+                > Sign up </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
