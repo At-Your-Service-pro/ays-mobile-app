@@ -37,7 +37,7 @@ const index = () => {
           showsVerticalScrollIndicator={false}
         >
           <View>
-            <Text>Hi {user.firstname} </Text>
+            <Text> Hi {user.firstname} </Text>
           </View>
         </ScrollView>
 
