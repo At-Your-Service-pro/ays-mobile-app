@@ -73,6 +73,7 @@ const index = () => {
          saveFormData('formData',values);
          setTimeout(() => {
            setShowLoader(false);
+           setError('');
            router.push({
             pathname: '/otp',
             params: {

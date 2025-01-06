@@ -1,14 +1,15 @@
-import { View, Text,StyleSheet,Dimensions,TouchableOpacity } from 'react-native'
+import { View, Text,StyleSheet,Dimensions,TouchableOpacity,ActivityIndicator } from 'react-native'
 import React from 'react'
 
 interface Props {
   title?: string;
   onPress?: () => any;
+  isLoading?: boolean
 }
 
 const {width,height} = Dimensions.get('window');
 
-const CustomeButtom:React.FC<Props> = ({title,onPress}) => {
+const CustomeButtom:React.FC<Props> = ({title,onPress,isLoading}) => {
   return (
     <TouchableOpacity 
       style={styles.containerStyle}
@@ -21,9 +22,11 @@ const CustomeButtom:React.FC<Props> = ({title,onPress}) => {
           flex: 1
         }}
       >
-        <Text
+        {
+          isLoading ? <ActivityIndicator size={130} color={'#ffffff'}/> :   <Text
           style={styles.textStyle}
         >{title}</Text>
+        }
       </View>
     </TouchableOpacity>
   )

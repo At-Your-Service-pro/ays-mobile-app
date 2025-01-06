@@ -1,10 +1,10 @@
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export async function saveToken(key: string, value: string) {
-    await SecureStore.setItemAsync(key, value);
+    await AsyncStorage.setItem(key, value);
   }
   
   export async function getToken(key: string) {
-    let result = await SecureStore.getItemAsync(key);
+    let result = await AsyncStorage.getItem(key);
     return result;
   }

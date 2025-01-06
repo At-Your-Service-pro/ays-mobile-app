@@ -6,7 +6,8 @@ import {
     UpdateUserData,
     VerifyOtp,
     VerifyUser,
-    updatePassword
+    updatePassword,
+    getUser
 } from "@/utils/utils";
 import { signUpData,loginData,otpData,updateData } from "@/enums/enums";
 import { saveToken } from "@/utils/_token";
@@ -28,6 +29,12 @@ export const useAuth = () => {
             phonenumber: phonenumber
         });
 
+        const responseData = await response.json();
+        return responseData;
+    }
+
+    const GetUser = async(email: string) => {
+        const response: any = await getUser(email);
         const responseData = await response.json();
         return responseData;
     }
@@ -99,7 +106,8 @@ export const useAuth = () => {
         VerifyUserExists,
         _error,
         notification,
-        UpdatePassword
+        UpdatePassword,
+        GetUser
     };
 };
   

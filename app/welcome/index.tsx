@@ -23,6 +23,7 @@ import { useAuth } from '@/hooks/useAuth';
 const index = () => {
   const {LoginUser} = useAuth();
   const [error,setError] = useState('');
+  const [isLoading,setIsLoading] = useState(false);
   const formData = useFormik({
     initialValues: {
       email: '',
@@ -37,13 +38,21 @@ const index = () => {
        .required('Password is required')
     }),
     onSubmit: async(values) => {
-      console.log(values);
+      setIsLoading(true);
       const response = await LoginUser(values);
       if(response.statusCode === 401){
+        setIsLoading(false);
+        setTimeout(() => {
+
+        },1500);
         setError(response.message);
       } else {
+        setIsLoading(false);
         setError('');
-        router.push('/dashboard');
+        router.push({
+          pathname: '/dashboard',
+          params: {email: values.email}
+        });
       }
       
       // TODO: Send the form data to the server
@@ -161,6 +170,7 @@ const index = () => {
           <CustomeButtom 
             title="Login" 
             onPress={formData.handleSubmit}
+            isLoading={isLoading}
           />
           <View
             style={{
