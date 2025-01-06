@@ -40,6 +40,7 @@ const index = () => {
       if(response.statusCode === 401){
         setError(response.message);
       } else {
+        setError('');
         router.push('/dashboard');
       }
       

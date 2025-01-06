@@ -58,14 +58,13 @@ const OTPVerification = () => {
 
       if(res.statusCode == 200){
         setError('');
-        const responseData: any = CreateAccount(formData);
-        if(responseData.statusCode == 201){
-          if(previous_screen == 'signup'){
-            router.push('/dashboard');  
-          }
-        }
       }else {
         setError(res.message);
+      }
+
+      const responseData: any = CreateAccount(formData);
+      if(responseData.statusCode == 201){
+        router.push('/dashboard');  
       }
       
     }
@@ -82,6 +81,7 @@ const OTPVerification = () => {
 
   const handleResend = async() => {
     const response =await  RequestOtpForEmail(email);
+    setError('');
     if(response.statusCode == 200){
       Toast.show({
         text1: "OTP sent successfully",

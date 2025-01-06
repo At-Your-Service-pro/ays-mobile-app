@@ -6,7 +6,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { store } from '@/redux/app/store';
 import { Provider } from 'react-redux';
 
-//Prevent Splash screen from auto hiding
+// // Prevent Splash screen from auto hiding
 // SplashScreen.preventAutoHideAsync();
 
 const _layout = () => {
