@@ -26,7 +26,7 @@ const index = () => {
       console.error(error);
     }
   }
-
+  
   useEffect(() => {
       loadUser();
   },[]);
@@ -49,7 +49,7 @@ const index = () => {
 		  	style={styles.imageContainer}
 		  >
 			<Image 
-				source={require('../../assets/images/bg.png')}
+				source={require('../../../assets/images/bg.png')}
 				style={styles.headerImage}
 			/>
 			<Text
@@ -88,7 +88,8 @@ export default index
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'white'
   },
   headerContainer: {
     width: '95%',
@@ -118,8 +119,8 @@ const styles = StyleSheet.create({
   },
   categories: {
     marginTop: '5%',
-	display: 'flex',
-	flexDirection: 'row',
+	  display: 'flex',
+	  flexDirection: 'row',
     justifyContent:'space-between',
     alignItems: 'center'
   }  

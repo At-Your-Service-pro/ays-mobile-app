@@ -50,7 +50,7 @@ const index = () => {
         setIsLoading(false);
         setError('');
         router.push({
-          pathname: '/dashboard',
+          pathname: '/(tabs)/dashboard',
           params: {email: values.email}
         });
       }
