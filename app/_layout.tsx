@@ -16,7 +16,7 @@ const _layout = () => {
         <Stack>
             <Stack.Screen 
               name="(tabs)"
-              options={{headerShown: false}}
+              options={{headerShown: false,gestureEnabled: false}}
             />
             <Stack.Screen 
                 name="index"
@@ -42,12 +42,7 @@ const _layout = () => {
               name='createnewpassword'
               options={{headerShown: false}}
             />
-            <Stack.Screen
-              name='(tabs)/dashboard'
-              options={{headerShown: false,gestureEnabled: false }}
-            />
         </Stack>
-        
       </GestureHandlerRootView>
     </Provider>
   )

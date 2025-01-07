@@ -31,6 +31,21 @@ const index = () => {
       loadUser();
   },[]);
 
+  const _categories = [
+    {
+      id: '1',
+      title: 'Plumbing',
+    },
+    {
+      id: '2',
+      title: 'Floor fitters',
+    },
+    {
+      id: '3',
+      title: 'Capenters',
+    }
+  ]
+
   
   return (
     <SafeAreaView style={styles.container}>

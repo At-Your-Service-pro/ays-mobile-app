@@ -12,7 +12,7 @@ const TabsLayout = () => {
         tabBarLabelStyle: {
             fontSize: 13, // Increase the font size here
             fontWeight: 'semibold', // Optional: bold text
-        }
+        },
     }}
     >
         <Tabs.Screen
@@ -31,7 +31,6 @@ const TabsLayout = () => {
             tabBarIcon: ({color}) => (
                 <AntDesign name="search1" size={20} color={color} />
             ),
-  
             }}
         />
         <Tabs.Screen
