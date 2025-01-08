@@ -8,7 +8,8 @@ import {
   Platform,
   Image,
   FlatList,
-  TouchableOpacity 
+  TouchableOpacity,
+  StatusBar 
 } from 'react-native';
 import React,{useEffect,useState} from 'react';
 import { useLocalSearchParams } from 'expo-router';
@@ -247,7 +248,11 @@ const index = () => {
               }}
             > Popular services </Text>
           </View>
-          <View style={styles.categoryContainer}>
+          <View style={{
+              flex: 1,
+              paddingRight: 30
+            }}
+            >
             <FlatList
               data={services}
               keyExtractor={(item) => item.id}
@@ -292,6 +297,70 @@ const index = () => {
             />
           </View>
       </View>
+      <View 
+        style={{
+          marginTop: '6%'
+        }}
+      >
+        <View>
+          <Text
+            style={{
+              fontSize: 22,
+              fontWeight: 'semibold'
+            }}
+          > All services </Text>
+        </View>
+        <View
+          style={{
+            paddingRight: 30,
+            width: '100%'
+          }}
+        >
+           <FlatList
+              data={services}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity  style={styles.popularSub}>
+                  <Image 
+                    source={item.image}
+                    style={{width: 'auto', height: 120, borderRadius: 10}}
+                    resizeMode='cover'
+                  />
+                  <View>
+                    <View 
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent:'space-between',
+                        alignItems: 'center',
+                        marginTop: 10
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 17,
+                          fontWeight: 'semibold' 
+                        }}
+                      >{item.title}</Text>
+                      <AntDesign name="heart" size={20} color={'#0598AC'} />
+                    </View>
+                    <View>
+                      <Text
+                        style={{
+                          fontWeight: 'light'
+                        }}
+                      >{item.loaction}</Text>
+                    </View>
+
+                  </View>
+
+                </TouchableOpacity>
+              )}
+            /> 
+         
+
+        </View>
+
+      </View>
       </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -306,7 +375,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   headerContainer: {
-    width: '95%',
+    width: '90%',
     marginHorizontal: 'auto',
     marginTop: '10%'
   },
