@@ -313,49 +313,50 @@ const index = () => {
         <View
           style={{
             paddingRight: 30,
-            width: '100%'
+            width: 'auto'
           }}
         >
-           <FlatList
-              data={services}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <TouchableOpacity  style={styles.popularSub}>
-                  <Image 
-                    source={item.image}
-                    style={{width: 'auto', height: 120, borderRadius: 10}}
-                    resizeMode='cover'
-                  />
-                  <View>
-                    <View 
+          <View>
+            {
+              services.map((item) => (
+                <TouchableOpacity  style={styles.popularSub} key={item.id}>
+                <Image 
+                  source={item.image}
+                  style={{width: 'auto', height: 120, borderRadius: 10}}
+                  resizeMode='cover'
+                />
+                <View>
+                  <View 
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent:'space-between',
+                      alignItems: 'center',
+                      marginTop: 10
+                    }}
+                  >
+                    <Text
                       style={{
-                        flexDirection: 'row',
-                        justifyContent:'space-between',
-                        alignItems: 'center',
-                        marginTop: 10
+                        fontSize: 17,
+                        fontWeight: 'semibold' 
                       }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: 17,
-                          fontWeight: 'semibold' 
-                        }}
-                      >{item.title}</Text>
-                      <AntDesign name="heart" size={20} color={'#0598AC'} />
-                    </View>
-                    <View>
-                      <Text
-                        style={{
-                          fontWeight: 'light'
-                        }}
-                      >{item.loaction}</Text>
-                    </View>
-
+                    >{item.title}</Text>
+                    <AntDesign name="heart" size={20} color={'#0598AC'} />
+                  </View>
+                  <View>
+                    <Text
+                      style={{
+                        fontWeight: 'light'
+                      }}
+                    >{item.loaction}</Text>
                   </View>
 
-                </TouchableOpacity>
-              )}
-            /> 
+                </View>
+
+              </TouchableOpacity>
+              ))
+            }
+          </View>   
+          
          
 
         </View>
