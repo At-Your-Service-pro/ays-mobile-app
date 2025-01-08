@@ -14,6 +14,7 @@ import React,{useEffect,useState} from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
 import { userData } from '@/enums/enums';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const index = () => {
   const {email} = useLocalSearchParams();
@@ -117,6 +118,63 @@ const index = () => {
           price: '$100'
         }
       ]
+    },
+    {
+      id: '4',
+      title: 'Plumbing Installation',
+      category: 'Plumbing',
+      loaction: 'Spintex',
+      image: require('../../../assets/images/3.png'),
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+      phonenumber: '0245861319',
+      sub_services: [
+        {
+          title: 'leak repair',
+          price: '$100'
+        },
+        {
+          title: 'leak repair',
+          price: '$100'
+        }
+      ]
+    },
+    {
+      id: '5',
+      title: 'Plumbing Installation',
+      category: 'Plumbing',
+      loaction: 'Spintex',
+      image: require('../../../assets/images/3.png'),
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+      phonenumber: '0245861319',
+      sub_services: [
+        {
+          title: 'leak repair',
+          price: '$100'
+        },
+        {
+          title: 'leak repair',
+          price: '$100'
+        }
+      ]
+    },
+    {
+      id: '6',
+      title: 'Plumbing Installation',
+      category: 'Plumbing',
+      loaction: 'Spintex',
+      image: require('../../../assets/images/3.png'),
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+      phonenumber: '0245861319',
+      sub_services: [
+        {
+          title: 'leak repair',
+          price: '$100'
+        },
+        {
+          title: 'leak repair',
+          price: '$100'
+        }
+      ]
     }
   ]
 
@@ -170,7 +228,7 @@ const index = () => {
       <View style={styles.categoryContainer}>
         <FlatList
           data={_categories}
-          // keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id}
           horizontal // Enables horizontal scrolling
           showsHorizontalScrollIndicator={false} // Hides the scrollbar
           renderItem={({ item }) => (
@@ -184,13 +242,54 @@ const index = () => {
           <View>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'semibold'
               }}
             > Popular services </Text>
           </View>
-          <View>
+          <View style={styles.categoryContainer}>
+            <FlatList
+              data={services}
+              keyExtractor={(item) => item.id}
+              horizontal // Enables horizontal scrolling
+              showsHorizontalScrollIndicator={false} // Hides the scrollbar
+              renderItem={({ item }) => (
+                <TouchableOpacity  style={styles.popularSub}>
+                  <Image 
+                    source={item.image}
+                    style={{width: 200, height: 100, borderRadius: 10}}
+                    resizeMode='cover'
+                  />
+                  <View>
+                    <View 
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent:'space-between',
+                        alignItems: 'center',
+                        marginTop: 10
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 17,
+                          fontWeight: 'semibold' 
+                        }}
+                      >{item.title}</Text>
+                      <AntDesign name="heart" size={20} color={'#0598AC'} />
+                    </View>
+                    <View>
+                      <Text
+                        style={{
+                          fontWeight: 'light'
+                        }}
+                      >{item.loaction}</Text>
+                    </View>
 
+                  </View>
+
+                </TouchableOpacity>
+              )}
+            />
           </View>
       </View>
       </ScrollView>
@@ -242,16 +341,22 @@ const styles = StyleSheet.create({
   categoryContainer: {
     marginTop: '4%',
     flex: 1,
+    paddingRight: 30
   },
   subcategory: {
     backgroundColor: '#E4E4E4',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    marginRight: 10,
+    marginRight: '2.5%',
   },
   popularContainer: {
     marginTop: '10%'
+  },
+  popularSub: {
+    paddingVertical: 10,
+    borderRadius: 5,
+    marginRight: '3%'
   }
 
 })
