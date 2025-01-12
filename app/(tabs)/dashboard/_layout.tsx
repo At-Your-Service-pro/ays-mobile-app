@@ -9,6 +9,10 @@ const _layout = () => {
               name="index"
               options={{headerShown: false}}
           />
+          <Stack.Screen 
+            name='[ItemId]'
+            options={{headerShown: false}}
+          />
       </Stack>
   )
 }

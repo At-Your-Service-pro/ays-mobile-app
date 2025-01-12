@@ -12,7 +12,7 @@ import {
   StatusBar 
 } from 'react-native';
 import React,{useEffect,useState} from 'react';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams,router,Link } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
 import { userData } from '@/enums/enums';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -268,7 +268,15 @@ const index = () => {
               horizontal // Enables horizontal scrolling
               showsHorizontalScrollIndicator={false} // Hides the scrollbar
               renderItem={({ item }) => (
-                <TouchableOpacity  style={styles.popularSub}>
+                <TouchableOpacity  
+                  style={styles.popularSub}
+                  onPress={() => {
+                    router.push({
+                      pathname: '/(tabs)/dashboard/[ItemId]', // Correct route
+                      params: { ItemId: item.id }, // Pass the dynamic parameter
+                    });
+                  }}
+                >
                   <Image 
                     source={item.image}
                     style={{width: 200, height: 100, borderRadius: 10}}

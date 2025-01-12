@@ -13,6 +13,9 @@ const TabsLayout = () => {
             fontSize: 13, // Increase the font size here
             fontWeight: 'semibold', // Optional: bold text
         },
+        tabBarStyle:{
+            paddingBottom: 10,
+        }
     }}
     >
         <Tabs.Screen
