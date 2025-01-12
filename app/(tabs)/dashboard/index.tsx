@@ -221,10 +221,20 @@ const index = () => {
             textAlign: 'center'
           }}
         > Categories</Text>
-        <Text 
+        <TouchableOpacity
           style={{
-            fontSize: 16
-          }}> All </Text>
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'row',
+          }}
+        >
+          <Text 
+            style={{
+              fontSize: 16
+            }}> All </Text>
+          <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
+        </TouchableOpacity>
 		  </View>
       <View style={styles.categoryContainer}>
         <FlatList
