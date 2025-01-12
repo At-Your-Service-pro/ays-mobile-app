@@ -36,6 +36,15 @@ const TabsLayout = () => {
             ),
             }}
         />
+         <Tabs.Screen
+           name="orders"
+           options={{
+            tabBarLabel: "Orders",
+            tabBarIcon: ({color}) => (
+                <MaterialCommunityIcons name="clipboard-text-outline" size={20} color={color} />
+            ),
+            }}
+        />
         <Tabs.Screen
            name="saved"
            options={{

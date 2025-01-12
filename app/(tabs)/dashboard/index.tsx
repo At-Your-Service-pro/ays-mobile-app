@@ -272,7 +272,7 @@ const index = () => {
                   style={styles.popularSub}
                   onPress={() => {
                     router.push({
-                      pathname: '/(tabs)/dashboard/[ItemId]', // Correct route
+                      pathname: '/serviceDetails', // Correct route
                       params: { ItemId: item.id }, // Pass the dynamic parameter
                     });
                   }}
