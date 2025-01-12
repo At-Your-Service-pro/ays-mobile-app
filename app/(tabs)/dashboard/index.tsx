@@ -16,6 +16,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
 import { userData } from '@/enums/enums';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 const index = () => {
   const {email} = useLocalSearchParams();
@@ -194,17 +195,17 @@ const index = () => {
         		<Text style={styles.headerText}> Hi {user.firstname} , </Text>
           	</View>
           <View
-		  	style={styles.imageContainer}
-		  >
-			<Image 
-				source={require('../../../assets/images/bg.png')}
-				style={styles.headerImage}
-			/>
-			<Text
-				style={styles.imageText}
-			>
-				Get 50% on your first service order 
-			</Text>
+            style={styles.imageContainer}
+          >
+          <Image 
+            source={require('../../../assets/images/bg.png')}
+            style={styles.headerImage}
+          />
+          <Text
+            style={styles.imageText}
+          >
+            Get 50% on your first service order 
+          </Text>
           </View>
 		  <View
 		  	style={styles.categories}
@@ -222,7 +223,6 @@ const index = () => {
         > Categories</Text>
         <Text 
           style={{
-            color: '#1AACD5',
             fontSize: 16
           }}> All </Text>
 		  </View>
@@ -249,8 +249,7 @@ const index = () => {
             > Popular services </Text>
           </View>
           <View style={{
-              flex: 1,
-              paddingRight: 30
+              flex: 1
             }}
             >
             <FlatList
@@ -289,9 +288,7 @@ const index = () => {
                         }}
                       >{item.loaction}</Text>
                     </View>
-
                   </View>
-
                 </TouchableOpacity>
               )}
             />
@@ -310,19 +307,14 @@ const index = () => {
             }}
           > All services </Text>
         </View>
-        <View
-          style={{
-            paddingRight: 30,
-            width: 'auto'
-          }}
-        >
+        <View>
           <View>
             {
               services.map((item) => (
-                <TouchableOpacity  style={styles.popularSub} key={item.id}>
+                <TouchableOpacity  style={styles.subServices} key={item.id}>
                 <Image 
                   source={item.image}
-                  style={{width: 'auto', height: 120, borderRadius: 10}}
+                  style={{width: 'auto', height: 140, borderRadius: 10}}
                   resizeMode='cover'
                 />
                 <View>
@@ -349,18 +341,12 @@ const index = () => {
                       }}
                     >{item.loaction}</Text>
                   </View>
-
                 </View>
-
               </TouchableOpacity>
               ))
             }
           </View>   
-          
-         
-
         </View>
-
       </View>
       </ScrollView>
       </KeyboardAvoidingView>
@@ -409,9 +395,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   categoryContainer: {
-    marginTop: '4%',
-    flex: 1,
-    paddingRight: 30
+    marginTop: '4%'
   },
   subcategory: {
     backgroundColor: '#E4E4E4',
@@ -427,6 +411,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 5,
     marginRight: '3%'
+  },
+  subServices: {
+    paddingVertical: 10,
+    borderRadius: 5
   }
 
 })
