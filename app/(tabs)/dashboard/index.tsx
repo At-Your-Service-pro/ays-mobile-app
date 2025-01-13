@@ -228,6 +228,9 @@ const index = () => {
             justifyContent: 'center',
             flexDirection: 'row',
           }}
+          onPress={() => {
+            router.push('/categories');
+          }}
         >
           <Text 
             style={{
@@ -243,7 +246,12 @@ const index = () => {
           horizontal // Enables horizontal scrolling
           showsHorizontalScrollIndicator={false} // Hides the scrollbar
           renderItem={({ item }) => (
-            <TouchableOpacity  style={styles.subcategory}>
+            <TouchableOpacity  
+              style={styles.subcategory}
+              onPress={() => {
+                router.push('/categories/[ItemId]');
+              }}
+            >
               <Text style={{textAlign: 'center'}}>{item.title}</Text>
             </TouchableOpacity>
           )}
