@@ -7,7 +7,8 @@ import {
     KeyboardAvoidingView,
     Platform,
     TextInput,
-    Image 
+    Image,
+    TouchableOpacity 
   } from 'react-native';
   import React,{useEffect,useState} from 'react';
   import AntDesign from '@expo/vector-icons/AntDesign';
@@ -15,7 +16,124 @@ import {
   
   
   const search = () => {
-    const [search, setSearch] = useState("");
+
+    const services = [
+        {
+          id: '1',
+          title: 'Plumbing Installation',
+          category: 'Plumbing',
+          loaction: 'Spintex',
+          image: require('../../assets/images/3.png'),
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+          phonenumber: '0245861319',
+          sub_services: [
+            {
+              title: 'leak repair',
+              price: '$100'
+            },
+            {
+              title: 'leak repair',
+              price: '$100'
+            }
+          ]
+        },
+        {
+          id: '2',
+          title: 'Plumbing Installation',
+          category: 'Plumbing',
+          loaction: 'Spintex',
+          image: require('../../assets/images/3.png'),
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+          phonenumber: '0245861319',
+          sub_services: [
+            {
+              title: 'leak repair',
+              price: '$100'
+            },
+            {
+              title: 'leak repair',
+              price: '$100'
+            }
+          ]
+        },
+        {
+          id: '3',
+          title: 'Plumbing Installation',
+          category: 'Plumbing',
+          loaction: 'Spintex',
+          image: require('../../assets/images/3.png'),
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+          phonenumber: '0245861319',
+          sub_services: [
+            {
+              title: 'leak repair',
+              price: '$100'
+            },
+            {
+              title: 'leak repair',
+              price: '$100'
+            }
+          ]
+        },
+        {
+          id: '4',
+          title: 'Plumbing Installation',
+          category: 'Plumbing',
+          loaction: 'Spintex',
+          image: require('../../assets/images/3.png'),
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+          phonenumber: '0245861319',
+          sub_services: [
+            {
+              title: 'leak repair',
+              price: '$100'
+            },
+            {
+              title: 'leak repair',
+              price: '$100'
+            }
+          ]
+        },
+        {
+          id: '5',
+          title: 'Plumbing Installation',
+          category: 'Plumbing',
+          loaction: 'Spintex',
+          image: require('../../assets/images/3.png'),
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+          phonenumber: '0245861319',
+          sub_services: [
+            {
+              title: 'leak repair',
+              price: '$100'
+            },
+            {
+              title: 'leak repair',
+              price: '$100'
+            }
+          ]
+        },
+        {
+          id: '6',
+          title: 'Plumbing Installation',
+          category: 'Plumbing',
+          loaction: 'Spintex',
+          image: require('../../assets/images/3.png'),
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+          phonenumber: '0245861319',
+          sub_services: [
+            {
+              title: 'leak repair',
+              price: '$100'
+            },
+            {
+              title: 'leak repair',
+              price: '$100'
+            }
+          ]
+        }
+      ]
+    
     
     return (
       <SafeAreaView style={styles.container}>
@@ -33,6 +151,44 @@ import {
                   <Text style={styles.headerText}> Plumbing </Text>
                 </View>
               </View>
+              <View>
+            {
+              services.map((item) => (
+                <TouchableOpacity  style={styles.subServices} key={item.id}>
+                <Image 
+                  source={item.image}
+                  style={{width: 'auto', height: 140, borderRadius: 10}}
+                  resizeMode='cover'
+                />
+                <View>
+                  <View 
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent:'space-between',
+                      alignItems: 'center',
+                      marginTop: 10
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 17,
+                        fontWeight: 'semibold' 
+                      }}
+                    >{item.title}</Text>
+                    <AntDesign name="heart" size={20} color={'#0598AC'} />
+                  </View>
+                  <View>
+                    <Text
+                      style={{
+                        fontWeight: 'light'
+                      }}
+                    >{item.loaction}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              ))
+            }
+          </View>  
               
           </ScrollView>
         </KeyboardAvoidingView>
@@ -48,7 +204,7 @@ import {
       backgroundColor: '#ffffff'
     },
     headerContainer: {
-      width: '95%',
+      width: '90%',
       marginHorizontal: 'auto',
       marginTop: '5%'
     },
@@ -82,4 +238,8 @@ import {
     icon: {
       marginRight: 10,
     }, 
+    subServices: {
+        paddingVertical: 10,
+        borderRadius: 5
+      }
   })

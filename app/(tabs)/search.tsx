@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   headerContainer: {
-    width: '95%',
+    width: '90%',
     marginHorizontal: 'auto',
     marginTop: '10%'
   },

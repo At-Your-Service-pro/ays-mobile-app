@@ -117,7 +117,7 @@ import {
       backgroundColor: '#ffffff'
     },
     headerContainer: {
-      width: '95%',
+      width: '90%',
       marginHorizontal: 'auto',
       marginTop: '5%'
     },
