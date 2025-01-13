@@ -9,38 +9,17 @@ import {
     Image,
     FlatList,
     TouchableOpacity,
-    StatusBar 
+    Modal,
+    Dimensions 
   } from 'react-native';
-  import React,{useEffect,useState} from 'react';
-  import { useLocalSearchParams,router,Link } from 'expo-router';
-  import { useAuth } from '@/hooks/useAuth';
-  import { userData } from '@/enums/enums';
-  import AntDesign from '@expo/vector-icons/AntDesign';
-  import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+  import React,{useState}from 'react';
+  import Carousel from 'react-native-snap-carousel';
+
+  const { width, height } = Dimensions.get('window');
   
-  const index = () => {
-   
-    const services = [
-      {
-        id: '1',
-        title: 'Plumbing Installation',
-        category: 'Plumbing',
-        loaction: 'Spintex',
-        image: require('../../assets/images/3.png'),
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
-        phonenumber: '0245861319',
-        sub_services: [
-          {
-            title: 'leak repair',
-            price: '$100'
-          },
-          {
-            title: 'leak repair',
-            price: '$100'
-          }
-        ]
-      }
-    ]
+  const serviceDetails = () => {
+
+  
   
     
     return (
@@ -53,14 +32,15 @@ import {
             style={styles.headerContainer}
             showsVerticalScrollIndicator={false}
           >
-        
+             
+
         </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
     )
   }
   
-  export default index
+  export default serviceDetails 
   
   const styles = StyleSheet.create({
     container: {
@@ -121,6 +101,31 @@ import {
     subServices: {
       paddingVertical: 10,
       borderRadius: 5
-    }
-  
+    },
+    carouselImage: {
+        width: width * 0.8,
+        height: height * 0.5,
+        borderRadius: 10,
+    },
+    image: {
+        width: 150,
+        height: 100,
+        borderRadius: 10,
+        marginRight: 10,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      closeButton: {
+        marginTop: 20,
+        padding: 10,
+        backgroundColor: '#000',
+        borderRadius: 5,
+      },
+      closeText: {
+        color: '#fff',
+        fontSize: 16,
+      },
   })
