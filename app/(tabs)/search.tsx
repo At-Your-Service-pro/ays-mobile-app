@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 16,
-    paddingHorizontal: 16,
-    width: '85%'
+    // paddingHorizontal: 16,
+    width: '80%'
   },
   headerText: {
     fontSize: 24,
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     height: 40,
+    marginTop: '5%'
   },
   icon: {
     marginRight: 10,
