@@ -144,12 +144,11 @@ const saved = () => {
           showsVerticalScrollIndicator={false}
         >
           <View>
-            <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
             <Text 
               style={styles.headerText}
             > Favorite Services</Text>  
           </View>
-          <View style={{marginTop: '10%'}}>
+          <View style={{marginTop: '5%'}}>
             {
               services.map((item) => (
                 <TouchableOpacity  style={styles.subServices} key={item.id}>
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     width: '90%',
     marginHorizontal: 'auto',
-    marginTop: '10%'
+    marginTop: '5%'
   },
   headerText: {
     fontSize: 24,

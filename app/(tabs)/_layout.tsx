@@ -4,6 +4,7 @@ import { Tabs } from 'expo-router';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const TabsLayout = () => {
   return (
@@ -59,9 +60,9 @@ const TabsLayout = () => {
         <Tabs.Screen
            name="profile"
            options={{
-            tabBarLabel: "Profile",
+            tabBarLabel: "Account",
             tabBarIcon: ({color}) => (
-                <AntDesign name="user" size={20} color={color} />
+                <FontAwesome name="user-o" size={20} color={color} />
             ),
   
             }}

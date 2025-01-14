@@ -28,7 +28,6 @@ const search = () => {
           showsVerticalScrollIndicator={false}
         >
            <View style={styles.header}>
-              <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
               <View>
                 <Text style={styles.headerText}> Find service providers </Text>
               </View>

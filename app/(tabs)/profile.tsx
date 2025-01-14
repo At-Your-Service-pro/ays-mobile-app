@@ -13,6 +13,9 @@ import React from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 import Feather from '@expo/vector-icons/Feather';
+import EvilIcons from '@expo/vector-icons/EvilIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 
 const profile = () => {
@@ -28,7 +31,7 @@ const profile = () => {
           showsVerticalScrollIndicator={false}
         >
           <View>
-            <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
+            {/* <AntDesign name="left" size={24} color="black" onPress={() => router.back()} /> */}
             <Text 
               style={styles.headerText}
             > Account Settings </Text>  
@@ -37,97 +40,255 @@ const profile = () => {
             <Text style={{color: '#868686'}}>Update your profile data </Text>
           </View>
           <View style={{marginTop: '10%'}}>
-            <TouchableOpacity
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}
-            >
-              <AntDesign name="user" size={20} color={'#000000'} />
-              <View 
+            <View>
+              <TouchableOpacity
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  width: '90%',
-                  marginLeft: '3%',
-                  padding: 5
+                  alignItems: 'center'
                 }}
               >
-                <View>
-                  <Text
-                    style={{
-                      fontSize: 20
-                    }}
-                  > Profile Information </Text>
-                  <Text 
-                    style={{
-                      color: '#868686',
-                      marginTop: '3%'
-                    }}
-                  > Change your account information </Text>
+                <AntDesign name="user" size={20} color={'#000000'} />
+                <View 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '90%',
+                    marginLeft: '3%',
+                    padding: 5
+                  }}
+                >
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 20
+                      }}
+                    > Profile Information </Text>
+                    <Text 
+                      style={{
+                        color: '#868686',
+                        marginTop: '5%'
+                      }}
+                    > Change your account information </Text>
+                  </View>
+                  <AntDesign name="right" size={24} color="black" />
                 </View>
-                <AntDesign name="right" size={24} color="black" />
-              </View>
-            </TouchableOpacity>
-            <View 
-              style={{
-                width: '100%',
-                borderWidth: 0.5,
-                opacity: 0.2,
-                marginTop: '2%'
-              }}
-            />
-            <TouchableOpacity
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: '5%'
-              }}
-            >
-              <Feather name="lock" size={20} color="black" />
+              </TouchableOpacity>
               <View 
+                style={{
+                  width: '100%',
+                  borderWidth: 0.5,
+                  opacity: 0.2,
+                  marginTop: '2%'
+                }}
+              />
+            </View>
+            <View>
+              <TouchableOpacity
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
                   alignItems: 'center',
-                  width: '90%',
-                  marginLeft: '3%',
-                  padding: 5
+                  marginTop: '5%'
                 }}
               >
-                <View>
-                  <Text
-                    style={{
-                      fontSize: 20
-                    }}
-                  > Change password </Text>
-                  <Text 
-                    style={{
-                      color: '#868686',
-                      marginTop: '3%'
-                    }}
-                  > Change your account password </Text>
+                <Feather name="lock" size={20} color="black" />
+                <View 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '90%',
+                    marginLeft: '3%',
+                    padding: 5
+                  }}
+                >
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 20
+                      }}
+                    > Change password </Text>
+                    <Text 
+                      style={{
+                        color: '#868686',
+                        marginTop: '5%'
+                      }}
+                    > Change your account password </Text>
+                  </View>
+                  <AntDesign name="right" size={24} color="black" />
                 </View>
-                <AntDesign name="right" size={24} color="black" />
-              </View>
-            </TouchableOpacity>
-            <View 
+              </TouchableOpacity>
+              <View 
+                style={{
+                  width: '100%',
+                  borderWidth: 0.5,
+                  opacity: 0.2,
+                  marginTop: '2%'
+                }}
+              />
+            </View>
+            <View>
+              <TouchableOpacity
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginTop: '5%'
+                }}
+              >
+                <EvilIcons name="location" size={28} color="black" />
+                <View 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '90%',
+                    marginLeft: '3%',
+                    padding: 5
+                  }}
+                >
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 20
+                      }}
+                    > Location </Text>
+                    <Text 
+                      style={{
+                        color: '#868686',
+                        marginTop: '7%'
+                      }}
+                    > Edit your location </Text>
+                  </View>
+                  <AntDesign name="right" size={24} color="black" />
+                </View>
+              </TouchableOpacity>
+              <View 
+                style={{
+                  width: '100%',
+                  borderWidth: 0.5,
+                  opacity: 0.2,
+                  marginTop: '2%'
+                }}
+              />
+            </View>
+            <View>
+              <TouchableOpacity
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginTop: '5%'
+                }}
+              >
+                <Ionicons name="hand-right-outline" size={24} color="black" />
+                <View 
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '90%',
+                    marginLeft: '3%',
+                    padding: 5
+                  }}
+                >
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 20
+                      }}
+                    > Privacy </Text>
+                    <Text 
+                      style={{
+                        color: '#868686',
+                        marginTop: '7%'
+                      }}
+                    > protect your data </Text>
+                  </View>
+                  <AntDesign name="right" size={24} color="black" />
+                </View>
+              </TouchableOpacity>
+              <View 
+                style={{
+                  width: '100%',
+                  borderWidth: 0.5,
+                  opacity: 0.2,
+                  marginTop: '2%'
+                }}
+              />
+            </View>
+            <View
               style={{
                 width: '100%',
-                borderWidth: 0.5,
-                opacity: 0.2,
-                marginTop: '2%'
+                backgroundColor: '#F1F1F1',
+                height: '23%',
+                marginBottom: '5%',
+                marginTop: '5%',
+                borderRadius: '5%',
+                paddingLeft: '4%',
+                paddingTop: '3%'
               }}
-            />
+            >
+              <View>
+                <TouchableOpacity
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginBottom: '3%'
+                  }}
+                >
+                  <AntDesign name="logout" size={22} color="#C62121" />
+                  <Text
+                     style={{
+                      color: '#C62121',
+                      fontSize: 18,
+                      marginLeft: '5%'
+                    }}
+                  >
+                    Logout
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View 
+                style={{
+                  width: '100%',
+                  borderWidth: 0.5,
+                  opacity: 0.2,
+                  marginTop: '2%'
+                }}
+              />
+              <View
+              >
+                <TouchableOpacity
+                   style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginTop: '3%'
+                  }}
+                >
+                  <MaterialIcons name="delete-outline" size={24} color="#C62121" />
+                  <Text 
+                    style={{
+                      color: '#C62121',
+                      fontSize: 18,
+                      marginLeft: '5%'
+                    }}
+                  >
+                    Delete Account
+                  </Text>
+                </TouchableOpacity>
 
-
+              </View>
+            </View>
           </View> 
-
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
