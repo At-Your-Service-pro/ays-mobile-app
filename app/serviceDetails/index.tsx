@@ -13,15 +13,11 @@ import {
     Dimensions 
   } from 'react-native';
   import React,{useState}from 'react';
-  import Carousel from 'react-native-snap-carousel';
 
   const { width, height } = Dimensions.get('window');
   
   const serviceDetails = () => {
 
-  
-  
-    
     return (
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView
@@ -34,7 +30,7 @@ import {
           >
              
 
-        </ScrollView>
+          </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
     )

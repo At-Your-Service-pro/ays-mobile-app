@@ -157,7 +157,7 @@ import {
                 <TouchableOpacity  style={styles.subServices} key={item.id}>
                 <Image 
                   source={item.image}
-                  style={{width: 'auto', height: 140, borderRadius: 10}}
+                  style={{width: 'auto', height: 140, borderRadius: 10,backgroundColor: '#E4E4E4'}}
                   resizeMode='cover'
                 />
                 <View>

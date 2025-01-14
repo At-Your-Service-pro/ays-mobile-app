@@ -287,7 +287,7 @@ const index = () => {
                 >
                   <Image 
                     source={item.image}
-                    style={{width: 200, height: 100, borderRadius: 10}}
+                    style={{width: 200, height: 100, borderRadius: 10,backgroundColor: '#E4E4E4'}}
                     resizeMode='cover'
                   />
                   <View>
@@ -340,7 +340,7 @@ const index = () => {
                 <TouchableOpacity  style={styles.subServices} key={item.id}>
                 <Image 
                   source={item.image}
-                  style={{width: 'auto', height: 140, borderRadius: 10}}
+                  style={{width: 'auto', height: 140, borderRadius: 10,backgroundColor: '#E4E4E4'}}
                   resizeMode='cover'
                 />
                 <View>

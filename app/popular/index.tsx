@@ -147,7 +147,7 @@ const saved = () => {
             <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
             <Text 
               style={styles.headerText}
-            > Favorite Services</Text>  
+            > Popular Services</Text>  
           </View>
           <View style={{marginTop: '10%'}}>
             {

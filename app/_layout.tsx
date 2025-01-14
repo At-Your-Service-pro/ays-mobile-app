@@ -50,6 +50,10 @@ const _layout = () => {
               name='categories'
               options={{headerShown: false}}
             />
+            <Stack.Screen 
+              name='popular'
+              options={{headerShown: false}}
+            />
         </Stack>
       </GestureHandlerRootView>
     </Provider>
