@@ -25,7 +25,7 @@ const TabsLayout = () => {
            options={{
                 tabBarLabel: "Home",
                 tabBarIcon: ({color}) => (
-                    <MaterialCommunityIcons name="home" size={20} color={color} />
+                    <AntDesign name="home" size={20} color={color} />
                 )
             }}
         />

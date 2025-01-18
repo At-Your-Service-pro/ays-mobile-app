@@ -96,6 +96,9 @@ const profile = () => {
                   alignItems: 'center',
                   marginTop: '5%'
                 }}
+                onPress={() => {
+                  router.push('/profilePassword')
+                }}
               >
                 <Feather name="lock" size={20} color="black" />
                 <View 
