@@ -30,14 +30,7 @@ import {
         password: '',
         confirmPassword: '',
       },
-      validationSchema: Yup.object({
-        password: Yup.string()
-          .min(8, 'Password must be at least 8 characters long')
-          .required('Password is required'),
-        confirmPassword: Yup.string()
-          .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
-          .required('Confirm Password is required'),
-      }),
+      validationSchema: Yup.object({}),
       onSubmit: async(values) => {  
         const response = await UpdatePassword({
           email,
@@ -50,7 +43,7 @@ import {
           });
   
           setTimeout(() => {
-            router.push('/welcome');
+            router.back();
           },1000)
         
         }
@@ -87,10 +80,10 @@ import {
             <View>
               <Text
                 style={styles.headerText}
-              > Create new password </Text>
+              > Change password </Text>
               <Text
                 style={styles.headerSubText} 
-              > Your new password must be different from previous used password </Text>
+              > Your new password must be different from previous password </Text>
             </View>
             <View
                   style={{
@@ -123,9 +116,6 @@ import {
                     </TouchableOpacity>
                 </View>
               </View>
-              {
-                formData.touched.password && formData.errors.password && (<Validationerror title={formData.errors.password}/>)
-              }
               <View
                   style={{
                     marginTop: 20
@@ -157,14 +147,11 @@ import {
                     </TouchableOpacity>
                 </View>
               </View>
-                {
-                  formData.touched.confirmPassword && formData.errors.confirmPassword && (<Validationerror title={formData.errors.confirmPassword}/>)
-                }
               <View
                 style={styles.button}
               >
                 <CustomeButtom 
-                  title="Reset password" 
+                  title="Change password" 
                   onPress={formData.handleSubmit}
                 />
               </View>
