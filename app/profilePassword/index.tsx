@@ -6,6 +6,7 @@ import {
     TextInput,
     ScrollView,
     Platform,
+    Image,
     KeyboardAvoidingView
   } from 'react-native'
   import Entypo from '@expo/vector-icons/Entypo';
@@ -19,11 +20,13 @@ import {
   import { useFormik } from 'formik';
   import { useAuth } from '@/hooks/useAuth';
   import Toast from 'react-native-toast-message';
+  import ModalPopup from '@/components/ModalPopup';
   
   const index = () => {
     const {email,previous_screen} = useLocalSearchParams();
     const [showPassword,setShowPassword] = useState(false);
     const {UpdatePassword} = useAuth();
+    const [visible,setVisible] = useState(false);
     
     const formData = useFormik({
       initialValues: {
@@ -32,21 +35,14 @@ import {
       },
       validationSchema: Yup.object({}),
       onSubmit: async(values) => {  
-        const response = await UpdatePassword({
-          email,
-          password: values.password
-        })
-        if(response.statusCode == 200){
-          Toast.show({
-            text1: 'Password updated successfully',
-            type:'success',
-          });
-  
-          setTimeout(() => {
-            router.back();
-          },1000)
+        setVisible(true);
+        // const response = await UpdatePassword({
+        //   email,
+        //   password: values.password
+        // })
+        // if(response.statusCode == 200){
         
-        }
+        // }
       },
     });
     
@@ -155,6 +151,46 @@ import {
                   onPress={formData.handleSubmit}
                 />
               </View>
+              <ModalPopup 
+                visible={visible}
+              >
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }}
+              >
+                <Text> Done!!! </Text>
+                <View 
+                  style={{
+                    marginTop: '8%'
+                  }}
+                >
+                  <Image 
+                    source={require('../../assets/images/Vector.png')}
+                  />
+                </View>
+                <Text
+                  style={{
+                    marginTop: '10%',
+                    marginBottom: '5%',
+                    fontSize: 18,
+                  }}
+                > Password updated successfully </Text>
+                <View
+                  style={{
+                    marginTop: '5%',
+                    width: '100%',
+                  }}
+                >
+                  <CustomeButtom 
+                    title='Continue'
+                    onPress={() => setVisible(false)}
+                  />
+                </View>
+              </View>
+              </ModalPopup>
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
