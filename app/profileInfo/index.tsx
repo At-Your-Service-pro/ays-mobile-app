@@ -9,21 +9,19 @@ import {
     KeyboardAvoidingView,
     Platform,
     Dimensions,
+    Image,
     ActivityIndicator
   } from 'react-native';
   import React, { useState,useRef,useEffect } from 'react';
   import AntDesign from '@expo/vector-icons/AntDesign';
   import { router } from 'expo-router';
-  import Entypo from '@expo/vector-icons/Entypo';
-  import Fontisto from '@expo/vector-icons/Fontisto';
-  import CustomeButtom from '@/components/CustomeButtom';
   import * as Yup from 'yup';
   import {useFormik} from 'formik';
   import { useAuth } from '@/hooks/useAuth';
-  import { saveFormData } from '@/utils/formData';
   import Toast from 'react-native-toast-message';
-  import PhoneInput from "react-native-phone-number-input";
   import { useSelector } from 'react-redux';
+  import ModalPopup from '@/components/ModalPopup';
+  import CustomeButtom from '@/components/CustomeButtom';
   
   const {width,height} = Dimensions.get('window');
   
@@ -33,6 +31,7 @@ import {
     const [loading,setLoading] = useState(false);
     const userData = useSelector((state: any)=> state.user.email);
     const {GetUser} = useAuth();
+    const [visible,setVisible] = useState(false);
 
     const loaduserData = async () => {
       if(userData){
@@ -60,6 +59,7 @@ import {
       },
       validationSchema: Yup.object().shape({}),
       onSubmit: async (values, actions) => {
+        setVisible(true);
         try {
   
         
@@ -168,6 +168,46 @@ import {
                     </View>
                   </TouchableOpacity>
               </View>
+              <ModalPopup 
+                visible={visible}
+              >
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }}
+              >
+                <Text> Done!!! </Text>
+                <View 
+                  style={{
+                    marginTop: '8%'
+                  }}
+                >
+                  <Image 
+                    source={require('../../assets/images/Vector.png')}
+                  />
+                </View>
+                <Text
+                  style={{
+                    marginTop: '10%',
+                    marginBottom: '5%',
+                    fontSize: 18,
+                  }}
+                > Profile Info updated successfully </Text>
+                <View
+                  style={{
+                    marginTop: '5%',
+                    width: '100%',
+                  }}
+                >
+                  <CustomeButtom 
+                    title='Continue'
+                    onPress={() => setVisible(false)}
+                  />
+                </View>
+              </View>
+              </ModalPopup>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
