@@ -17,16 +17,20 @@ import { useAuth } from '@/hooks/useAuth';
 import { userData } from '@/enums/enums';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useDispatch } from 'react-redux';
+import { setSaveEmail } from '@/redux/features/users';
 
 const index = () => {
   const {email} = useLocalSearchParams();
   const {GetUser} = useAuth();
   const [user,setuser] = useState<userData>({});
+  const dispatch = useDispatch();
 
   const loadUser = async () => {
     try {
       const data = await GetUser(email);
       setuser(data.user);
+      dispatch(setSaveEmail(email));
     } catch (error) {
       console.error(error);
     }

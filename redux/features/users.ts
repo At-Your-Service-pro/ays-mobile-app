@@ -20,8 +20,13 @@ const userSlice = createSlice({
     name: "user",
     initialState: initailState,
     reducers: {
+        setSaveEmail:(state,action) => {
+            state.email = action.payload;
+        }
        
     }
 })
+
+export const {setSaveEmail} = userSlice.actions;
 
 export default userSlice.reducer;

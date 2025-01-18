@@ -114,7 +114,7 @@ import {
               <View style={styles.header}>
                 <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
                 <View>
-                  <Text style={styles.headerText}>Create Account</Text>
+                  <Text style={styles.headerText}> Profile Info</Text>
                 </View>
               </View>
               
@@ -228,7 +228,7 @@ import {
                       {
                         showloader ? <ActivityIndicator size={130} color={'#ffffff'}/> :  <Text
                         style={styles.textStyle}
-                      >{'Continue'}</Text>
+                      >{'Save changes'}</Text>
                       }
                     </View>
                   </TouchableOpacity>
@@ -255,7 +255,7 @@ import {
       alignItems: 'center',
       paddingVertical: 16,
       paddingHorizontal: 16,
-      width: '75%',
+      width: '70%',
     },
     headerText: {
       fontSize: 25,
