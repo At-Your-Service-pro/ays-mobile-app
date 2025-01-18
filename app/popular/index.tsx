@@ -149,7 +149,7 @@ const saved = () => {
               style={styles.headerText}
             > Popular Services</Text>  
           </View>
-          <View style={{marginTop: '10%'}}>
+          <View style={{marginTop: '5%'}}>
             {
               services.map((item) => (
                 <TouchableOpacity  style={styles.subServices} key={item.id}>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: 400,
-    marginTop: '10%'
+    marginTop: '5%'
   },
   subServices: {
     paddingVertical: 10,

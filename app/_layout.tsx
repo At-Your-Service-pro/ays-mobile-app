@@ -54,6 +54,22 @@ const _layout = () => {
               name='popular'
               options={{headerShown: false}}
             />
+            <Stack.Screen 
+              name='profileInfo'
+              options={{headerShown: false}}
+            />
+            <Stack.Screen 
+              name='profilePassword'
+              options={{headerShown: false}}
+            />
+            <Stack.Screen 
+              name='privacy'
+              options={{headerShown: false}}
+            />
+            <Stack.Screen 
+              name='location'
+              options={{headerShown: false}}
+            />
         </Stack>
       </GestureHandlerRootView>
     </Provider>

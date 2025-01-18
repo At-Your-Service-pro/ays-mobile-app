@@ -258,13 +258,30 @@ const index = () => {
         />
       </View>
       <View style={styles.popularContainer}>
-          <View>
+          <View style={styles.popularCategories}>
             <Text
               style={{
                 fontSize: 22,
                 fontWeight: 'semibold'
               }}
             > Popular services </Text>
+             <TouchableOpacity
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+              }}
+              onPress={() => {
+                router.push('/popular');
+              }}
+            >
+              <Text 
+                style={{
+                  fontSize: 16
+                }}> All </Text>
+              <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
+            </TouchableOpacity>
           </View>
           <View style={{
               flex: 1
@@ -415,6 +432,12 @@ const styles = StyleSheet.create({
   },
   categories: {
     marginTop: '7%',
+	  display: 'flex',
+	  flexDirection: 'row',
+    justifyContent:'space-between',
+    alignItems: 'center'
+  },
+  popularCategories:{
 	  display: 'flex',
 	  flexDirection: 'row',
     justifyContent:'space-between',

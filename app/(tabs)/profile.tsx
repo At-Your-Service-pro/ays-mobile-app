@@ -47,6 +47,9 @@ const profile = () => {
                   flexDirection: 'row',
                   alignItems: 'center'
                 }}
+                onPress={() => {
+                  router.push('/profileInfo');
+                }}
               >
                 <AntDesign name="user" size={20} color={'#000000'} />
                 <View 
