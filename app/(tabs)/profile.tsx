@@ -16,9 +16,13 @@ import Feather from '@expo/vector-icons/Feather';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import ModalPopup from '@/components/ModalPopup';
+import CustomeButtom from '@/components/CustomeButtom';
 
 
 const profile = () => {
+  const [logoutModal,setLogoutModal] = React.useState(false);
+  const [deleteaccountModal,setDeleteAccountModal] = React.useState(false);
   
   return (
     <SafeAreaView style={styles.container}>
@@ -249,6 +253,7 @@ const profile = () => {
                     alignItems: 'center',
                     marginBottom: '3%'
                   }}
+                  onPress={() => setLogoutModal(true)}
                 >
                   <AntDesign name="logout" size={22} color="#C62121" />
                   <Text
@@ -279,6 +284,7 @@ const profile = () => {
                     alignItems: 'center',
                     marginTop: '3%'
                   }}
+                  onPress={() => setDeleteAccountModal(true)}
                 >
                   <MaterialIcons name="delete-outline" size={24} color="#C62121" />
                   <Text 
@@ -295,6 +301,66 @@ const profile = () => {
               </View>
             </View>
           </View> 
+          <ModalPopup 
+                visible={logoutModal}
+              >
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }}
+              >
+                <Text> Are you sure you want to logout </Text>
+                <View
+                  style={{
+                    marginTop: '5%',
+                    width: '100%'
+                  }}
+                >
+                  <CustomeButtom 
+                    title='Yes'
+                    onPress={() => setLogoutModal(false)}
+                    color={'#1AACD5'}
+                  />
+                  <CustomeButtom 
+                    title='No'
+                    onPress={() => setLogoutModal(false)}
+                    color={'#E60023'}
+                  />
+                </View>
+              </View>
+          </ModalPopup>
+          <ModalPopup 
+                visible={deleteaccountModal}
+              >
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }}
+              >
+                <Text> Are you sure you want to delete accoutnt permanently? </Text>
+                <View
+                  style={{
+                    marginTop: '5%',
+                    width: '100%'
+                  }}
+                >
+                  <CustomeButtom 
+                    title='Yes'
+                    onPress={() => setDeleteAccountModal(false)}
+                    color={'#1AACD5'}
+                  />
+                  <CustomeButtom 
+                    title='No'
+                    onPress={() => setDeleteAccountModal(false)}
+                    color={'#E60023'}
+                  />
+                </View>
+              </View>
+          </ModalPopup>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

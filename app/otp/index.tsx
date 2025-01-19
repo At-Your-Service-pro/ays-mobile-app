@@ -146,7 +146,11 @@ const OTPVerification = () => {
             </TouchableOpacity>
           </View>
 
-          <CustomeButtom title="Confirm" onPress={handleConfirm} />
+          <CustomeButtom 
+            title="Confirm" 
+            onPress={handleConfirm} 
+            color={'#1AACD5'}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

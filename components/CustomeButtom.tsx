@@ -4,15 +4,16 @@ import React from 'react'
 interface Props {
   title?: string;
   onPress?: () => any;
-  isLoading?: boolean
+  isLoading?: boolean;
+  color?: string;
 }
 
 const {width,height} = Dimensions.get('window');
 
-const CustomeButtom:React.FC<Props> = ({title,onPress,isLoading}) => {
+const CustomeButtom:React.FC<Props> = ({title,onPress,isLoading,color}) => {
   return (
     <TouchableOpacity 
-      style={styles.containerStyle}
+      style={[styles.containerStyle,{ backgroundColor: color,}]}
       onPress={onPress}
     >
       <View
@@ -34,7 +35,6 @@ const CustomeButtom:React.FC<Props> = ({title,onPress,isLoading}) => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    backgroundColor: '#1AACD5',
     padding: 10,
     borderRadius: 10,
     margin: 10,

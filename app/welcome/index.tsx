@@ -171,6 +171,7 @@ const index = () => {
             title="Login" 
             onPress={formData.handleSubmit}
             isLoading={isLoading}
+            color={'#1AACD5'}
           />
           <View
             style={{

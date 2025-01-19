@@ -98,6 +98,7 @@ const index = () => {
           <CustomeButtom 
             title="Continue" 
             onPress={formdata.handleSubmit}
+            color={'#1AACD5'}
           />
         </ScrollView>
       </KeyboardAvoidingView>

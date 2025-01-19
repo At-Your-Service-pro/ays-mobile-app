@@ -149,6 +149,7 @@ import {
                 <CustomeButtom 
                   title="Change password" 
                   onPress={formData.handleSubmit}
+                  color={'#1AACD5'}
                 />
               </View>
               <ModalPopup 
@@ -187,6 +188,7 @@ import {
                   <CustomeButtom 
                     title='Continue'
                     onPress={() => setVisible(false)}
+                    color={'#1AACD5'}
                   />
                 </View>
               </View>

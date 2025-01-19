@@ -166,6 +166,7 @@ const index = () => {
               <CustomeButtom 
                 title="Reset password" 
                 onPress={formData.handleSubmit}
+                color={'#1AACD5'}
               />
             </View>
         </ScrollView>

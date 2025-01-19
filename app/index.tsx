@@ -93,6 +93,7 @@ const index = () => {
             <CustomeButtom 
             title='Get Started'
             onPress={() => router.push('/welcome')}
+            color={'#1AACD5'}
           />
           </View>
         ) : (
@@ -106,6 +107,7 @@ const index = () => {
             onPress={() => {
               ref.current.scrollToIndex({ index: currentSlideIndex + 1 });
             }}
+            color={'#1AACD5'}
           />
           </View>
         )}
