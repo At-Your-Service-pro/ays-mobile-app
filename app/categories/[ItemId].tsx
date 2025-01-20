@@ -146,7 +146,9 @@ import {
             showsVerticalScrollIndicator={false}
           >
              <View style={styles.header}>
-                <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
+                <TouchableOpacity onPress={() => router.back()}>
+                  <AntDesign name="left" size={24} color="black"  />
+                </TouchableOpacity>
                 <View>
                   <Text style={styles.headerText}> Plumbing </Text>
                 </View>

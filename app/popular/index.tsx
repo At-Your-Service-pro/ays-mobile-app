@@ -144,7 +144,9 @@ const saved = () => {
           showsVerticalScrollIndicator={false}
         >
           <View>
-            <AntDesign name="left" size={24} color="black" onPress={() => router.back()} />
+            <TouchableOpacity onPress={() => router.back()}>
+              <AntDesign name="left" size={24} color="black"  />
+            </TouchableOpacity>
             <Text 
               style={styles.headerText}
             > Popular Services</Text>  
