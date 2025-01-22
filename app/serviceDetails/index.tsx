@@ -138,6 +138,7 @@ import CarouselItem from '@/components/CarouselItem';
               </View>
               <Carousel
                 visible={showImages}
+                setImages={setImages}
               >
                 <FlatList 
                   data={services.image}

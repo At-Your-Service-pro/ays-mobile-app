@@ -10,7 +10,7 @@ const ModalPopup = ({ visible, children }: any) => {
       setShowModal(true); // Ensure the modal is shown
       Animated.spring(scaleValue, {
         toValue: 1,
-        friction: 5,
+        friction: 10,
         useNativeDriver: true, // Use native driver for better performance
       }).start();
     } else {

@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Modal, Animated,TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, Modal, Animated,TouchableOpacity} from 'react-native';
 import React from 'react';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-const  Carousel = ({ visible, children }: any) => {
+const  Carousel = ({ visible, children,setImages }: any) => {
   const [showModal, setShowModal] = React.useState(visible);
   const scaleValue = React.useRef(new Animated.Value(0)).current;
 
@@ -10,7 +11,7 @@ const  Carousel = ({ visible, children }: any) => {
       setShowModal(true); // Ensure the modal is shown
       Animated.spring(scaleValue, {
         toValue: 1,
-        friction: 5,
+        friction: 10,
         useNativeDriver: true, // Use native driver for better performance
       }).start();
     } else {
@@ -31,7 +32,18 @@ const  Carousel = ({ visible, children }: any) => {
             { transform: [{ scale: scaleValue }] }, // Apply the scale animation
           ]}
         >
-          <Text style={{color: 'red'}}> fynn </Text>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              marginRight: '5%',
+              marginTop: '5%'
+            }}
+            onPress={() => setImages(false)}
+          >
+            <AntDesign name="closecircle" size={30} color="white" />
+          </TouchableOpacity>
           {children}
         </Animated.View>
       </View>
@@ -44,7 +56,7 @@ export default Carousel;
 const styles = StyleSheet.create({
   modalBackground: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.88)',
     justifyContent: 'center',
     alignItems: 'center',
   },

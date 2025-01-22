@@ -21,7 +21,8 @@ const CarouselItem = ({item,index}:any) => {
           source={item.uri}
           style={{
             width: width/1.1,
-            height: height/1.2
+            height: height/1.2,
+            backgroundColor: '#E4E4E4',
           }}
         />
       </View>
