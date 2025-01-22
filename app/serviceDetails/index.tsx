@@ -16,6 +16,7 @@ import {
   import AntDesign from '@expo/vector-icons/AntDesign';
   import { router } from 'expo-router';
   import Carousel from '@/components/Carousel';
+import CarouselItem from '@/components/CarouselItem';
 
   const { width, height } = Dimensions.get('window');
   
@@ -28,13 +29,30 @@ import {
         category: 'Plumbing',
         loaction: 'Spintex',
         image: [
-          require('../../assets/images/3.png'),
-          require('../../assets/images/3.png'),
-          require('../../assets/images/3.png'),
-          require('../../assets/images/3.png'),
-          require('../../assets/images/3.png'),
-          require('../../assets/images/3.png'),
-          require('../../assets/images/3.png')
+          {
+            id: 1,
+            uri: require('../../assets/images/3.png'),
+          },
+          {
+            id: 2,
+            uri: require('../../assets/images/3.png'),
+          },
+          {
+            id: 3,
+            uri: require('../../assets/images/3.png'),
+          },
+          {
+            id: 4,
+            uri: require('../../assets/images/3.png'),
+          },
+          {
+            id: 5,
+            uri: require('../../assets/images/3.png'),
+          },
+          {
+            id: 6,
+            uri: require('../../assets/images/3.png'),
+          }
         ],
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
         phonenumber: '0245861319',
@@ -78,37 +96,35 @@ import {
                     alignItems: 'center'
                   }}
                 >
-                  <TouchableOpacity
-                    onPress={() => {
-                      setImages(true);
-                    }}
-                  >
-                    <Image 
-                      source={services.image[0]}
-                      style={{width: width/2, height: height/7,backgroundColor: '#E4E4E4'}}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Image 
-                      source={services.image[0]}
-                      style={{
-                        width: width/2, 
-                        height: height/7,
-                        backgroundColor: '#E4E4E4',
-                        borderBottomLeftRadius: 10,
-                        borderBottomRightRadius: 10,
-                        marginLeft: '2%'
-                      }}
-                    />
-                  </TouchableOpacity>
+                  {
+                    services.image.slice(0,2).map((image) => (
+                      <TouchableOpacity
+                        key={image.id}
+                        onPress={() =>setImages(true)}
+                      >
+                          <Image 
+                              source={image.uri}
+                              style={{
+                                width: width/2, 
+                                height: height/7,
+                                backgroundColor: '#E4E4E4',
+                                borderBottomLeftRadius: 10,
+                                borderBottomRightRadius: 10
+                              }}
+                          />
+                    </TouchableOpacity>
+                    ))
+                  }
+                  
                 </View>
                 <TouchableOpacity
                   style={{
                     marginTop: '2%'
                   }}
+                  onPress={() =>setImages(true)}
                 >
                   <Image 
-                      source={services.image[0]}
+                      source={services.image[2].uri}
                       resizeMode='cover'
                       style={{
                         width: width, 
@@ -120,21 +136,18 @@ import {
                   />
                 </TouchableOpacity>
               </View>
-
               <Carousel
                 visible={showImages}
               >
-                <Image 
-                      source={services.image[0]}
-                      resizeMode='cover'
-                      style={{
-                        width: width/1.2, 
-                        height: height/1.5,
-                        backgroundColor: '#E4E4E4',
-                        borderBottomLeftRadius: 10,
-                        borderBottomRightRadius: 10,
-                    }}
-                  />
+                <FlatList 
+                  data={services.image}
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  pagingEnabled
+                  renderItem={({item,index}) => (
+                    <CarouselItem item={item} index={index}/>
+                  )}
+                />
               </Carousel>
           </ScrollView>
         </KeyboardAvoidingView>

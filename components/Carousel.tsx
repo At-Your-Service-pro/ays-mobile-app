@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Modal, Animated } from 'react-native';
+import { StyleSheet, Text, View, Modal, Animated,TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
 
 const  Carousel = ({ visible, children }: any) => {
@@ -31,6 +31,7 @@ const  Carousel = ({ visible, children }: any) => {
             { transform: [{ scale: scaleValue }] }, // Apply the scale animation
           ]}
         >
+          <Text style={{color: 'red'}}> fynn </Text>
           {children}
         </Animated.View>
       </View>
