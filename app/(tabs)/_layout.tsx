@@ -14,9 +14,10 @@ const TabsLayout = () => {
         tabBarLabelStyle: {
             fontSize: 13, // Increase the font size here
             fontWeight: 'semibold', // Optional: bold text
+            paddingBottom: 20
         },
         tabBarStyle:{
-            paddingBottom: 10,
+            paddingBottom: 20
         }
     }}
     >
@@ -25,7 +26,7 @@ const TabsLayout = () => {
            options={{
                 tabBarLabel: "Home",
                 tabBarIcon: ({color}) => (
-                    <AntDesign name="home" size={20} color={color} />
+                    <AntDesign name="home" size={18} color={color} />
                 )
             }}
         />
@@ -34,7 +35,7 @@ const TabsLayout = () => {
            options={{
             tabBarLabel: "Search",
             tabBarIcon: ({color}) => (
-                <AntDesign name="search1" size={20} color={color} />
+                <AntDesign name="search1" size={18} color={color} />
             ),
             }}
         />
@@ -43,7 +44,7 @@ const TabsLayout = () => {
            options={{
             tabBarLabel: "Orders",
             tabBarIcon: ({color}) => (
-                <MaterialCommunityIcons name="clipboard-text-outline" size={20} color={color} />
+                <MaterialCommunityIcons name="clipboard-text-outline" size={18} color={color} />
             ),
             }}
         />
@@ -52,7 +53,7 @@ const TabsLayout = () => {
            options={{
             tabBarLabel: "Saved",
             tabBarIcon: ({color}) => (
-                <AntDesign name="hearto" size={20} color={color} />
+                <AntDesign name="hearto" size={18} color={color} />
             ),
   
             }}
@@ -62,7 +63,7 @@ const TabsLayout = () => {
            options={{
             tabBarLabel: "Account",
             tabBarIcon: ({color}) => (
-                <FontAwesome name="user-o" size={20} color={color} />
+                <FontAwesome name="user-o" size={18} color={color} />
             ),
   
             }}

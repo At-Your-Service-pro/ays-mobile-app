@@ -15,10 +15,12 @@ import {
   import React,{useState}from 'react';
   import AntDesign from '@expo/vector-icons/AntDesign';
   import { router } from 'expo-router';
+  import Carousel from '@/components/Carousel';
 
   const { width, height } = Dimensions.get('window');
   
   const serviceDetails = () => {
+    const [showImages,setImages] = useState(false);
 
     const services = {
         id: '1',
@@ -76,7 +78,11 @@ import {
                     alignItems: 'center'
                   }}
                 >
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setImages(true);
+                    }}
+                  >
                     <Image 
                       source={services.image[0]}
                       style={{width: width/2, height: height/7,backgroundColor: '#E4E4E4'}}
@@ -113,9 +119,23 @@ import {
                     }}
                   />
                 </TouchableOpacity>
-
               </View>
-             
+
+              <Carousel
+                visible={showImages}
+              >
+                <Image 
+                      source={services.image[0]}
+                      resizeMode='cover'
+                      style={{
+                        width: width/1.2, 
+                        height: height/1.5,
+                        backgroundColor: '#E4E4E4',
+                        borderBottomLeftRadius: 10,
+                        borderBottomRightRadius: 10,
+                    }}
+                  />
+              </Carousel>
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
