@@ -12,16 +12,20 @@ import {
     Modal,
     Dimensions 
   } from 'react-native';
-  import React,{useState}from 'react';
+  import React,{useState,useCallback,useRef}from 'react';
   import AntDesign from '@expo/vector-icons/AntDesign';
   import { router } from 'expo-router';
   import Carousel from '@/components/Carousel';
 import CarouselItem from '@/components/CarouselItem';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import BottomSheetPop from '../../components/BottomSheetPop';
 
   const { width, height } = Dimensions.get('window');
   
   const serviceDetails = () => {
     const [showImages,setImages] = useState(false);
+    const [isopen,setIsOpen] = useState(false);
 
     const services = {
         id: '1',
@@ -59,16 +63,21 @@ import CarouselItem from '@/components/CarouselItem';
         sub_services: [
           {
             title: 'leak repair',
-            price: '$100'
+            description: 'Fixing of leakages from toilet flapper value, pipes and etc',
+            price: '100'
           },
           {
             title: 'leak repair',
-            price: '$100'
+            description: 'Fixing of leakages from toilet flapper value, pipes and etc',
+            price: '100'
           }
         ]
       }
-    
 
+    const toggleSheet = () => {
+      setIsOpen(!isopen);
+    }  
+    
     return (
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView
@@ -97,44 +106,102 @@ import CarouselItem from '@/components/CarouselItem';
                   }}
                 >
                   {
-                    services.image.slice(0,2).map((image) => (
-                      <TouchableOpacity
+                    services.image.slice(0,1).map((image) => (
+                      <View
                         key={image.id}
-                        onPress={() =>setImages(true)}
                       >
                           <Image 
                               source={image.uri}
                               style={{
-                                width: width/2, 
-                                height: height/7,
+                                width: width/2.5, 
+                                height: height/6,
                                 backgroundColor: '#E4E4E4',
-                                borderBottomLeftRadius: 10,
-                                borderBottomRightRadius: 10
+                                borderTopLeftRadius: 10
                               }}
                           />
-                    </TouchableOpacity>
+                    </View>
+                    ))
+                  }
+                  {
+                    services.image.slice(1,2).map((image) => (
+                      <View
+                        key={image.id}
+                        style={{
+                          
+                        }}
+                      >
+                          <Image 
+                              source={image.uri}
+                              style={{
+                                width: width/1.88, 
+                                height: height/6,
+                                backgroundColor: '#E4E4E4',
+                                borderTopRightRadius: 10
+                              }}
+                          />
+                          <View
+                            style={{
+                              position: 'absolute', 
+                              bottom: 0, 
+                              backgroundColor: 'rgba(0,0,0,0.3)', 
+                              width: '100%', 
+                              height: '100%', 
+                              borderTopRightRadius: 10,
+                            }}
+                          >
+                            <TouchableOpacity
+                              style={{
+                                backgroundColor: 'white',
+                                width: '90%',
+                                borderRadius: 5, 
+                                position: 'absolute',
+                                bottom: 0,
+                                marginBottom: '10%',
+                                marginLeft: '5%',
+                                padding: '0%'
+
+                              }}
+                              onPress={() =>setImages(true)}
+                            >
+                              <View
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  alignItems: 'center',
+                                  padding: '2%'
+                                }}
+                              >
+                                <MaterialCommunityIcons name="dots-grid" size={24} color="black" />
+                                <Text 
+                                  style={{
+                                    fontSize: 18
+                                  }}
+                                > Show all photos </Text>
+                              </View>
+                            </TouchableOpacity>  
+                          </View>
+                    </View>
                     ))
                   }
                   
                 </View>
-                <TouchableOpacity
+                <View
                   style={{
                     marginTop: '2%'
                   }}
-                  onPress={() =>setImages(true)}
                 >
                   <Image 
                       source={services.image[2].uri}
                       resizeMode='cover'
                       style={{
-                        width: width, 
-                        height: height/6,
+                        width: width/1.06, 
+                        height: height/5,
                         backgroundColor: '#E4E4E4',
-                        borderBottomLeftRadius: 10,
+                        borderBottomLeftRadius: 8,
                         borderBottomRightRadius: 10,
                     }}
                   />
-                </TouchableOpacity>
+                </View>
               </View>
               <Carousel
                 visible={showImages}
@@ -150,6 +217,179 @@ import CarouselItem from '@/components/CarouselItem';
                   )}
                 />
               </Carousel>
+
+              {/* Description container */}
+              <View style={styles.descriptionContainer}>
+                <Text
+                  style={{
+                    fontSize: 23,
+                    fontWeight: 'bold',
+                    marginBottom: '5%'
+                  }}
+                >Description</Text>
+                <Text>
+                  {services.description}
+                </Text>
+              </View>
+              <View
+                style={{
+                  marginTop: '5%',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center'
+                  }}
+                >
+                  <Ionicons name="location-outline" size={24} color="black" /> 
+                  <Text
+                    style={{
+                      fontSize: 18
+                    }}
+                  >Location</Text>
+                </View>
+                <Text
+                  style={{
+                    fontSize: 18
+                  }}
+                >{services.loaction}</Text>
+              </View>
+              {/* <View 
+                  style={{
+                      width: '100%',
+                      borderWidth: 0.5,
+                      opacity: 0.2,
+                      marginTop: '2%'
+                  }}
+              /> */}
+              <View
+                style={{
+                  marginTop: '10%'
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: '500',
+                    marginBottom: '5%'
+                  }}
+                > Services Offered </Text>
+                {/* <View 
+                  style={{
+                      width: '100%',
+                      borderWidth: 0.5,
+                      opacity: 0.2,
+                      marginTop: '5%'
+                  }}
+                /> */}
+                <View>
+                  {
+                    services.sub_services.map((subService, index) => (
+                      <View 
+                        key={index}
+                        style={{
+                          backgroundColor: '#E4E4E4',
+                          borderRadius: 10,
+                          marginBottom: '5%'
+                        }}
+                      >
+                        <TouchableOpacity
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent:'space-between',
+                            alignItems: 'center',
+                            width: '90%'
+                          }}
+                          onPress={() => toggleSheet()}
+                        >
+                          <View
+                            style={{
+                              width: '70%',
+                              marginVertical: '3%',
+                              marginLeft: '4%'
+                            }}
+                          > 
+                            <View>
+                              <Text
+                                style={{
+                                  fontSize: 18
+                                }}
+                              >{subService.title}</Text>
+                              <Text
+                                style={{
+                                  width: '70%',
+                                  marginTop: '5%',
+                                  color: '#5E5E5E'
+                                }}
+                              >{subService.description}</Text>
+                            </View>
+                          </View>
+                          <Text
+                            style={{
+                              fontSize: 18
+                            }}
+                          >${subService.price}</Text>
+
+                        </TouchableOpacity>
+                        {
+                    isopen && 
+                    <BottomSheetPop 
+                      visible={isopen}
+                    >
+                      <View
+                        style={{
+                          backgroundColor: 'white',
+                          padding: 20
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontSize: 18
+                          }}
+                        >
+                          Book Now
+                        </Text>
+                        <Text
+                          style={{
+                            marginTop: '5%',
+                            fontSize: 16
+                          }}
+                        >
+                          Book this service for a specific date and time.
+                        </Text>
+                        <TouchableOpacity
+                          style={{
+                            marginTop: '10%',
+                            backgroundColor: '#00A6ED',
+                            borderRadius: 10,
+                            paddingVertical: 10,
+                            paddingHorizontal: 20
+                          }}
+                          onPress={() => toggleSheet()}
+                        >
+                          <Text
+                            style={{
+                              color: 'white',
+                              fontSize: 18
+                            }}
+                          >Book Now</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </BottomSheetPop>
+                  }
+                      </View>
+                    ))
+                  }
+                </View>
+              </View>
+
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -192,5 +432,47 @@ import CarouselItem from '@/components/CarouselItem';
     },
     image: {
       width: '40%'
+    },
+    descriptionContainer: {
+      marginTop: '5%',
+      backgroundColor: '#97E8FF',
+      padding: '5%',
+      borderRadius: 10
+    },
+    sheetContent: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20,
+    },
+    sheetTitle: {
+      fontSize: 18,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+    closeButton: {
+      marginTop: 20,
+      backgroundColor: "#dc3545",
+      padding: 10,
+      borderRadius: 5,
+    },
+    closeButtonText: {
+      color: "#fff",
+      fontWeight: "bold",
+    },
+    subServiceTitle: {
+      fontSize: 18,
+    },
+    subServiceDescription: {
+      marginTop: '5%',
+      color: '#5E5E5E',
+      width: '70%',
+    },
+    subServicePrice: {
+      fontSize: 18,
+    },
+    sheetPrice: {
+      marginTop: 10,
+      fontWeight: 'bold',
     }
   })
