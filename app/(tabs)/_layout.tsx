@@ -42,7 +42,7 @@ const TabsLayout = () => {
          <Tabs.Screen
            name="orders"
            options={{
-            tabBarLabel: "Orders",
+            tabBarLabel: "Requests",
             tabBarIcon: ({color}) => (
                 <MaterialCommunityIcons name="clipboard-text-outline" size={18} color={color} />
             ),

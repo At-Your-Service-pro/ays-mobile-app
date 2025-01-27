@@ -72,6 +72,10 @@ const _layout = () => {
                 name='location'
                 options={{headerShown: false}}
               />
+               <Stack.Screen 
+                name='requestsDetails'
+                options={{headerShown: false}}
+              />
           </Stack>
         </GestureHandlerRootView>
       </PersistGate>

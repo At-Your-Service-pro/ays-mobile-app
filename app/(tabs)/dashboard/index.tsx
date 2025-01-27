@@ -420,7 +420,8 @@ const styles = StyleSheet.create({
 	width: '100%', 
 	marginHorizontal: 'auto',
 	height: 100, 
-	borderRadius: 10
+	borderRadius: 10,
+  backgroundColor: '#E4E4E4'
   },
   imageContainer: {
 	marginTop: '3%'

@@ -10,7 +10,8 @@ import {
     FlatList,
     TouchableOpacity,
     Modal,
-    Dimensions 
+    Dimensions, 
+    ActivityIndicator
   } from 'react-native';
   import React,{useState,useCallback,useRef}from 'react';
   import AntDesign from '@expo/vector-icons/AntDesign';
@@ -19,21 +20,38 @@ import {
 import CarouselItem from '@/components/CarouselItem';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import BottomSheetPop from '../../components/BottomSheetPop';
-import BottomSheetItem from '@/components/BottomSheetItem';
 
   const { width, height } = Dimensions.get('window');
   
   const serviceDetails = () => {
     const [showImages,setImages] = useState(false);
     const [isopen,setIsOpen] = useState(false);
-    const [selectedSubService, setSelectedSubService] = useState(null);
+    const [selectedSubServices, setSelectedSubServices] = useState([]);
+    const [loadingSubService, setLoadingSubService] = useState(null);
 
-    const handleSelectSubService = (subService: any) => {
-      setSelectedSubService(subService); // Set the selected sub-service
-      toggleSheet(); // Open the bottom sheet
+    const handleToggleSubService = (id:any) => {
+      if (loadingSubService === id) return; // Prevent duplicate interactions
+      setLoadingSubService(id);
+  
+      setTimeout(() => {
+        setLoadingSubService(null);
+        setSelectedSubServices((prev:any) =>
+          prev.includes(id)
+            ? prev.filter((serviceId: any) => serviceId !== id) // Deselect
+            : [...prev, id] // Select
+        );
+      }, 500); // Simulate animation duration
     };
-
+  
+    const handleFloatingButtonPress = () => {
+      router.push({
+        pathname: '/requestsDetails',
+        params:  {
+          subServices: selectedSubServices
+        }
+      })
+    };
+  
     const services = {
         id: '1',
         title: 'Elisah Plumbing Installation',
@@ -69,14 +87,28 @@ import BottomSheetItem from '@/components/BottomSheetItem';
         phonenumber: '0245861319',
         sub_services: [
           {
+            id: 1,
             title: 'leak repair',
             description: 'Fixing of leakages from toilet flapper value, pipes and etc',
             price: '100'
           },
           {
+            id: 2,
             title: 'Sewages',
             description: 'Fixing of leakages from toilet flapper value, pipes and etc',
+            price: '200'
+          },
+          {
+            id: 3,
+            title: 'leak repair',
+            description: 'Fixing of leakages from toilet flapper value, pipes and etc',
             price: '100'
+          },
+          {
+            id: 4,
+            title: 'Sewages',
+            description: 'Fixing of leakages from toilet flapper value, pipes and etc',
+            price: '200'
           }
         ]
       }
@@ -296,75 +328,61 @@ import BottomSheetItem from '@/components/BottomSheetItem';
                   }}
                 /> */}
                 <View>
-                  {
-                    services.sub_services.map((subService, index) => (
-                      <View 
-                        key={index}
-                        style={{
-                          backgroundColor: '#E4E4E4',
-                          borderRadius: 10,
-                          marginBottom: '5%'
-                        }}
-                      >
-                        <View
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent:'space-between',
-                            alignItems: 'center',
-                            width: '90%'
-                          }}
-                        >
-                          <View
-                            style={{
-                              width: '70%',
-                              marginVertical: '3%',
-                              marginLeft: '4%'
-                            }}
-                          > 
-                            <View>
-                              <Text
-                                style={{
-                                  fontSize: 18
-                                }}
-                              >{subService.title}</Text>
-                              <Text
-                                style={{
-                                  width: '70%',
-                                  marginTop: '5%',
-                                  color: '#5E5E5E'
-                                }}
-                              >{subService.description}</Text>
-                              <Text
-                                style={{
-                                  fontSize: 18
-                                }}
-                              >${subService.price}</Text>
-                            </View>
-                          </View>
-                          <TouchableOpacity>
-                              <AntDesign name="pluscircle" size={30} color={'#1AACD5'} />
-                            </TouchableOpacity>
-                        </View>
-                        {/* {
-                          isopen && 
-                          <BottomSheetPop 
-                            visible={isopen}
-                          >
-                          <BottomSheetItem 
-                            item={selectedSubService}
-                            isopen={isopen}
-                            setIsOpen={setIsOpen}
-                          />
-                          </BottomSheetPop>
-                        } */}
-                      </View>
-                    ))
-                  }
+                {services.sub_services.map((subService) => (
+            <View
+              key={subService.id}
+              style={[
+                styles.subServiceContainer,
+                selectedSubServices.includes(subService.id) && styles.selectedContainer,
+              ]}
+            >
+              <View style={styles.subServiceDetails}>
+                <Text style={styles.subServiceTitle}>{subService.title}</Text>
+                <Text style={styles.subServiceDescription}>{subService.description}</Text>
+                <Text style={styles.subServicePrice}>${subService.price}</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => handleToggleSubService(subService.id)}
+                disabled={loadingSubService === subService.id}
+              >
+                {loadingSubService === subService.id ? (
+                  <ActivityIndicator size="small" color="#1AACD5" />
+                ) : (
+                  <AntDesign
+                    name={
+                      selectedSubServices.includes(subService.id) ? 'closecircle' : 'pluscircle'
+                    }
+                    size={30}
+                    color="#1AACD5"
+                  />
+                )}
+              </TouchableOpacity>
+            </View>
+          ))}
                 </View>
               </View>
-
           </ScrollView>
+          {selectedSubServices.length > 0 && (
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <TouchableOpacity
+              style={styles.floatingButton}
+              onPress={() => {
+                router.push('/requestsDetails')
+              }}
+            >
+              <Text style={styles.floatingButtonText}>
+                View {selectedSubServices.length} request{selectedSubServices.length > 1 && 's'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
         </KeyboardAvoidingView>
       </SafeAreaView>
     )
@@ -448,5 +466,42 @@ import BottomSheetItem from '@/components/BottomSheetItem';
     sheetPrice: {
       marginTop: 10,
       fontWeight: 'bold',
+    },
+    subServiceContainer: {
+      backgroundColor: '#E4E4E4',
+      borderRadius: 10,
+      marginBottom: 16,
+      padding: 16,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    selectedContainer: {
+      borderLeftWidth: 5,
+      borderLeftColor: '#1AACD5',
+    },
+    subServiceDetails: {
+      width: '70%',
+    },
+    floatingButton: {
+      position: 'absolute',
+      backgroundColor: '#1AACD5',
+      width: '95%',
+      height: 50,
+      borderRadius: 10,
+      bottom: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    floatingButtonText: {
+      color: 'white',
+      fontSize: 18,
+      fontWeight: 'bold',
     }
+
   })
