@@ -20,12 +20,19 @@ import CarouselItem from '@/components/CarouselItem';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import BottomSheetPop from '../../components/BottomSheetPop';
+import BottomSheetItem from '@/components/BottomSheetItem';
 
   const { width, height } = Dimensions.get('window');
   
   const serviceDetails = () => {
     const [showImages,setImages] = useState(false);
     const [isopen,setIsOpen] = useState(false);
+    const [selectedSubService, setSelectedSubService] = useState(null);
+
+    const handleSelectSubService = (subService: any) => {
+      setSelectedSubService(subService); // Set the selected sub-service
+      toggleSheet(); // Open the bottom sheet
+    };
 
     const services = {
         id: '1',
@@ -67,7 +74,7 @@ import BottomSheetPop from '../../components/BottomSheetPop';
             price: '100'
           },
           {
-            title: 'leak repair',
+            title: 'Sewages',
             description: 'Fixing of leakages from toilet flapper value, pipes and etc',
             price: '100'
           }
@@ -299,7 +306,7 @@ import BottomSheetPop from '../../components/BottomSheetPop';
                           marginBottom: '5%'
                         }}
                       >
-                        <TouchableOpacity
+                        <View
                           style={{
                             display: 'flex',
                             flexDirection: 'row',
@@ -307,7 +314,6 @@ import BottomSheetPop from '../../components/BottomSheetPop';
                             alignItems: 'center',
                             width: '90%'
                           }}
-                          onPress={() => toggleSheet()}
                         >
                           <View
                             style={{
@@ -329,61 +335,29 @@ import BottomSheetPop from '../../components/BottomSheetPop';
                                   color: '#5E5E5E'
                                 }}
                               >{subService.description}</Text>
+                              <Text
+                                style={{
+                                  fontSize: 18
+                                }}
+                              >${subService.price}</Text>
                             </View>
                           </View>
-                          <Text
-                            style={{
-                              fontSize: 18
-                            }}
-                          >${subService.price}</Text>
-
-                        </TouchableOpacity>
-                        {
-                    isopen && 
-                    <BottomSheetPop 
-                      visible={isopen}
-                    >
-                      <View
-                        style={{
-                          backgroundColor: 'white',
-                          padding: 20
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontSize: 18
-                          }}
-                        >
-                          Book Now
-                        </Text>
-                        <Text
-                          style={{
-                            marginTop: '5%',
-                            fontSize: 16
-                          }}
-                        >
-                          Book this service for a specific date and time.
-                        </Text>
-                        <TouchableOpacity
-                          style={{
-                            marginTop: '10%',
-                            backgroundColor: '#00A6ED',
-                            borderRadius: 10,
-                            paddingVertical: 10,
-                            paddingHorizontal: 20
-                          }}
-                          onPress={() => toggleSheet()}
-                        >
-                          <Text
-                            style={{
-                              color: 'white',
-                              fontSize: 18
-                            }}
-                          >Book Now</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </BottomSheetPop>
-                  }
+                          <TouchableOpacity>
+                              <AntDesign name="pluscircle" size={30} color={'#1AACD5'} />
+                            </TouchableOpacity>
+                        </View>
+                        {/* {
+                          isopen && 
+                          <BottomSheetPop 
+                            visible={isopen}
+                          >
+                          <BottomSheetItem 
+                            item={selectedSubService}
+                            isopen={isopen}
+                            setIsOpen={setIsOpen}
+                          />
+                          </BottomSheetPop>
+                        } */}
                       </View>
                     ))
                   }
