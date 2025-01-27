@@ -17,6 +17,7 @@ import React,{useState,useCallback,useRef}from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 
   const { width, height } = Dimensions.get('window');
@@ -83,6 +84,12 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
             style={styles.headerContainer}
             showsVerticalScrollIndicator={false}
           >
+            <View
+              style={{
+                width: '95%',
+                margin: 'auto'
+              }}
+            >
              <View style={styles.header}>
                 <TouchableOpacity onPress={() => router.back()}>
                   <AntDesign name="left" size={24} color="black"  />
@@ -90,13 +97,16 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
                 <View>
                   <Text style={styles.headerText}> {services.title}</Text>
                 </View>
-              </View>
-              <View
-                style={{
-                  backgroundColor: 'white',
-                  borderRadius: 20
-                }}
-              >
+             </View>
+            </View>
+            <View
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 20,
+                width: '100%'
+              }}
+            >
+              <View>
               {
                 services.sub_services.map((sub) => (
                   <View key={sub.id}>
@@ -140,14 +150,75 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
                   </View>
                 ))
               }
-              <View>
-                <View>
-                  <AntDesign name="pluscircle" size={24} color="black" />
-                  <Text> Add more </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  router.back();
+                }}
+              >
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    padding: '5%'
+                  }}
+                >
+                  <AntDesign name="pluscircle" size={24} color="#1AACD5" />
+                  <Text
+                    style={{
+                      fontSize: 18, 
+                      fontWeight:  '500', 
+                      marginLeft: '5%',
+                      color: '#1AACD5'
+                    }}
+                  >
+                    Add more </Text>
+                </View>
+              </TouchableOpacity>
+              </View>
+            </View>
+            <View
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 10,
+                width: '100%',
+                marginTop: '5%'
+              }}
+            >
+              <View
+                style={{
+                  width: '95%',
+                  margin: 'auto'
+                }}
+              >
+                <View
+                  style={{
+                    marginTop: '5%',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                  }}
+                >
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <Ionicons name="location-outline" size={24} color="black" /> 
+                    <Text
+                      style={{
+                        fontSize: 18
+                      }}
+                    > Add Location </Text>
+                  </View>
+                  <AntDesign name="right" size={24} color="#c5c5c5"  />
                 </View>
               </View>
-
-              </View>
+            </View>
            </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -162,7 +233,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
       backgroundColor: '#EBEBEB'
     },
     headerContainer: {
-      width: '95%',
+      width: '100%',
       marginHorizontal: 'auto',
       marginTop: '2%'
     },

@@ -468,7 +468,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
       fontWeight: 'bold',
     },
     subServiceContainer: {
-      backgroundColor: '#E4E4E4',
+      backgroundColor: '#EBEBEB',
       borderRadius: 10,
       marginBottom: 16,
       padding: 16,
