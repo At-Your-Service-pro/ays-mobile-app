@@ -186,11 +186,12 @@ import Ionicons from '@expo/vector-icons/Ionicons';
                 marginTop: '5%'
               }}
             >
-              <View
+              <TouchableOpacity
                 style={{
                   width: '95%',
                   margin: 'auto'
                 }}
+                onPress={() => router.push('/location')}
               >
                 <View
                   style={{
@@ -217,7 +218,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
                   </View>
                   <AntDesign name="right" size={24} color="#c5c5c5"  />
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
            </ScrollView>
         </KeyboardAvoidingView>

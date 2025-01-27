@@ -20,37 +20,59 @@ import {
 import CarouselItem from '@/components/CarouselItem';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useDispatch,useSelector } from 'react-redux';
+import { toggleSelectedService,setShowBotton,clearSelectedServices } from '@/redux/features/requestBotton';
 
   const { width, height } = Dimensions.get('window');
+
+  const AnimatedIcon = ({ isSelected, onPress, loading }: any) => {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        disabled={loading} // Disable button while loading
+        style={styles.iconButton}
+      >
+        {loading ? (
+          <ActivityIndicator size="small" color="#1AACD5" />
+        ) : (
+          <AntDesign
+            name={isSelected ? 'closecircle' : 'pluscircle'}
+            size={30}
+            color="#1AACD5"
+          />
+        )}
+      </TouchableOpacity>
+    );
+  };
   
   const serviceDetails = () => {
     const [showImages,setImages] = useState(false);
     const [isopen,setIsOpen] = useState(false);
-    const [selectedSubServices, setSelectedSubServices] = useState([]);
-    const [loadingSubService, setLoadingSubService] = useState(null);
+    const [loadingSubService, setLoadingSubService] = useState<number | null>(null);
+    const [selected, setSelected] = useState(false);
+    const dispatch = useDispatch();
 
-    const handleToggleSubService = (id:any) => {
-      if (loadingSubService === id) return; // Prevent duplicate interactions
-      setLoadingSubService(id);
-  
-      setTimeout(() => {
-        setLoadingSubService(null);
-        setSelectedSubServices((prev:any) =>
-          prev.includes(id)
-            ? prev.filter((serviceId: any) => serviceId !== id) // Deselect
-            : [...prev, id] // Select
-        );
-      }, 500); // Simulate animation duration
-    };
-  
-    const handleFloatingButtonPress = () => {
-      router.push({
-        pathname: '/requestsDetails',
-        params:  {
-          subServices: selectedSubServices
-        }
-      })
-    };
+  const selectedServices = useSelector((state: any) => state.request.selectedServices);
+  const showFloatingButton = useSelector((state: any) => state.request.showbottom);
+
+  const handleToggleSubService = (subServiceId: number) => {
+    setLoadingSubService(subServiceId); // Start loader for this service
+
+    // Simulate API call or any async operation
+    setTimeout(() => {
+      dispatch(toggleSelectedService(subServiceId)); // Dispatch action to update global state
+      setLoadingSubService(null); // Stop loader
+    }, 1000); // Adjust timeout duration as needed
+  };
+
+  const handleFloatingButtonPress = () => {
+    router.push({
+      pathname: '/requestsDetails',
+      params: {
+        subServices: selectedServices,
+      },
+    })
+  };
   
     const services = {
         id: '1',
@@ -112,10 +134,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
           }
         ]
       }
-
-    const toggleSheet = () => {
-      setIsOpen(!isopen);
-    }  
+ 
     
     return (
       <SafeAreaView style={styles.container}>
@@ -327,42 +346,41 @@ import Ionicons from '@expo/vector-icons/Ionicons';
                       marginTop: '5%'
                   }}
                 /> */}
-                <View>
-                {services.sub_services.map((subService) => (
-            <View
-              key={subService.id}
-              style={[
-                styles.subServiceContainer,
-                selectedSubServices.includes(subService.id) && styles.selectedContainer,
-              ]}
-            >
-              <View style={styles.subServiceDetails}>
-                <Text style={styles.subServiceTitle}>{subService.title}</Text>
-                <Text style={styles.subServiceDescription}>{subService.description}</Text>
-                <Text style={styles.subServicePrice}>${subService.price}</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => handleToggleSubService(subService.id)}
-                disabled={loadingSubService === subService.id}
-              >
-                {loadingSubService === subService.id ? (
-                  <ActivityIndicator size="small" color="#1AACD5" />
-                ) : (
-                  <AntDesign
-                    name={
-                      selectedSubServices.includes(subService.id) ? 'closecircle' : 'pluscircle'
-                    }
-                    size={30}
-                    color="#1AACD5"
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
-          ))}
+                 <View>
+                  {services.sub_services.map((subService) => (
+                    <View
+                      key={subService.id}
+                      style={[
+                        styles.subServiceContainer,
+                        selectedServices.includes(subService.id) && styles.selectedContainer,
+                      ]}
+                    >
+                      <View style={styles.subServiceDetails}>
+                        <Text style={styles.subServiceTitle}>{subService.title}</Text>
+                        <Text style={styles.subServiceDescription}>{subService.description}</Text>
+                        <Text style={styles.subServicePrice}>${subService.price}</Text>
+                      </View>
+                      <TouchableOpacity
+                        onPress={() => handleToggleSubService(subService.id)}
+                      >
+                       {loadingSubService === subService.id ? (
+                          <ActivityIndicator size="small" color="#1AACD5" />
+                        ) : (
+                          <AntDesign
+                            name={
+                              selectedServices.includes(subService.id) ? 'closecircle' : 'pluscircle'
+                            }
+                            size={30}
+                            color="#1AACD5"
+                          />
+                        )}
+                      </TouchableOpacity>
+                    </View>
+                  ))}
                 </View>
               </View>
           </ScrollView>
-          {selectedSubServices.length > 0 && (
+          {showFloatingButton && (
           <View
             style={{
               display: 'flex',
@@ -373,12 +391,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
           >
             <TouchableOpacity
               style={styles.floatingButton}
-              onPress={() => {
-                router.push('/requestsDetails')
-              }}
+              onPress={handleFloatingButtonPress}
             >
               <Text style={styles.floatingButtonText}>
-                View {selectedSubServices.length} request{selectedSubServices.length > 1 && 's'}
+                View {selectedServices.length} request
+                {selectedServices.length > 1 && 's'}
               </Text>
             </TouchableOpacity>
           </View>

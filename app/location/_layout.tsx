@@ -10,7 +10,6 @@ const _layout = () => {
               options={{headerShown: false}}
           />
       </Stack>
-  
   )
 }
 
