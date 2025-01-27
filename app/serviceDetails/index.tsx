@@ -405,8 +405,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
       justifyContent: 'space-between',
       alignItems: 'center',
       paddingVertical: 16,
-      paddingHorizontal: 16,
-      width: '85%',
+      width: '82%',
     },
     headerText: {
       fontSize: 20,
@@ -462,6 +461,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
     },
     subServicePrice: {
       fontSize: 18,
+      marginTop: '4%'
     },
     sheetPrice: {
       marginTop: 10,

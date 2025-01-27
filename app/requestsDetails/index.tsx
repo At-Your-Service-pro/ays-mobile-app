@@ -13,15 +13,11 @@ import {
     Dimensions, 
     ActivityIndicator
   } from 'react-native';
-  import React,{useState,useCallback,useRef}from 'react';
-  import AntDesign from '@expo/vector-icons/AntDesign';
-  import { router } from 'expo-router';
-  import Carousel from '@/components/Carousel';
-import CarouselItem from '@/components/CarouselItem';
+import React,{useState,useCallback,useRef}from 'react';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { router } from 'expo-router';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import BottomSheetPop from '../../components/BottomSheetPop';
-import BottomSheetItem from '@/components/BottomSheetItem';
+
 
   const { width, height } = Dimensions.get('window');
   
@@ -95,6 +91,63 @@ import BottomSheetItem from '@/components/BottomSheetItem';
                   <Text style={styles.headerText}> {services.title}</Text>
                 </View>
               </View>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  borderRadius: 20
+                }}
+              >
+              {
+                services.sub_services.map((sub) => (
+                  <View key={sub.id}>
+                    <View 
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingHorizontal: '5%',
+                        paddingVertical: '5%'
+                      }}
+                    >
+                      <View>
+                        <Text style={{ fontSize: 18, fontWeight: '600' }}>{sub.title}</Text>
+                        <Text 
+                          style={{ 
+                            fontSize: 14, 
+                            color: '#808080',
+                            width:  '70%',
+                            marginVertical: '5%' 
+                          }}>{sub.description}</Text>
+                        <Text 
+                          style={{ 
+                            fontSize: 18, 
+                            fontWeight: '500',
+                          }}>${sub.price}</Text>
+                      </View>
+                      <TouchableOpacity>
+                        <MaterialCommunityIcons name="delete-outline" size={24} color="#C62121" />
+                      </TouchableOpacity>
+                    </View>
+                     <View 
+                        style={{
+                          width: '90%',
+                          borderWidth: 0.5,
+                          opacity: 0.2,
+                          margin: 'auto'
+                        }}
+                      />
+                  </View>
+                ))
+              }
+              <View>
+                <View>
+                  <AntDesign name="pluscircle" size={24} color="black" />
+                  <Text> Add more </Text>
+                </View>
+              </View>
+
+              </View>
            </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -106,7 +159,7 @@ import BottomSheetItem from '@/components/BottomSheetItem';
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'white'
+      backgroundColor: '#EBEBEB'
     },
     headerContainer: {
       width: '95%',
@@ -118,8 +171,7 @@ import BottomSheetItem from '@/components/BottomSheetItem';
       justifyContent: 'space-between',
       alignItems: 'center',
       paddingVertical: 16,
-      paddingHorizontal: 16,
-      width: '85%',
+      width: '82%'
     },
     headerText: {
       fontSize: 20,
@@ -137,84 +189,5 @@ import BottomSheetItem from '@/components/BottomSheetItem';
     },
     image: {
       width: '40%'
-    },
-    descriptionContainer: {
-      marginTop: '5%',
-      backgroundColor: '#97E8FF',
-      padding: '5%',
-      borderRadius: 10
-    },
-    sheetContent: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 20,
-    },
-    sheetTitle: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    closeButton: {
-      marginTop: 20,
-      backgroundColor: "#dc3545",
-      padding: 10,
-      borderRadius: 5,
-    },
-    closeButtonText: {
-      color: "#fff",
-      fontWeight: "bold",
-    },
-    subServiceTitle: {
-      fontSize: 18,
-    },
-    subServiceDescription: {
-      marginTop: '5%',
-      color: '#5E5E5E',
-      width: '70%',
-    },
-    subServicePrice: {
-      fontSize: 18,
-    },
-    sheetPrice: {
-      marginTop: 10,
-      fontWeight: 'bold',
-    },
-    subServiceContainer: {
-      backgroundColor: '#E4E4E4',
-      borderRadius: 10,
-      marginBottom: 16,
-      padding: 16,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    selectedContainer: {
-      borderLeftWidth: 5,
-      borderLeftColor: '#1AACD5',
-    },
-    subServiceDetails: {
-      width: '70%',
-    },
-    floatingButton: {
-      position: 'absolute',
-      backgroundColor: '#1AACD5',
-      width: '95%',
-      height: 50,
-      borderRadius: 10,
-      bottom: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 5,
-    },
-    floatingButtonText: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold',
     }
-
   })
