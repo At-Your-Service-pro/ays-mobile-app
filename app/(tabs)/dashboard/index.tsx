@@ -19,12 +19,14 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useDispatch } from 'react-redux';
 import { setSaveEmail } from '@/redux/features/users';
+import { useSelector } from 'react-redux';
 
 const index = () => {
   const {email} = useLocalSearchParams();
   const {GetUser} = useAuth();
   const [user,setuser] = useState<userData>({});
   const dispatch = useDispatch();
+  const selectedServices = useSelector((state: any) => state.request.selectedServices);
 
   const loadUser = async () => {
     try {
@@ -197,7 +199,7 @@ const index = () => {
         >
         	<View>
         		<Text style={styles.headerText}> Hi {user.firstname} , </Text>
-          	</View>
+          </View>
           <View
             style={styles.imageContainer}
           >
@@ -211,65 +213,21 @@ const index = () => {
             Get 50% on your first service order 
           </Text>
           </View>
-		  <View
-		  	style={styles.categories}
-		  >
-        <Text
-          style={{
-            backgroundColor: '#1AACD5',
-            color: '#FFFFFF',
-            padding: 10,
-            fontSize: 17,
-            borderRadius: 7,
-            width: '35%',
-            textAlign: 'center'
-          }}
-        > Categories</Text>
-        <TouchableOpacity
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-          }}
-          onPress={() => {
-            router.push('/categories');
-          }}
-        >
-          <Text 
-            style={{
-              fontSize: 16
-            }}> All </Text>
-          <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
-        </TouchableOpacity>
-		  </View>
-      <View style={styles.categoryContainer}>
-        <FlatList
-          data={_categories}
-          keyExtractor={(item) => item.id}
-          horizontal // Enables horizontal scrolling
-          showsHorizontalScrollIndicator={false} // Hides the scrollbar
-          renderItem={({ item }) => (
-            <TouchableOpacity  
-              style={styles.subcategory}
-              onPress={() => {
-                router.push('/categories/[ItemId]');
-              }}
-            >
-              <Text style={{textAlign: 'center'}}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-      <View style={styles.popularContainer}>
-          <View style={styles.popularCategories}>
+          <View
+            style={styles.categories}
+          >
             <Text
               style={{
-                fontSize: 22,
-                fontWeight: 'semibold'
+                backgroundColor: '#1AACD5',
+                color: '#FFFFFF',
+                padding: 10,
+                fontSize: 17,
+                borderRadius: 7,
+                width: '35%',
+                textAlign: 'center'
               }}
-            > Popular services </Text>
-             <TouchableOpacity
+            > Categories</Text>
+            <TouchableOpacity
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -277,7 +235,7 @@ const index = () => {
                 flexDirection: 'row',
               }}
               onPress={() => {
-                router.push('/popular');
+                router.push('/categories');
               }}
             >
               <Text 
@@ -287,114 +245,164 @@ const index = () => {
               <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
             </TouchableOpacity>
           </View>
-          <View style={{
-              flex: 1
-            }}
-            >
+          <View style={styles.categoryContainer}>
             <FlatList
-              data={services}
+              data={_categories}
               keyExtractor={(item) => item.id}
               horizontal // Enables horizontal scrolling
               showsHorizontalScrollIndicator={false} // Hides the scrollbar
               renderItem={({ item }) => (
                 <TouchableOpacity  
-                  style={styles.popularSub}
+                  style={styles.subcategory}
                   onPress={() => {
-                    router.push({
-                      pathname: '/serviceDetails', // Correct route
-                      params: { ItemId: item.id }, // Pass the dynamic parameter
-                    });
+                    router.push('/categories/[ItemId]');
                   }}
                 >
-                  <Image 
-                    source={item.image}
-                    style={{width: 200, height: 100, borderRadius: 10,backgroundColor: '#E4E4E4'}}
-                    resizeMode='cover'
-                  />
-                  <View>
-                    <View 
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent:'space-between',
-                        alignItems: 'center',
-                        marginTop: 10
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: 17,
-                          fontWeight: 'semibold' 
-                        }}
-                      >{item.title}</Text>
-                      <AntDesign name="heart" size={20} color={'#0598AC'} />
-                    </View>
-                    <View>
-                      <Text
-                        style={{
-                          fontWeight: 'light'
-                        }}
-                      >{item.loaction}</Text>
-                    </View>
-                  </View>
+                  <Text style={{textAlign: 'center'}}>{item.title}</Text>
                 </TouchableOpacity>
               )}
             />
           </View>
-      </View>
-      <View 
-        style={{
-          marginTop: '6%'
-        }}
-      >
-        <View>
-          <Text
-            style={{
-              fontSize: 22,
-              fontWeight: 'semibold'
-            }}
-          > All services </Text>
-        </View>
-        <View>
-          <View>
-            {
-              services.map((item) => (
-                <TouchableOpacity  style={styles.subServices} key={item.id}>
-                <Image 
-                  source={item.image}
-                  style={{width: 'auto', height: 140, borderRadius: 10,backgroundColor: '#E4E4E4'}}
-                  resizeMode='cover'
-                />
-                <View>
-                  <View 
+          <View style={styles.popularContainer}>
+              <View style={styles.popularCategories}>
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 'semibold'
+                  }}
+                > Popular services </Text>
+                <TouchableOpacity
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                  }}
+                  onPress={() => {
+                    router.push('/popular');
+                  }}
+                >
+                  <Text 
                     style={{
-                      flexDirection: 'row',
-                      justifyContent:'space-between',
-                      alignItems: 'center',
-                      marginTop: 10
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 17,
-                        fontWeight: 'semibold' 
+                      fontSize: 16
+                    }}> All </Text>
+                  <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
+                </TouchableOpacity>
+              </View>
+              <View style={{
+                  flex: 1
+                }}
+                >
+                <FlatList
+                  data={services}
+                  keyExtractor={(item) => item.id}
+                  horizontal // Enables horizontal scrolling
+                  showsHorizontalScrollIndicator={false} // Hides the scrollbar
+                  renderItem={({ item }) => (
+                    <TouchableOpacity  
+                      style={styles.popularSub}
+                      onPress={() => {
+                        router.push({
+                          pathname: '/serviceDetails', // Correct route
+                          params: { ItemId: item.id }, // Pass the dynamic parameter
+                        });
                       }}
-                    >{item.title}</Text>
-                    <AntDesign name="heart" size={20} color={'#0598AC'} />
+                    >
+                      <Image 
+                        source={item.image}
+                        style={{width: 200, height: 100, borderRadius: 10,backgroundColor: '#E4E4E4'}}
+                        resizeMode='cover'
+                      />
+                      <View>
+                        <View 
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent:'space-between',
+                            alignItems: 'center',
+                            marginTop: 10
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontSize: 17,
+                              fontWeight: 'semibold' 
+                            }}
+                          >{item.title}</Text>
+                          <AntDesign name="heart" size={20} color={'#0598AC'} />
+                        </View>
+                        <View>
+                          <Text
+                            style={{
+                              fontWeight: 'light'
+                            }}
+                          >{item.loaction}</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+          </View>
+          <View 
+            style={{
+              marginTop: '6%'
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  fontSize: 22,
+                  fontWeight: 'semibold'
+                }}
+              > All services </Text>
+            </View>
+            <View>
+              <View>
+                {
+                  services.map((item) => (
+                    <View  style={styles.subServices} key={item.id}>
+                      <TouchableOpacity
+                        onPress={() => router.push('/serviceDetails')}
+                      >
+                        <Image 
+                          source={item.image}
+                          style={{width: 'auto', height: 140, borderRadius: 10,backgroundColor: '#E4E4E4'}}
+                          resizeMode='cover'
+                        />
+                      </TouchableOpacity>
+                      <View>
+                        <View 
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent:'space-between',
+                            alignItems: 'center',
+                            marginTop: 10
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontSize: 17,
+                              fontWeight: 'semibold' 
+                            }}
+                          >{item.title}</Text>
+                          <TouchableOpacity>
+                            <AntDesign name="heart" size={20} color={'#0598AC'} />
+                          </TouchableOpacity>
+                        </View>
+                        <View>
+                          <Text
+                            style={{
+                              fontWeight: 'light'
+                            }}
+                          >{item.loaction}</Text>
+                        </View>
+                      </View>
                   </View>
-                  <View>
-                    <Text
-                      style={{
-                        fontWeight: 'light'
-                      }}
-                    >{item.loaction}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-              ))
-            }
-          </View>   
-        </View>
-      </View>
+                  ))
+                }
+              </View>   
+            </View>
+          </View>
       </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -469,6 +477,26 @@ const styles = StyleSheet.create({
   subServices: {
     paddingVertical: 10,
     borderRadius: 5
+  },
+  floatingButton: {
+    position: 'absolute',
+      backgroundColor: '#1AACD5',
+      width: '95%',
+      height: 50,
+      borderRadius: 10,
+      bottom: -60,
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 5,
+  },
+  floatingButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   }
 
 })

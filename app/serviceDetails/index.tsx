@@ -21,35 +21,14 @@ import CarouselItem from '@/components/CarouselItem';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useDispatch,useSelector } from 'react-redux';
-import { toggleSelectedService,setShowBotton,clearSelectedServices } from '@/redux/features/requestBotton';
+import { toggleSelectedService,setShowBotton} from '@/redux/features/requestBotton';
 
   const { width, height } = Dimensions.get('window');
-
-  const AnimatedIcon = ({ isSelected, onPress, loading }: any) => {
-    return (
-      <TouchableOpacity
-        onPress={onPress}
-        disabled={loading} // Disable button while loading
-        style={styles.iconButton}
-      >
-        {loading ? (
-          <ActivityIndicator size="small" color="#1AACD5" />
-        ) : (
-          <AntDesign
-            name={isSelected ? 'closecircle' : 'pluscircle'}
-            size={30}
-            color="#1AACD5"
-          />
-        )}
-      </TouchableOpacity>
-    );
-  };
   
   const serviceDetails = () => {
     const [showImages,setImages] = useState(false);
     const [isopen,setIsOpen] = useState(false);
     const [loadingSubService, setLoadingSubService] = useState<number | null>(null);
-    const [selected, setSelected] = useState(false);
     const dispatch = useDispatch();
 
   const selectedServices = useSelector((state: any) => state.request.selectedServices);
@@ -394,7 +373,7 @@ import { toggleSelectedService,setShowBotton,clearSelectedServices } from '@/red
               onPress={handleFloatingButtonPress}
             >
               <Text style={styles.floatingButtonText}>
-                View {selectedServices.length} request
+                View request
                 {selectedServices.length > 1 && 's'}
               </Text>
             </TouchableOpacity>

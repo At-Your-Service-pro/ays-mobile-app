@@ -25,15 +25,10 @@ const requestBottonSlice = createSlice({
         state.selectedServices.push(serviceId);
       }
       state.showbottom = state.selectedServices.length > 0;
-    },
-    clearSelectedServices: (state) => {
-      state.selectedServices = [];
-      state.showbottom = false;
-    },
+    }
   },
 });
 
-export const { setShowBotton, toggleSelectedService, clearSelectedServices } =
-  requestBottonSlice.actions;
+export const { setShowBotton, toggleSelectedService} = requestBottonSlice.actions;
 
 export default requestBottonSlice.reducer;

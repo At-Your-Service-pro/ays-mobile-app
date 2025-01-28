@@ -261,5 +261,25 @@ import Ionicons from '@expo/vector-icons/Ionicons';
     },
     image: {
       width: '40%'
+    },
+    floatingButton: {
+      position: 'absolute',
+      backgroundColor: '#1AACD5',
+      width: '95%',
+      height: 50,
+      borderRadius: 10,
+      bottom: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    floatingButtonText: {
+      color: 'white',
+      fontSize: 18,
+      fontWeight: 'bold',
     }
   })
