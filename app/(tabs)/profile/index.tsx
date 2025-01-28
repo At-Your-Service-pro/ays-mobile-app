@@ -20,7 +20,7 @@ import ModalPopup from '@/components/ModalPopup';
 import CustomeButtom from '@/components/CustomeButtom';
 
 
-const profile = () => {
+const index = () => {
   const [logoutModal,setLogoutModal] = React.useState(false);
   const [deleteaccountModal,setDeleteAccountModal] = React.useState(false);
   
@@ -367,7 +367,7 @@ const profile = () => {
   )
 }
 
-export default profile
+export default index
 
 const styles = StyleSheet.create({
   container: {

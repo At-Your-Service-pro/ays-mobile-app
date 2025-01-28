@@ -47,12 +47,10 @@ export default _layout
 
 const styles = StyleSheet.create({
     floatingButton: {
-        position: 'absolute',
         backgroundColor: '#1AACD5',
         width: '95%',
         height: 50,
         borderRadius: 10,
-        bottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: '#000',

@@ -13,7 +13,7 @@ import React from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 
-const saved = () => {
+const index = () => {
 
   const services = [
     {
@@ -21,7 +21,7 @@ const saved = () => {
       title: 'Plumbing Installation',
       category: 'Plumbing',
       loaction: 'Spintex',
-      image: require('../../assets/images/3.png'),
+      image: require('../../../assets/images/3.png'),
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
       phonenumber: '0245861319',
       sub_services: [
@@ -40,7 +40,7 @@ const saved = () => {
       title: 'Plumbing Installation',
       category: 'Plumbing',
       loaction: 'Spintex',
-      image: require('../../assets/images/3.png'),
+      image: require('../../../assets/images/3.png'),
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
       phonenumber: '0245861319',
       sub_services: [
@@ -59,7 +59,7 @@ const saved = () => {
       title: 'Plumbing Installation',
       category: 'Plumbing',
       loaction: 'Spintex',
-      image: require('../../assets/images/3.png'),
+      image: require('../../../assets/images/3.png'),
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
       phonenumber: '0245861319',
       sub_services: [
@@ -78,7 +78,7 @@ const saved = () => {
       title: 'Plumbing Installation',
       category: 'Plumbing',
       loaction: 'Spintex',
-      image: require('../../assets/images/3.png'),
+      image: require('../../../assets/images/3.png'),
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
       phonenumber: '0245861319',
       sub_services: [
@@ -97,7 +97,7 @@ const saved = () => {
       title: 'Plumbing Installation',
       category: 'Plumbing',
       loaction: 'Spintex',
-      image: require('../../assets/images/3.png'),
+      image: require('../../../assets/images/3.png'),
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
       phonenumber: '0245861319',
       sub_services: [
@@ -116,7 +116,64 @@ const saved = () => {
       title: 'Plumbing Installation',
       category: 'Plumbing',
       loaction: 'Spintex',
-      image: require('../../assets/images/3.png'),
+      image: require('../../../assets/images/3.png'),
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+      phonenumber: '0245861319',
+      sub_services: [
+        {
+          title: 'leak repair',
+          price: '$100'
+        },
+        {
+          title: 'leak repair',
+          price: '$100'
+        }
+      ]
+    },
+    {
+      id: '7',
+      title: 'Plumbing Installation',
+      category: 'Plumbing',
+      loaction: 'Spintex',
+      image: require('../../../assets/images/3.png'),
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+      phonenumber: '0245861319',
+      sub_services: [
+        {
+          title: 'leak repair',
+          price: '$100'
+        },
+        {
+          title: 'leak repair',
+          price: '$100'
+        }
+      ]
+    },
+    {
+      id: '8',
+      title: 'Plumbing Installation',
+      category: 'Plumbing',
+      loaction: 'Spintex',
+      image: require('../../../assets/images/3.png'),
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+      phonenumber: '0245861319',
+      sub_services: [
+        {
+          title: 'leak repair',
+          price: '$100'
+        },
+        {
+          title: 'leak repair',
+          price: '$100'
+        }
+      ]
+    },
+    {
+      id: '9',
+      title: 'Plumbing Installation',
+      category: 'Plumbing',
+      loaction: 'Spintex',
+      image: require('../../../assets/images/3.png'),
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
       phonenumber: '0245861319',
       sub_services: [
@@ -193,7 +250,7 @@ const saved = () => {
   )
 }
 
-export default saved
+export default index
 
 const styles = StyleSheet.create({
   container: {

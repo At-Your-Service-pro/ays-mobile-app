@@ -14,7 +14,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from 'expo-router';
 
 
-const search = () => {
+const index = () => {
   const [search, setSearch] = useState("");
   
   return (
@@ -50,7 +50,7 @@ const search = () => {
   )
 }
 
-export default search
+export default index
 
 const styles = StyleSheet.create({
   container: {
