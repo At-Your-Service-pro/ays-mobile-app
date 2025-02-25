@@ -24,7 +24,7 @@ const CustomeButtom:React.FC<Props> = ({title,onPress,isLoading,color}) => {
         }}
       >
         {
-          isLoading ? <ActivityIndicator size={130} color={'#ffffff'}/> :   <Text
+          isLoading ? <ActivityIndicator size={70} color={'#ffffff'}/> :   <Text
           style={styles.textStyle}
         >{title}</Text>
         }
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: 'center',
     width: '100%',
-    height: height / 13
+    height: height / 15
   },
   textStyle: {
     color: 'white',

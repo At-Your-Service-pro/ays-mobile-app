@@ -235,7 +235,7 @@ const index = () => {
                     }}
                   >
                     {
-                      showloader ? <ActivityIndicator size={130} color={'#ffffff'}/> :  <Text
+                      showloader ? <ActivityIndicator size={60} color={'#ffffff'}/> :  <Text
                       style={styles.textStyle}
                     >{'Continue'}</Text>
                     }

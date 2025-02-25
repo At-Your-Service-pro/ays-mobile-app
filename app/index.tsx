@@ -84,7 +84,7 @@ const index = () => {
         keyExtractor={(item, index) => item.id.toString()}
       />
       <View style={styles.footer}>
-        {currentSlideIndex === onboardingData.length - 1 ? (
+        {currentSlideIndex === onboardingData.length - 2 ? (
           <View
             style={{
               width: '85%'
@@ -94,7 +94,7 @@ const index = () => {
             title='Get Started'
             onPress={() => router.push('/welcome')}
             color={'#1AACD5'}
-          />
+            />
           </View>
         ) : (
           <View

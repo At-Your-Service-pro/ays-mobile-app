@@ -1,4 +1,6 @@
-const api_url = 'http://192.168.0.126:3104'
+// const api_url = 'http://192.168.0.126:3104'
+const api_url = 'http://10.0.2.2:3104'
+
 
 //Auth
 export const signInUrl = `${api_url}/users/login`;
