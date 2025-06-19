@@ -198,7 +198,7 @@ const index = () => {
           showsVerticalScrollIndicator={false}
         >
         	<View>
-        		<Text style={styles.headerText}> Hi {user.firstname || ''} , </Text>
+        		<Text style={styles.headerText}> Hello</Text>
           </View>
           <View
             style={styles.imageContainer}
